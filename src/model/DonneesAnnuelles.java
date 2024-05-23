@@ -1,5 +1,7 @@
 package model;
 
+import model.Annee;
+
 public class DonneesAnnuelles {
 
     private Annee lAnnee;
@@ -13,7 +15,7 @@ public class DonneesAnnuelles {
     private double budgetTotal;
     private int population;
 
-    
+
     public DonneesAnnuelles() {
     }
 
