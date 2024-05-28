@@ -1,6 +1,4 @@
-package model;
-
-import model.Annee;
+package model.data;
 
 public class DonneesAnnuelles {
 

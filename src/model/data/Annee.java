@@ -1,4 +1,4 @@
-package model;
+package model.data;
 
 public class Annee {
 
@@ -6,6 +6,8 @@ public class Annee {
     private double tauxInflation;
 
     public Annee() {
+        this.ANNEE = 0;
+        this.tauxInflation = 0;
     }
 
     public Annee(int ANNEE, double tauxInflation) {

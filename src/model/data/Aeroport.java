@@ -1,6 +1,4 @@
-package model;
-
-import model.Departement;
+package model.data;
 
 public class Aeroport {
 

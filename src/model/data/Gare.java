@@ -1,6 +1,4 @@
-package model;
-
-import model.Commune;
+package model.data;
 
 public class Gare {
 

@@ -1,8 +1,7 @@
-package model;
+package model.data;
 
 import java.util.ArrayList;
 
-import model.Departement;
 
 public class Commune {
 

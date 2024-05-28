@@ -1,8 +1,7 @@
-package model;
+package model.data;
 
 import java.util.ArrayList;
 
-import model.Aeroport;
 
 public class Departement {
 
@@ -62,6 +61,5 @@ public class Departement {
     public void setInvestissementCulturel2019(double investissementCulturel2019) {
         this.investissementCulturel2019 = investissementCulturel2019;
     }
-
     
 }
