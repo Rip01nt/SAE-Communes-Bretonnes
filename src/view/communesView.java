@@ -10,6 +10,7 @@ import controller.communesController;
 public class communesView extends Application {
 
     public void start(Stage primaryStage) throws Exception {
+        /*
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/communes.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
@@ -18,10 +19,11 @@ public class communesView extends Application {
         primaryStage.show();
         primaryStage.setResizable(false);
         communesController controller = new communesController();
-        
+        */
     }
     
     public static void main(String[] args) {
         launch(args);
     }
+
 }
