@@ -22,34 +22,12 @@ public class Commune {
     }
 
     public Commune(Departement leDepartement, ArrayList<Gare> lesGares, ArrayList<Commune> communesVoisines, int idCommune, String nomCommune) throws InvalidAttributException {
-        try{
-            if (idCommune < 0) {
-                throw new InvalidAttributException("Erreur idCommune : valeur incorrecte");
-            }
-            if(nomCommune == null){
-                throw new InvalidAttributException("Erreur nomCommune : valeur incorrecte");
-            }
-            if(leDepartement == null){
-                throw new InvalidAttributException("Erreur leDepartement : valeur incorrecte");
-            }
-            if(lesGares == null){
-                throw new InvalidAttributException("Erreur lesGares : valeur incorrecte");
-            }
-            if(communesVoisines == null){
-                throw new InvalidAttributException("Erreur communesVoisines : valeur incorrecte");
-            }
-            this.leDepartement = leDepartement;
-            this.lesGares = lesGares;
-            this.communesVoisines = communesVoisines;
-            this.idCommune = idCommune;
-            this.nomCommune = nomCommune;
-
-
-
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
-        
+        if (leDepartement == null || lesGares == null || communesVoisines == null || nomCommune == null) throw new InvalidAttributException("The attributs are invalid");
+        this.leDepartement = leDepartement;
+        this.lesGares = lesGares;
+        this.communesVoisines = communesVoisines;
+        this.idCommune = idCommune;
+        this.nomCommune = nomCommune;
     }
 
 
