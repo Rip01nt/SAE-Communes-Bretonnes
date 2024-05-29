@@ -67,5 +67,9 @@ public class Aeroport {
         return ret;
     }
 
+    public String toString(){
+        return "Departement : " + this.leDepartement.toString() + "\nNom : " + this.nom + "\nAdresse : " + this.adresse;
+    }
+
 
 }

@@ -83,4 +83,17 @@ public class Commune {
         return this.lesGares.size() != 0;
     }
 
+    public String toString(){
+        String ret = "Code Insee : " + this.idCommune + "\nNom : " + this.nomCommune + "\nDepatement : " + this.leDepartement.toString() + "\nGarres : ";
+        for (Gare g : this.lesGares) {
+            ret += "\n" + g.getNomGare();
+        }
+
+        ret += "\nCommunes Voisines : ";
+        for (Commune c : this.communesVoisines) {
+            ret += "\n" + c.getNomCommune();
+        }
+
+        return ret;
+    }
 }

@@ -37,4 +37,8 @@ public class Annee {
         ret =  ret / annee.size();
         return ret;
     }
+
+    public String toString(){
+        return "Année : " + this.ANNEE + "\nTaux inflation : " + this.tauxInflation;
+    }
 }

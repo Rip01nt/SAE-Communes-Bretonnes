@@ -149,6 +149,10 @@ public class DonneesAnnuelles {
         
     }
 
+    public String toString(){
+        return "l'Année : " + this.lAnnee.getANNEE() + "\tla Commune : " + this.laCommune.getNomCommune() + "\nNombre Maison vendu : " + this.nbMaison + "\nNombre Appartement vendu : " + this.nbAppart + "\nSurface Moyenne Logement : " + this.surfaceMoy + "\nPrix Moyen Logement : " + this.prixMoyen + "\nPrix Moyenne m² : " + this.prixM2Moyen + "\nDépenses Culturelles Total : " + this.depensesCultutrellesTotales + "\nBudjet Total : " + this.budgetTotal + "\nPopulation : " + this.population;  
+    }
+
 
 
 }

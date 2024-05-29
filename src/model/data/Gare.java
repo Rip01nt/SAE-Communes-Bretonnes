@@ -76,4 +76,8 @@ public class Gare {
     public boolean estFerroviaire() {
         return this.estFret && this.estVoyageur;
     }
+
+    public String toString(){
+        return "Nom : " + this.nomGare + "Code Gare : " + this.codeGare + "\nCommune : " + this.laCommune.getNomCommune() + "\nFret : " + this.estFret + "\nVoyageur : " + this.estVoyageur;
+    }
 }
