@@ -104,6 +104,7 @@ public class Commune {
             this.nomCommune = nomCommune;
         } catch (Exception e) {
             System.out.println("Erreur nomCommune : valeur incorrecte");
+        }
     }
 
 }
