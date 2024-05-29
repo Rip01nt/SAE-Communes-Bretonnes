@@ -1,6 +1,7 @@
 package model.data;
 
 import java.util.ArrayList;
+import exception.*;
 
 
 public class Commune {
@@ -20,35 +21,13 @@ public class Commune {
         this.nomCommune = "";
     }
 
-    public Commune(Departement leDepartement, ArrayList<Gare> lesGares, ArrayList<Commune> communesVoisines, int idCommune, String nomCommune) {
-        try{
-            if (idCommune < 0) {
-                throw new IllegalArgumentException("Erreur idCommune : valeur incorrecte");
-            }
-            if(nomCommune == null){
-                throw new IllegalArgumentException("Erreur nomCommune : valeur incorrecte");
-            }
-            if(leDepartement == null){
-                throw new IllegalArgumentException("Erreur leDepartement : valeur incorrecte");
-            }
-            if(lesGares == null){
-                throw new IllegalArgumentException("Erreur lesGares : valeur incorrecte");
-            }
-            if(communesVoisines == null){
-                throw new IllegalArgumentException("Erreur communesVoisines : valeur incorrecte");
-            }
-            this.leDepartement = leDepartement;
-            this.lesGares = lesGares;
-            this.communesVoisines = communesVoisines;
-            this.idCommune = idCommune;
-            this.nomCommune = nomCommune;
-
-
-
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
-        
+    public Commune(Departement leDepartement, ArrayList<Gare> lesGares, ArrayList<Commune> communesVoisines, int idCommune, String nomCommune) throws InvalidAttributException {
+        if (leDepartement == null || lesGares == null || communesVoisines == null || nomCommune == null) throw new InvalidAttributException("The attributs are invalid");
+        this.leDepartement = leDepartement;
+        this.lesGares = lesGares;
+        this.communesVoisines = communesVoisines;
+        this.idCommune = idCommune;
+        this.nomCommune = nomCommune;
     }
 
 
@@ -56,35 +35,27 @@ public class Commune {
         return this.leDepartement;
     }
 
-    public void setLeDepartement(Departement leDepartement) {
-        try{
-            this.leDepartement = leDepartement;
-        } catch (Exception e) {
-            System.out.println("Erreur leDepartement : valeur incorrecte");
-        }
+    public void setLeDepartement(Departement leDepartement) throws InvalidAttributException {
+        if(leDepartement == null) throw new InvalidAttributException("Attribut cannot be null");
+        this.leDepartement = leDepartement;
     }
 
     public ArrayList<Gare> getLesGares() {
         return this.lesGares;
     }
 
-    public void setLesGares(ArrayList<Gare> lesGares) {
-        try{
-            this.lesGares = lesGares;
-        } catch (Exception e) {
-            System.out.println("Erreur lesGares : valeur incorrecte");
-        }
+    public void setLesGares(ArrayList<Gare> lesGares) throws InvalidAttributException {
+        if(lesGares == null) throw new InvalidAttributException("Attribut cannot be null");
+        this.lesGares = lesGares;
     }
 
     public ArrayList<Commune> getCommunesVoisines() {
         return this.communesVoisines;
     }
 
-    public void setCommunesVoisines(ArrayList<Commune> communesVoisines) {
-        try{
-            this.communesVoisines = communesVoisines;
-        } catch (Exception e) {
-            System.out.println("Erreur communesVoisines : valeur incorrecte");
+    public void setCommunesVoisines(ArrayList<Commune> communesVoisines) throws InvalidAttributException{
+        if (communesVoisines == null) throw new InvalidAttributException("Attribut cannot be null");
+        this.communesVoisines = communesVoisines;
     }
 
     public int getIdCommune() {
@@ -99,12 +70,17 @@ public class Commune {
         return this.nomCommune;
     }
 
-    public void setNomCommune(String nomCommune) {
-        try{
-            this.nomCommune = nomCommune;
-        } catch (Exception e) {
-            System.out.println("Erreur nomCommune : valeur incorrecte");
-        }
+    public void setNomCommune(String nomCommune) throws InvalidAttributException{
+        if(nomCommune == null)throw new InvalidAttributException("Attribut cannto be null");
+        this.nomCommune = nomCommune;
+    }
+
+    public int getNbVoisin(){
+        return this.communesVoisines.size();
+    }
+
+    public boolean aGare(){
+        return this.lesGares.size() != 0;
     }
 
 }
