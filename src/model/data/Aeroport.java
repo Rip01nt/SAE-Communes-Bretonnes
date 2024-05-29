@@ -7,6 +7,7 @@ public class Aeroport {
     private Departement leDepartement;
     private String nom;
     private String adresse;
+    private Commune laCommune;
 
     public Aeroport() {
     }
@@ -50,7 +51,7 @@ public class Aeroport {
         
         for(Commune c : this.leDepartement.getLesCommunes()){
             for(Gare g : c.getLesGares()){
-                
+
             }
         }
     }
