@@ -1,5 +1,7 @@
 package model.data;
 
+import exception.*;
+
 public class Gare {
 
     private Commune laCommune;
@@ -10,23 +12,20 @@ public class Gare {
 
 
     public Gare() {
+        this.laCommune = new Commune();
+        this.codeGare = 0;
+        this.nomGare = "";
+        this.estFret = false;
+        this.estVoyageur = false;
     }
 
-    public Gare(Commune laCommune, int codeGare, String nomGare, boolean estFret, boolean estVoyageur) {
-        try{
-            if(laCommune == null || codeGare == 0 || nomGare == null){
-                throw new Exception("Erreur : paramètre null ou vide");
-            }
-            else{
-                this.laCommune = laCommune;
-                this.codeGare = codeGare;
-                this.nomGare = nomGare;
-                this.estFret = estFret;
-                this.estVoyageur = estVoyageur;
-            }
-        }catch(Exception e){
-            System.out.println(e.getMessage());
-        }
+    public Gare(Commune laCommune, int codeGare, String nomGare, boolean estFret, boolean estVoyageur) throws InvalidAttributException {
+        if (laCommune == null || codeGare <= 0 || nomGare == null) throw new InvalidAttributException("The Attributs are invalid ");
+        this.laCommune = laCommune;
+        this.codeGare = codeGare;
+        this.nomGare = nomGare;
+        this.estFret = estFret;
+        this.estVoyageur = estVoyageur;
         
     }
 
@@ -35,7 +34,8 @@ public class Gare {
         return this.laCommune;
     }
 
-    public void setLaCommune(Commune laCommune) {
+    public void setLaCommune(Commune laCommune) throws InvalidAttributException{
+        if (laCommune == null)throw new InvalidAttributException("Attribut laCommune cannot be null");
         this.laCommune = laCommune;
     }
 
@@ -43,7 +43,8 @@ public class Gare {
         return this.codeGare;
     }
 
-    public void setCodeGare(int codeGare) {
+    public void setCodeGare(int codeGare) throws InvalidAttributException{
+        if (codeGare <= 0)throw new InvalidAttributException("Attribut codeGare cannot be lesser than 0");
         this.codeGare = codeGare;
     }
 
@@ -51,12 +52,9 @@ public class Gare {
         return this.nomGare;
     }
 
-    public void setNomGare(String nomGare) {
+    public void setNomGare(String nomGare) throws InvalidAttributException{
+        if (nomGare == null) throw new InvalidAttributException("Attribut nomGare cannot be null");
         this.nomGare = nomGare;
-    }
-
-    public boolean isEstFret() {
-        return this.estFret;
     }
 
     public boolean getEstFret() {
@@ -65,10 +63,6 @@ public class Gare {
 
     public void setEstFret(boolean estFret) {
         this.estFret = estFret;
-    }
-
-    public boolean isEstVoyageur() {
-        return this.estVoyageur;
     }
 
     public boolean getEstVoyageur() {
@@ -80,16 +74,6 @@ public class Gare {
     }
 
     public boolean estFerroviaire() {
-        try{
-            if (this.estFret || this.estVoyageur) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (Exception e) {
-            return false;
-        
-        }
-
+        return this.estFret && this.estVoyageur;
     }
 }
