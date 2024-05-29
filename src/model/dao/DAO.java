@@ -26,8 +26,12 @@ public abstract class DAO <T> {
     }
     protected void closeConnection(){
         if (this.conn != null){
-            this.conn.close();
-            this.conn = null;
+            try {
+                this.conn.close();
+                this.conn = null;
+            } catch (Exception e) {
+                e.getMessage();
+            }
         }
     }
     public abstract List <T> findAll ();
