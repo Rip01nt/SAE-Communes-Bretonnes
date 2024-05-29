@@ -61,8 +61,8 @@ public class Aeroport {
         ArrayList<Gare> ret = new ArrayList<Gare>();
         
         ArrayList<Gare> tmp = laCommune.getLesGares();
-        for(Garre g : tmp){
-            if (g.getEstVoyageur) ret.add(g);
+        for(Gare g : tmp){
+            if (g.getEstVoyageur()) ret.add(g);
         }
         return ret;
     }
