@@ -93,5 +93,20 @@ public class Departement {
         }
         return ret;
     }
+
+    public String toString(){
+        String ret = "Code Insee : " + this.idDepartement + "\nNom : " + this.nomDepartement + "\nInversissement Culturelle 2019 : " + this.investissementCulturel2019 + "\n Communes : ";
+
+        for(Commune c : this.lesCommunes){
+            ret += "\n" + c.getNomCommune();
+        }
+
+        ret += "\n Aeroports : ";
+
+        for(Aeroport a : this.lesAeroports){
+            ret += "\n" + a.getNom();
+        }
+        return ret;
+    }
     
 }
