@@ -13,11 +13,21 @@ public class Gare {
     }
 
     public Gare(Commune laCommune, int codeGare, String nomGare, boolean estFret, boolean estVoyageur) {
-        this.laCommune = laCommune;
-        this.codeGare = codeGare;
-        this.nomGare = nomGare;
-        this.estFret = estFret;
-        this.estVoyageur = estVoyageur;
+        try{
+            if(laCommune == null || codeGare == 0 || nomGare == null){
+                throw new Exception("Erreur : paramètre null ou vide");
+            }
+            else{
+                this.laCommune = laCommune;
+                this.codeGare = codeGare;
+                this.nomGare = nomGare;
+                this.estFret = estFret;
+                this.estVoyageur = estVoyageur;
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        
     }
 
 
@@ -69,4 +79,17 @@ public class Gare {
         this.estVoyageur = estVoyageur;
     }
 
+    public boolean estFerroviaire() {
+        try{
+            if (this.estFret || this.estVoyageur) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            return false;
+        
+        }
+
+    }
 }
