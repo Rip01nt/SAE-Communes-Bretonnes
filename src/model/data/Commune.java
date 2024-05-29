@@ -2,9 +2,10 @@ package model.data;
 
 import java.util.ArrayList;
 import exception.*;
+import java.lang.Comparable;
 
 
-public class Commune {
+public class Commune implements Comparable {
 
     private Departement leDepartement;
     private ArrayList<Gare> lesGares;
@@ -94,6 +95,20 @@ public class Commune {
             ret += "\n" + c.getNomCommune();
         }
 
+        return ret;
+    }
+
+    public int compareTo(Commune comm) throws NullPointerException{
+        if (comm == null) throw new NullPointerException("The Commune to comapre cannot be null");
+
+        int ret;
+        if (this.communesVoisines.size() > comm.getCommunesVoisines().size()){ 
+            ret = 1;
+        }else if (this.communesVoisines.size() < comm.getCommunesVoisines().size()){
+            ret = -1;
+        }else {
+            ret = 0;
+        }
         return ret;
     }
 }
