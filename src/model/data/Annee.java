@@ -1,4 +1,5 @@
 package model.data;
+import java.util.ArrayList;
 
 public class Annee {
 
@@ -26,5 +27,22 @@ public class Annee {
     public void setTauxInflation(double tauxInflation) {
         this.tauxInflation = tauxInflation;
     }
+
+    public double moyenneTauxInflation(ArrayList<Annee> annee) {
+        double ret;
+        try{
+            ret = 0;
+            for (Annee a : annee) {
+                ret += a.getTauxInflation();
+            }
+            ret =  ret / annee.size();
+        } catch (Exception e) {
+            System.out.println("Erreur moyenneTauxInflation : valeur incorrecte");
+            ret = 0;
+        }
+        return ret;
+    }
+
+
 
 }
