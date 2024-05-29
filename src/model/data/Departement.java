@@ -2,9 +2,10 @@ package model.data;
 
 import java.util.ArrayList;
 import exception.*;
+import java.lang.Comparable;
 
 
-public class Departement {
+public class Departement implements Comparable{
 
     private ArrayList<Aeroport> lesAeroports;
     private ArrayList<Commune> lesCommunes;
@@ -105,6 +106,20 @@ public class Departement {
 
         for(Aeroport a : this.lesAeroports){
             ret += "\n" + a.getNom();
+        }
+        return ret;
+    }
+
+    public int compareTo(Departement dep) throws NullPointerException{
+        if (dep == null) throw new NullPointerException("The Departement to compare to cannot be null");
+        
+        int ret;
+        if (this.lesCommunes.size() > dep.getLesCommunes().size()){
+            ret = 1;
+        }else if (this.lesCommunes.size() < dep.getLesCommunes().size()){
+            ret = -1;
+        }else {
+            ret = 0;
         }
         return ret;
     }
