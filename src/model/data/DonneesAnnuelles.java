@@ -1,10 +1,10 @@
 package model.data;
 
 import java.util.ArrayList;
-
+import java.lang.Comparable;
 import exception.*;
 
-public class DonneesAnnuelles {
+public class DonneesAnnuelles implements Comparable{
 
     private Annee lAnnee;
     private Commune laCommune;
@@ -153,6 +153,18 @@ public class DonneesAnnuelles {
         return "l'Année : " + this.lAnnee.getANNEE() + "\tla Commune : " + this.laCommune.getNomCommune() + "\nNombre Maison vendu : " + this.nbMaison + "\nNombre Appartement vendu : " + this.nbAppart + "\nSurface Moyenne Logement : " + this.surfaceMoy + "\nPrix Moyen Logement : " + this.prixMoyen + "\nPrix Moyenne m² : " + this.prixM2Moyen + "\nDépenses Culturelles Total : " + this.depensesCultutrellesTotales + "\nBudjet Total : " + this.budgetTotal + "\nPopulation : " + this.population;  
     }
 
+    public int compareTo(DonneesAnnuelles data) throws NullPointerException {
+        if (data == null) throw new NullPointerException("The DonneesAnnuelles to compare to cannot be null");
 
+        int ret;
+        if (this.population > data.getPopulation()){
+            ret = 1;
+        }else if (this.population < data.getPopulation()){
+            ret = -1;
+        }else {
+            ret = 0;
+        }
+        return ret;
+    }
 
 }
