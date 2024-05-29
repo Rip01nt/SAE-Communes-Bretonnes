@@ -17,7 +17,9 @@ public class DonneesAnnuelles {
     public DonneesAnnuelles() {
     }
 
-    public DonneesAnnuelles(Annee lAnnee, Commune laCommune, int nbMaison, int nbAppart, double prixMoyen, double prixM2Moyen, double surfaceMoy, double depensesCultutrellesTotales, double budgetTotal, int population) {
+    public DonneesAnnuelles(Annee lAnnee, Commune laCommune, int nbMaison, int nbAppart, double prixMoyen, double prixM2Moyen, double surfaceMoy, double depensesCultutrellesTotales, double budgetTotal, int population) throws NullPointerException{
+
+        if (lAnnee == null || laCommune == null || nbMaison <= 0 || nbAppart <= 0 || prixMoyen <= 0 || prixM2Moyen <= 0 || surfaceMoy <= 0 || depensesCultutrellesTotales <= 0 || budgetTotal <= 0 || population <= 0) throw
         this.lAnnee = lAnnee;
         this.laCommune = laCommune;
         this.nbMaison = nbMaison;

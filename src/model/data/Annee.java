@@ -28,21 +28,13 @@ public class Annee {
         this.tauxInflation = tauxInflation;
     }
 
-    public double moyenneTauxInflation(ArrayList<Annee> annee) {
-        double ret;
-        try{
-            ret = 0;
-            for (Annee a : annee) {
-                ret += a.getTauxInflation();
-            }
-            ret =  ret / annee.size();
-        } catch (Exception e) {
-            System.out.println("Erreur moyenneTauxInflation : valeur incorrecte");
-            ret = 0;
+    public double moyenneTauxInflation(ArrayList<Annee> annee) throws NullPointerException {
+        if (annee == null) throw new NullPointerException("The parameter cannot be null");
+        double ret = 0;
+        for (Annee a : annee) {
+            ret += a.getTauxInflation();
         }
+        ret =  ret / annee.size();
         return ret;
     }
-
-
-
 }

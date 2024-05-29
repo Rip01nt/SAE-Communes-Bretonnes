@@ -1,5 +1,5 @@
 package model.data;
-import java.lang.NullPointerException;
+import exception.*;
 import java.util.ArrayList;
 
 public class Aeroport {
@@ -10,10 +10,14 @@ public class Aeroport {
     private Commune laCommune;
 
     public Aeroport() {
+        this.leDepartement = new Departement();
+        this.nom = "";
+        this.adresse = "";
+        this.laCommune = new Commune();
     }
 
-    public Aeroport(Departement leDepartement, String nom, String adresse) throws NullPointerException, CommuneNotFoundException{
-        if (leDepartement == null || nom == null || adresse == null) throw new NullPointerException("The attribut cannot be null");
+    public Aeroport(Departement leDepartement, String nom, String adresse) throws InvalidAttributException, CommuneNotFoundException{
+        if (leDepartement == null || nom == null || adresse == null) throw new InvalidAttributException("The attribut cannot be null");
         this.leDepartement = leDepartement;
         this.nom = nom;
         this.adresse = adresse;
@@ -30,8 +34,8 @@ public class Aeroport {
         return this.leDepartement;
     }
 
-    public void setLeDepartement(Departement leDepartement) throws NullPointerException{
-        if (leDepartement == null) throw new NullPointerException("The attribut cannot be null");
+    public void setLeDepartement(Departement leDepartement) throws InvalidAttributException{
+        if (leDepartement == null) throw new InvalidAttributException("The attribut cannot be null");
         this.leDepartement = leDepartement;
     }
 
@@ -39,8 +43,8 @@ public class Aeroport {
         return this.nom;
     }
 
-    public void setNom(String nom) {
-        if (nom == null) throw new NullPointerException("The attribut cannot be null");
+    public void setNom(String nom) throws InvalidAttributException {
+        if (nom == null) throw new InvalidAttributException("The attribut cannot be null");
         this.nom = nom;
     }
 
@@ -48,8 +52,8 @@ public class Aeroport {
         return this.adresse;
     }
 
-    public void setAdresse(String adresse) {
-        if (adresse == null) throw new NullPointerException("The attribut cannot be null");
+    public void setAdresse(String adresse) throws InvalidAttributException {
+        if (adresse == null) throw new InvalidAttributException("The attribut cannot be null");
         this.adresse = adresse;
     }
 
