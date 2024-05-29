@@ -12,11 +12,18 @@ public class Aeroport {
     public Aeroport() {
     }
 
-    public Aeroport(Departement leDepartement, String nom, String adresse) throws NullPointerException{
+    public Aeroport(Departement leDepartement, String nom, String adresse) throws NullPointerException, CommuneNotFoundException{
         if (leDepartement == null || nom == null || adresse == null) throw new NullPointerException("The attribut cannot be null");
         this.leDepartement = leDepartement;
         this.nom = nom;
         this.adresse = adresse;
+        String[] tmp = this.adresse.split(" ");
+        int idCommune = Integer.parseInt(tmp[tmp.length-1]);
+
+        for(Commune c : this.leDepartement.getLesCommunes()){
+            if (idCommune == c.getIdCommune()) this.laCommune = c;
+        }
+        if (this.laCommune == null) throw new CommuneNotFoundException("The Commune is not found");
     }
 
     public Departement getLeDepartement() {
@@ -47,13 +54,13 @@ public class Aeroport {
     }
 
     public ArrayList<Gare> getGaresVoyageurs(){
-        ArrayList<Gare> ret = new ArrayList<>();
+        ArrayList<Gare> ret = new ArrayList<Gare>();
         
-        for(Commune c : this.leDepartement.getLesCommunes()){
-            for(Gare g : c.getLesGares()){
-
-            }
+        ArrayList<Gare> tmp = laCommune.getLesGares();
+        for(Garre g : tmp){
+            if (g.getEstVoyageur) ret.add(g);
         }
+        return ret;
     }
 
 
