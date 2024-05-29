@@ -5,4 +5,4 @@ src_dir="../src"
 class_dir="../class"
 lib_dir="../lib"
 
-javac -cp "$lib_dir" -d "$class_dir" $(find $src_dir -type f -name "*.java")
+javac -cp "$lib_dir":../src/ressources -d "$class_dir" --module-path ../lib/javafx/lib --add-modules javafx.controls,javafx.fxml $(find $src_dir -type f -name "*.java")
