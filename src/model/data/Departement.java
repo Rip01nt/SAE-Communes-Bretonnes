@@ -12,6 +12,7 @@ public class Departement {
     private double investissementCulturel2019;
 
     public Departement() {
+        this.lesAeroports = new ArrayList<Aeroport>();
     }
 
     public Departement(ArrayList<Aeroport> lesAeroports, ArrayList<Commune> lesCommunes, int idDepartement, String nomDepartement, double investissementCulturel2019) {
@@ -61,5 +62,28 @@ public class Departement {
     public void setInvestissementCulturel2019(double investissementCulturel2019) {
         this.investissementCulturel2019 = investissementCulturel2019;
     }
-    
+
+    public int getNbGareFret(){
+        int nbGareFret = 0;
+        for(Commune c : lesCommunes){
+            for(Gare g : c.getLesGares()){
+                if(g.isEstFret()){
+                    nbGareFret++;
+                }
+            }
+        }
+        return nbGareFret;
+    }
+
+    public int getNbGareVoyageur(){
+        try{
+            int nbGareVoyageur = 0;
+            for(Commune c : lesCommunes){
+                for(Gare g : c.getLesGares()){
+                    if(g.isEstVoyageur()){
+                        nbGareVoyageur++;
+                    }
+                }
+            }
+            return nbGareVoyageur;
 }
