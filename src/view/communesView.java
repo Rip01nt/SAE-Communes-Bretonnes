@@ -7,7 +7,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import controller.communesController;
@@ -19,23 +18,28 @@ public class communesView extends Application {
     private BorderPane root;
     private VBox menu;
     private Button menuButton;
+    private Button userButton;
+    private Button searchButton;
+    private Button homeButton;
+    private Button scoreboardButton;
+    private Button settingsButton;
+    private Button exitButton;
+    
 
 
     public void start(Stage primaryStage) throws Exception {
-        /*
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/ressource/communes.fxml"));
-        Parent root = loader.load();
-        */
+        Parent parRoot = loader.load();
         root = new BorderPane();
         menu = new VBox();
+        menuButton = new Button("≡");
         root.setLeft(menu);
         root.setTop(menuButton);
         BorderPane.setAlignment(menuButton, javafx.geometry.Pos.CENTER_LEFT);
         root.setCenter(new Label("Hello World"));
-        menuButton = new Button("≡");
-        Scene scene = new Scene(root, 300, 250);
+        Scene scene = new Scene(parRoot, 300, 250);
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Communes Bretonnes");
+        primaryStage.setTitle(TITLE);
 
 
         primaryStage.show();
