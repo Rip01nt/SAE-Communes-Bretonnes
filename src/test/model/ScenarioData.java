@@ -8,5 +8,7 @@ import model.data.Gare;
 import model.data.DonneesAnnuelles;
 
 public class ScenarioData {
+    
+
 
 }
