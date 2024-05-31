@@ -28,7 +28,7 @@ public class Annee {
         this.tauxInflation = tauxInflation;
     }
 
-    public double moyenneTauxInflation(ArrayList<Annee> annee) throws NullPointerException {
+    public static double moyenneTauxInflation(ArrayList<Annee> annee) throws NullPointerException {
         if (annee == null) throw new NullPointerException("The parameter cannot be null");
         double ret = 0;
         for (Annee a : annee) {
