@@ -5,7 +5,7 @@ import exception.*;
 import java.lang.Comparable;
 
 
-public class Commune implements Comparable {
+public class Commune implements Comparable<Commune> {
 
     private Departement leDepartement;
     private ArrayList<Gare> lesGares;
@@ -85,14 +85,14 @@ public class Commune implements Comparable {
     }
 
     public String toString(){
-        String ret = "Code Insee : " + this.idCommune + "\nNom : " + this.nomCommune + "\nDepatement : " + this.leDepartement.toString() + "\nGarres : ";
+        String ret = "Code Insee : " + this.idCommune + "\nNom : " + this.nomCommune + "\nDepatement : " + this.leDepartement.getNomDepartement() + "\nGarres : ";
         for (Gare g : this.lesGares) {
-            ret += "\n" + g.getNomGare();
+            ret += "\n\t" + g.getNomGare();
         }
 
         ret += "\nCommunes Voisines : ";
         for (Commune c : this.communesVoisines) {
-            ret += "\n" + c.getNomCommune();
+            ret += "\n\t" + c.getNomCommune();
         }
 
         return ret;

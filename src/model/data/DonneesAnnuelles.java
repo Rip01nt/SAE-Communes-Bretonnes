@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.lang.Comparable;
 import exception.*;
 
-public class DonneesAnnuelles implements Comparable{
+public class DonneesAnnuelles implements Comparable<DonneesAnnuelles> {
 
     private Annee lAnnee;
     private Commune laCommune;

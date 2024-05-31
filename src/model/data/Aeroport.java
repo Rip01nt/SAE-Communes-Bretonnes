@@ -68,7 +68,7 @@ public class Aeroport {
     }
 
     public String toString(){
-        return "Departement : " + this.leDepartement.toString() + "\nNom : " + this.nom + "\nAdresse : " + this.adresse;
+        return "Departement : " + this.leDepartement.getNomDepartement() + "\nNom : " + this.nom + "\nAdresse : " + this.adresse;
     }
 
 

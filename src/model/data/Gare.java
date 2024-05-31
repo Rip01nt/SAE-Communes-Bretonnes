@@ -78,6 +78,6 @@ public class Gare {
     }
 
     public String toString(){
-        return "Nom : " + this.nomGare + "Code Gare : " + this.codeGare + "\nCommune : " + this.laCommune.getNomCommune() + "\nFret : " + this.estFret + "\nVoyageur : " + this.estVoyageur;
+        return "Nom : " + this.nomGare + "\nCode Gare : " + this.codeGare + "\nCommune : " + this.laCommune.getNomCommune() + "\nFret : " + this.estFret + "\nVoyageur : " + this.estVoyageur;
     }
 }
