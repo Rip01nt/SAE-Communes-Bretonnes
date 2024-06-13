@@ -13,8 +13,6 @@ import exception.CommuneNotFoundException;
 import exception.InvalidAttributException;
 
 public class ScenarioData {
-    
-
 
     public static void main(String[] args){
         
@@ -135,11 +133,27 @@ public class ScenarioData {
             listData.add(data2);
             System.out.println(DonneesAnnuelles.moyennePrixLogements(listData));
 
+            System.out.println("\n\nQuelle DonneeAnnuelles des deux est la plus grande ?");
+            tmp = data1.compareTo(data2);
+            if (tmp < 0){
+                System.out.println("La donnée de " + data1.getLAnnee().getANNEE() + " pour la Commune de : "  + data1.getLaCommune().getNomCommune() + " est la plus grande.");
+            }else if (tmp > 0){
+                System.out.println("La donnée de " + data2.getLAnnee().getANNEE() + " pour la Commune de : "  + data2.getLaCommune().getNomCommune() + " est la plus grande.");
+            }else {
+                System.out.println("Aucune, elles sont équivalente.");
+            }
+
         }catch (InvalidAttributException e){
             System.out.print(e.getMessage());
         }catch (CommuneNotFoundException e){
             System.out.println(e.getMessage());
         }
+
+        
+
+
+
+
 
 
         
