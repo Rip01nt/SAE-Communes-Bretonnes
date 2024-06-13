@@ -21,13 +21,7 @@ public class Aeroport {
         this.leDepartement = leDepartement;
         this.nom = nom;
         this.adresse = adresse;
-        String[] tmp = this.adresse.split(" ");
-        int idCommune = Integer.parseInt(tmp[tmp.length-1]);
-
-        for(Commune c : this.leDepartement.getLesCommunes()){
-            if (idCommune == c.getIdCommune()) this.laCommune = c;
-        }
-        if (this.laCommune == null) throw new CommuneNotFoundException("The Commune is not found");
+        this.updateCommune();
     }
 
     public Departement getLeDepartement() {
@@ -52,9 +46,29 @@ public class Aeroport {
         return this.adresse;
     }
 
-    public void setAdresse(String adresse) throws InvalidAttributException {
+    public void setAdresse(String adresse) throws InvalidAttributException, CommuneNotFoundException {
         if (adresse == null) throw new InvalidAttributException("The attribut cannot be null");
         this.adresse = adresse;
+        this.updateCommune();
+    }
+
+    public Commune getLaCommune() {
+        return this.laCommune;
+    }
+
+    public void setlaCommune(Commune laCommune) throws InvalidAttributException {
+        if (laCommune == null) throw new InvalidAttributException("The attribut cannot be null");
+        this.laCommune = laCommune;
+    }
+
+    private void updateCommune() throws CommuneNotFoundException{
+        String[] tmp = this.adresse.split(" ");
+        int idCommune = Integer.parseInt(tmp[tmp.length-1]);
+
+        for(Commune c : this.leDepartement.getLesCommunes()){
+            if (idCommune == c.getIdCommune()) this.laCommune = c;
+        }
+        if (this.laCommune == null) throw new CommuneNotFoundException("The Commune is not found");
     }
 
     public ArrayList<Gare> getGaresVoyageurs(){
