@@ -111,17 +111,7 @@ public class communesView extends Application {
         VBox.setMargin(exitButton, new Insets(IMG_SIZE/10, IMG_SIZE/10, IMG_SIZE/10, IMG_SIZE/20));
         BorderPane.setAlignment(menuButton, javafx.geometry.Pos.CENTER_LEFT);
 
-        
-        Media media = new Media(new File("../src/assets/rick.mp4").toURI().toURL().toString());
-
-        MediaPlayer mediaPlayer = new MediaPlayer(media);
-        MediaView mediaView = new MediaView(mediaPlayer);
-        mediaView.setFitHeight(IMG_SIZE*9);
-        mediaView.setFitWidth(IMG_SIZE*7);
-
-        mediaPlayer.play();
-
-        root.setCenter(mediaView);
+        root.setCenter(this.rickRoll());
 
         this.center = new StackPane(root, this.authPane());
         this.scene = new Scene(center, 720, 740);
@@ -183,6 +173,19 @@ public class communesView extends Application {
         imageView.setFitWidth(IMG_SIZE);
         button.setGraphic(imageView);
         button.textFillProperty().set(javafx.scene.paint.Color.BLUE);
+    }
+
+    private MediaView rickRoll() {
+        MediaPlayer mediaPlayer=null;
+        MediaView mediaView=null;
+        try {
+            mediaPlayer = new MediaPlayer(new Media(new File("../src/assets/rick.mp4").toURI().toURL().toString()));
+            mediaView = new MediaView(mediaPlayer);
+        } catch (Exception e) {}
+        mediaView.setFitHeight(IMG_SIZE*9);
+        mediaView.setFitWidth(IMG_SIZE*7);
+        mediaPlayer.play();
+        return mediaView;
     }
 
     private GridPane authPane() {
