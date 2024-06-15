@@ -16,11 +16,16 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.FileInputStream;
 
 import controller.communesController;
@@ -32,7 +37,7 @@ public class communesView extends Application {
     private static final int IMG_SIZE = 80;
     private static final Font TITLE_FONT = new Font("Arial", IMG_SIZE/2);
     private static final Font FONT = new Font("Arial", IMG_SIZE/4);
-    private static final Insets INSETS = new Insets(IMG_SIZE/8, IMG_SIZE/8, IMG_SIZE/8, IMG_SIZE/8);
+    private static final Insets INSETS = new Insets(IMG_SIZE/10, IMG_SIZE/10, IMG_SIZE/10, IMG_SIZE/10);
     //private static final String FXML = "/ressource/communes.fxml";
     //private static final String CSS = "/ressource/communes.css";
     private Stage primaryStage;
@@ -56,22 +61,21 @@ public class communesView extends Application {
     public void start(Stage primaryStage) throws Exception {
         communesController controller = new communesController(this);
         this.primaryStage = primaryStage;
-        // FXMLLoader loader = new FXMLLoader(getClass().getResource(FXML));
-        // Parent parRoot = loader.load();
+
         try {
-        root = new BorderPane();
-        userButton = new Button();
-        this.setMenuButtonsImage(userButton, new FileInputStream("../src/assets/user.png"));
-        searchButton = new Button();
-        this.setMenuButtonsImage(searchButton, new FileInputStream("../src/assets/search.png"));
-        homeButton = new Button();
-        this.setMenuButtonsImage(homeButton, new FileInputStream("../src/assets/home.png"));
-        scoreboardButton = new Button();
-        this.setMenuButtonsImage(scoreboardButton, new FileInputStream("../src/assets/scoreboard.png"));
-        settingsButton = new Button();
-        this.setMenuButtonsImage(settingsButton, new FileInputStream("../src/assets/settings.png"));
-        exitButton = new Button();
-        this.setMenuButtonsImage(exitButton, new FileInputStream("../src/assets/exit.png"));
+            root = new BorderPane();
+            userButton = new Button();
+            this.setMenuButtonsImage(userButton, new FileInputStream("../src/assets/user.png"));
+            searchButton = new Button();
+            this.setMenuButtonsImage(searchButton, new FileInputStream("../src/assets/search.png"));
+            homeButton = new Button();
+            this.setMenuButtonsImage(homeButton, new FileInputStream("../src/assets/home.png"));
+            scoreboardButton = new Button();
+            this.setMenuButtonsImage(scoreboardButton, new FileInputStream("../src/assets/scoreboard.png"));
+            settingsButton = new Button();
+            this.setMenuButtonsImage(settingsButton, new FileInputStream("../src/assets/settings.png"));
+            exitButton = new Button();
+            this.setMenuButtonsImage(exitButton, new FileInputStream("../src/assets/exit.png"));
         } catch (NullPointerException e) {
             System.out.println("Error: "+e.getMessage());
         }
@@ -83,9 +87,11 @@ public class communesView extends Application {
         TITLE_LABEL.setFont(TITLE_FONT);
         titleBar.setCenter(TITLE_LABEL);
         titleBar.setLeft(menuButton);
+        BorderPane.setMargin(menuButton, INSETS);
         ImageView logo = new ImageView(new Image(new FileInputStream("../src/assets/logo_dark.png")));
-        logo.setFitHeight(IMG_SIZE*1.25);
-        logo.setFitWidth(IMG_SIZE*1.25);
+        logo.setFitHeight(IMG_SIZE*1.2);
+        logo.setFitWidth(IMG_SIZE*1.2);
+        BorderPane.setMargin(logo, INSETS);
         titleBar.setRight(logo);
 
         root.setLeft(menu);
@@ -97,15 +103,28 @@ public class communesView extends Application {
         controller.onReady();
         menuButtons = new Button[]{userButton, searchButton, homeButton, scoreboardButton, settingsButton, exitButton};
         for (Button button : menuButtons) {
-            button.setPrefWidth(150);
+            button.setPrefWidth(IMG_SIZE*1.2);
             button.setPrefHeight(Integer.MAX_VALUE);
+            VBox.setMargin(button, new Insets(IMG_SIZE/10, IMG_SIZE/10, 0, IMG_SIZE/20));
         }
+        VBox.setMargin(userButton, new Insets(IMG_SIZE/10, IMG_SIZE/10, 0, IMG_SIZE/20));
+        VBox.setMargin(exitButton, new Insets(IMG_SIZE/10, IMG_SIZE/10, IMG_SIZE/10, IMG_SIZE/20));
         BorderPane.setAlignment(menuButton, javafx.geometry.Pos.CENTER_LEFT);
-        root.setCenter(new Hyperlink("https://www.youtube.com/watch?v=DmH6YPWhaDY", new Label("Don't click here -->")));
-        this.usernameField = new TextField();
-        this.passwordField = new PasswordField();
+
+        
+        Media media = new Media(new File("../src/assets/rick.mp4").toURI().toURL().toString());
+
+        MediaPlayer mediaPlayer = new MediaPlayer(media);
+        MediaView mediaView = new MediaView(mediaPlayer);
+        mediaView.setFitHeight(IMG_SIZE*9);
+        mediaView.setFitWidth(IMG_SIZE*7);
+
+        mediaPlayer.play();
+
+        root.setCenter(mediaView);
+
         this.center = new StackPane(root, this.authPane());
-        this.scene = new Scene(center, 720, 720);
+        this.scene = new Scene(center, 720, 740);
         this.primaryStage.setMinHeight(IMG_SIZE*9);
         this.primaryStage.setMinWidth(IMG_SIZE*7);
         primaryStage.setScene(scene);
@@ -158,6 +177,8 @@ public class communesView extends Application {
     private void setMenuButtonsImage(Button button, FileInputStream FIS) {
         Image image = new Image(FIS);
         ImageView imageView = new ImageView(image);
+        imageView.setPreserveRatio(true);
+        imageView.setSmooth(true);
         imageView.setFitHeight(IMG_SIZE);
         imageView.setFitWidth(IMG_SIZE);
         button.setGraphic(imageView);
@@ -170,12 +191,12 @@ public class communesView extends Application {
         try {
             logo = new ImageView(new Image(new FileInputStream("../src/assets/logo_light.png")));
             logo.setFitHeight(IMG_SIZE*1.75);
-            logo.setFitWidth(IMG_SIZE*1.75);            
+            logo.setFitWidth(IMG_SIZE*1.75);
         } catch (Exception e) {}
         Label errLabel = new Label("Wrong credentials");
-        usernameField = new TextField();
+        this.usernameField = new TextField();
         usernameField.setPromptText("Username");
-        passwordField = new PasswordField();
+        this.passwordField = new PasswordField();
         passwordField.setPromptText("Password");
         loginButton = new Button("Login");
         GridPane.setHalignment(logo, HPos.CENTER);
@@ -206,7 +227,7 @@ public class communesView extends Application {
             }
         });
 
-        authPane.setStyle("-fx-background-color: rgba(0, 0, 0, 0.75);");
+        authPane.setStyle("-fx-background-color: rgba(0, 0, 0, 0.5);");
         authPane.setAlignment(Pos.CENTER);
 
         return authPane;
