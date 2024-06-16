@@ -110,8 +110,7 @@ public class communesView extends Application {
         VBox.setMargin(exitButton, new Insets(imgSize/10, imgSize/10, imgSize/10, imgSize/20));
         BorderPane.setAlignment(menuButton, javafx.geometry.Pos.CENTER_LEFT);
 
-        root.setCenter(this.rickRoll());
-        this.titleLabel = new Label(TITLE);
+        root.setCenter(this.homeView());
 
         userButton.setOnAction(e -> {
             root.setCenter(this.userView());
@@ -138,7 +137,7 @@ public class communesView extends Application {
 
 
         this.center = new StackPane(root, this.authPane());
-        this.scene = new Scene(center, 720, 740);
+        this.scene = new Scene(center, imgSize*9, imgSize*9.25);
         this.primaryStage.setMinHeight(imgSize*9);
         this.primaryStage.setMinWidth(imgSize*7);
         primaryStage.setScene(scene);
@@ -199,18 +198,25 @@ public class communesView extends Application {
         button.textFillProperty().set(javafx.scene.paint.Color.BLUE);
     }
 
+    private MediaView rickView = null;
+
     private MediaView rickRoll() {
-        this.titleLabel = new Label("EasterEgg : Rick Rolled!");
-        MediaPlayer mediaPlayer=null;
-        MediaView mediaView=null;
+        this.titleLabel.setText("EasterEgg : Rick Rolled!");
+        MediaPlayer mediaPlayer = null;
         try {
             mediaPlayer = new MediaPlayer(new Media(new File("../src/assets/rick.mp4").toURI().toURL().toString()));
-            mediaView = new MediaView(mediaPlayer);
-        } catch (Exception e) {}
-        mediaView.setFitHeight(imgSize*9);
-        mediaView.setFitWidth(imgSize*7);
-        mediaPlayer.play();
-        return mediaView;
+            rickView = new MediaView(mediaPlayer);
+        } catch (Exception e) {} finally {
+            rickView.setFitHeight(imgSize*9);
+            rickView.setFitWidth(imgSize*7);
+            mediaPlayer.play();
+            root.centerProperty().addListener((obs, oldVal, newVal) -> {
+                if (oldVal != this.rickView) {
+                    ((MediaView) oldVal).getMediaPlayer().stop();
+                }
+            });
+        }
+        return rickView;
     }
 
     private GridPane authPane() {
@@ -366,10 +372,9 @@ public class communesView extends Application {
         // Add the series to the chart
         lineChart.getData().add(series);
         lineChart.setPrefSize(imgSize*7, imgSize*7);
-        lineChart.setCreateSymbols(false);
-        lineChart.setLegendVisible(false);
+        lineChart.setCreateSymbols(true);
+        lineChart.setLegendVisible(true);
         lineChart.setAnimated(true);
-        lineChart.setOpacity(0.5);
 
         scoreboardPane.add(lineChart, 0, 0);
 
@@ -379,7 +384,7 @@ public class communesView extends Application {
     private GridPane settingsView() {
         GridPane dataPane = new GridPane();
 
-        this.titleLabel = new Label("Settings");
+        this.titleLabel.setText("Settings");
 
         Label labelCommunesVoisines = new Label("Nombre de communes voisines");
 
