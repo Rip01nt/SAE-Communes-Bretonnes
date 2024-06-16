@@ -5,6 +5,9 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -53,7 +56,6 @@ public class communesView extends Application {
     private TextField usernameField;
     private PasswordField passwordField;
     private Button loginButton;
-
     public void start(Stage primaryStage) throws Exception {
         communesController controller = new communesController(this);
         this.primaryStage = primaryStage;
@@ -78,6 +80,7 @@ public class communesView extends Application {
         exitButton.textFillProperty().set(javafx.scene.paint.Color.RED);
         menu = new VBox(userButton, searchButton, homeButton, scoreboardButton, settingsButton, exitButton);
         menuButton = new Button("≡");
+        menuButton.setFocusTraversable(false);
         menuButton.setFont(TITLE_FONT);
         titleBar = new BorderPane();
         titleLabel.setFont(TITLE_FONT);
@@ -246,6 +249,7 @@ public class communesView extends Application {
             if (usernameField.getText().equals("admin") && passwordField.getText().equals("admin")) {
                 authPane.setVisible(false);
                 root.setVisible(true);
+                menuButton.setFocusTraversable(true);
             } else {
                 authPane.add(errLabel, 0, 1);
                 GridPane.setMargin(errLabel, INSETS);
@@ -328,6 +332,46 @@ public class communesView extends Application {
         GridPane scoreboardPane = new GridPane();
 
         this.titleLabel = new Label("Scoreboard");
+
+                // Define the X-axis
+        final NumberAxis xAxis = new NumberAxis();
+        xAxis.setLabel("Month");
+
+        // Define the Y-axis
+        final NumberAxis yAxis = new NumberAxis();
+        yAxis.setLabel("Sales");
+
+        // Create the line chart
+        final LineChart<Number,Number> lineChart = new LineChart<>(xAxis,yAxis);
+        lineChart.setTitle("Monthly Sales Data");
+
+        // Prepare data
+        XYChart.Series<Number, Number> series = new XYChart.Series<>();
+        series.setName("My plot");
+
+        // Adding data to the series
+        series.getData().add(new XYChart.Data<>(1, 23));
+        series.getData().add(new XYChart.Data<>(2, 14));
+        series.getData().add(new XYChart.Data<>(3, 15));
+        series.getData().add(new XYChart.Data<>(4, 24));
+        series.getData().add(new XYChart.Data<>(5, 34));
+        series.getData().add(new XYChart.Data<>(6, 36));
+        series.getData().add(new XYChart.Data<>(7, 22));
+        series.getData().add(new XYChart.Data<>(8, 45));
+        series.getData().add(new XYChart.Data<>(9, 43));
+        series.getData().add(new XYChart.Data<>(10, 17));
+        series.getData().add(new XYChart.Data<>(11, 29));
+        series.getData().add(new XYChart.Data<>(12, 35));
+
+        // Add the series to the chart
+        lineChart.getData().add(series);
+        lineChart.setPrefSize(imgSize*7, imgSize*7);
+        lineChart.setCreateSymbols(false);
+        lineChart.setLegendVisible(false);
+        lineChart.setAnimated(true);
+        lineChart.setOpacity(0.5);
+
+        scoreboardPane.add(lineChart, 0, 0);
 
         return scoreboardPane;
     }
