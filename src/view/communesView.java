@@ -39,7 +39,6 @@ public class communesView extends Application {
     private final Font FONT = new Font(FONT_NAME, imgSize/4);
     private final Insets INSETS = new Insets(imgSize/10, imgSize/10, imgSize/10, imgSize/10);
     private Label titleLabel = new Label(TITLE);
-    private Font iconFont = null;
     private Stage primaryStage;
     private Scene scene;
     private BorderPane root;
@@ -61,12 +60,6 @@ public class communesView extends Application {
     public void start(Stage primaryStage) throws Exception {
         communesController controller = new communesController(this);
         this.primaryStage = primaryStage;
-
-        try {
-            iconFont = Font.loadFont(new FileInputStream("../src/assets/icon_font.otf"), imgSize/2);
-        } catch (Exception e) {
-            e.getStackTrace();
-        }
 
         root = new BorderPane();
         userButton = new Button("\uE853");
@@ -101,13 +94,11 @@ public class communesView extends Application {
         */
         exitButton.textFillProperty().set(javafx.scene.paint.Color.RED);
         menu = new VBox(userButton, searchButton, homeButton, scoreboardButton, settingsButton, exitButton);
-        menuButton = new Button("\uE3C7");
-        menuButton.setFont(FONT);
-        menuButton.setStyle("-fx-font-family: 'Material Symbols Outlined';-fx-font-size: 3em;-fx-alignment: center;");
+        menuButton = new Button("≡");
         menuButton.setFocusTraversable(false);
         menuButton.setFont(TITLE_FONT);
         titleBar = new BorderPane();
-        titleLabel.setFont(TITLE_FONT);
+        this.titleLabel.setFont(TITLE_FONT);
         titleBar.setCenter(titleLabel);
         titleBar.setLeft(menuButton);
         BorderPane.setMargin(menuButton, INSETS);
@@ -211,6 +202,7 @@ public class communesView extends Application {
         return menuButtons;
     }
 
+    /*
     private void setMenuButtonsImage(Button button, FileInputStream FIS) {
         Image image = new Image(FIS);
         ImageView imageView = new ImageView(image);
@@ -221,6 +213,7 @@ public class communesView extends Application {
         button.setGraphic(imageView);
         button.textFillProperty().set(javafx.scene.paint.Color.BLUE);
     }
+    */
 
     private MediaView rickView = null;
 
