@@ -80,18 +80,6 @@ public class communesView extends Application {
         exitButton = new Button("\uE8AC");
         exitButton.setStyle("-fx-font-family: 'Material Symbols Outlined';-fx-font-size: 3em;-fx-alignment: center;");
         exitButton.setFont(FONT);
-        /*
-        try {
-            this.setMenuButtonsImage(userButton, new FileInputStream("../src/assets/user.png"));
-            this.setMenuButtonsImage(searchButton, new FileInputStream("../src/assets/search.png"));
-            this.setMenuButtonsImage(homeButton, new FileInputStream("../src/assets/home.png"));
-            this.setMenuButtonsImage(scoreboardButton, new FileInputStream("../src/assets/scoreboard.png"));
-            this.setMenuButtonsImage(settingsButton, new FileInputStream("../src/assets/settings.png"));
-            this.setMenuButtonsImage(exitButton, new FileInputStream("../src/assets/exit.png"));
-        } catch (NullPointerException e) {
-            System.out.println("Error: "+e.getMessage());
-        }
-        */
         exitButton.textFillProperty().set(javafx.scene.paint.Color.RED);
         menu = new VBox(userButton, searchButton, homeButton, scoreboardButton, settingsButton, exitButton);
         menuButton = new Button("≡");
@@ -201,19 +189,6 @@ public class communesView extends Application {
     public Button[] getMenuButtons() {
         return menuButtons;
     }
-
-    /*
-    private void setMenuButtonsImage(Button button, FileInputStream FIS) {
-        Image image = new Image(FIS);
-        ImageView imageView = new ImageView(image);
-        imageView.setPreserveRatio(true);
-        imageView.setSmooth(true);
-        imageView.setFitHeight(imgSize*0.8);
-        imageView.setFitWidth(imgSize*0.8);
-        button.setGraphic(imageView);
-        button.textFillProperty().set(javafx.scene.paint.Color.BLUE);
-    }
-    */
 
     private MediaView rickView = null;
 
