@@ -39,6 +39,7 @@ public class communesView extends Application {
     private final Font FONT = new Font(FONT_NAME, imgSize/4);
     private final Insets INSETS = new Insets(imgSize/10, imgSize/10, imgSize/10, imgSize/10);
     private Label titleLabel = new Label(TITLE);
+    private Font iconFont = null;
     private Stage primaryStage;
     private Scene scene;
     private BorderPane root;
@@ -56,30 +57,53 @@ public class communesView extends Application {
     private TextField usernameField;
     private PasswordField passwordField;
     private Button loginButton;
+
     public void start(Stage primaryStage) throws Exception {
         communesController controller = new communesController(this);
         this.primaryStage = primaryStage;
 
         try {
-            root = new BorderPane();
-            userButton = new Button();
+            iconFont = Font.loadFont(new FileInputStream("../src/assets/icon_font.otf"), imgSize/2);
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
+
+        root = new BorderPane();
+        userButton = new Button("\uE853");
+        userButton.setStyle("-fx-font-family: 'Material Symbols Outlined';-fx-font-size: 3em;-fx-alignment: center;");
+        userButton.setFont(TITLE_FONT);
+        searchButton = new Button("\uE8B6");
+        searchButton.setStyle("-fx-font-family: 'Material Symbols Outlined';-fx-font-size: 3em;-fx-alignment: center;");
+        searchButton.setFont(FONT);
+        homeButton = new Button("\uE88A");
+        homeButton.setStyle("-fx-font-family: 'Material Symbols Outlined';-fx-font-size: 3em;-fx-alignment: center;");
+        homeButton.setFont(FONT);
+        scoreboardButton = new Button("\uF6A0");
+        scoreboardButton.setStyle("-fx-font-family: 'Material Symbols Outlined';-fx-font-size: 3em;-fx-alignment: center;");
+        scoreboardButton.setFont(FONT);
+        settingsButton = new Button("\uE026");
+        settingsButton.setStyle("-fx-font-family: 'Material Symbols Outlined';-fx-font-size: 3em;-fx-alignment: center;");
+        settingsButton.setFont(FONT);
+        exitButton = new Button("\uE8AC");
+        exitButton.setStyle("-fx-font-family: 'Material Symbols Outlined';-fx-font-size: 3em;-fx-alignment: center;");
+        exitButton.setFont(FONT);
+        /*
+        try {
             this.setMenuButtonsImage(userButton, new FileInputStream("../src/assets/user.png"));
-            searchButton = new Button();
             this.setMenuButtonsImage(searchButton, new FileInputStream("../src/assets/search.png"));
-            homeButton = new Button();
             this.setMenuButtonsImage(homeButton, new FileInputStream("../src/assets/home.png"));
-            scoreboardButton = new Button();
             this.setMenuButtonsImage(scoreboardButton, new FileInputStream("../src/assets/scoreboard.png"));
-            settingsButton = new Button();
             this.setMenuButtonsImage(settingsButton, new FileInputStream("../src/assets/settings.png"));
-            exitButton = new Button();
             this.setMenuButtonsImage(exitButton, new FileInputStream("../src/assets/exit.png"));
         } catch (NullPointerException e) {
             System.out.println("Error: "+e.getMessage());
         }
+        */
         exitButton.textFillProperty().set(javafx.scene.paint.Color.RED);
         menu = new VBox(userButton, searchButton, homeButton, scoreboardButton, settingsButton, exitButton);
-        menuButton = new Button("≡");
+        menuButton = new Button("\uE3C7");
+        menuButton.setFont(FONT);
+        menuButton.setStyle("-fx-font-family: 'Material Symbols Outlined';-fx-font-size: 3em;-fx-alignment: center;");
         menuButton.setFocusTraversable(false);
         menuButton.setFont(TITLE_FONT);
         titleBar = new BorderPane();
