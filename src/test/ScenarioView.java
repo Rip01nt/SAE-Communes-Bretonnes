@@ -1,6 +1,6 @@
 package test;
 
-import view.communesView;
+import view.CommunesView;
 
 public class ScenarioView {
 

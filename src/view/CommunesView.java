@@ -19,18 +19,14 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.io.FileInputStream;
 
 import controller.communesController;
 
-public class communesView extends Application {
+public class CommunesView extends Application {
 
     private final String TITLE = "Communes Bretonnes";
     private final String FONT_NAME="Arial";
@@ -56,6 +52,7 @@ public class communesView extends Application {
     private TextField usernameField;
     private PasswordField passwordField;
     private Button loginButton;
+    private ImageView logo;
 
     public void start(Stage primaryStage) throws Exception {
         communesController controller = new communesController(this);
@@ -90,7 +87,7 @@ public class communesView extends Application {
         titleBar.setCenter(titleLabel);
         titleBar.setLeft(menuButton);
         BorderPane.setMargin(menuButton, INSETS);
-        ImageView logo = new ImageView(new Image(new FileInputStream("../src/assets/logo_dark.png")));
+        logo = new ImageView(new Image(new FileInputStream("../src/assets/logo_dark.png")));
         logo.setFitHeight(imgSize*1.2);
         logo.setFitWidth(imgSize*1.2);
         BorderPane.setMargin(logo, INSETS);
@@ -115,37 +112,16 @@ public class communesView extends Application {
 
         root.setCenter(this.homeView());
 
-        userButton.setOnAction(e -> {
-            root.setCenter(this.userView());
-        });
 
-        searchButton.setOnAction(e -> {
-            root.setCenter(this.searchView());
-        });
-
-        homeButton.setOnAction(e -> {
-            root.setCenter(this.homeView());
-        });
-
-        scoreboardButton.setOnAction(e -> {
-            root.setCenter(this.scoreboardView());
-        });
-
-        settingsButton.setOnAction(e -> {
-            root.setCenter(this.settingsView());
-        });
-        logo.setOnMouseClicked(e -> {
-            root.setCenter(this.rickRoll());
-        });
 
 
         this.center = new StackPane(root, this.authPane());
         this.scene = new Scene(center, imgSize*9, imgSize*9.25);
         this.primaryStage.setMinHeight(imgSize*9);
         this.primaryStage.setMinWidth(imgSize*7);
-        primaryStage.setScene(scene);
-        primaryStage.setTitle(TITLE);
-        primaryStage.show();
+        this.primaryStage.setScene(scene);
+        this.primaryStage.setTitle(TITLE);
+        this.primaryStage.show();
     }
     
     public static void main(String[] args) {
@@ -178,8 +154,32 @@ public class communesView extends Application {
         return scene;
     }
 
+    public Button getUserButton() {
+        return userButton;
+    }
+
+    public Button getSearchButton() {
+        return searchButton;
+    }
+
+    public Button getHomeButton() {
+        return homeButton;
+    }
+
+    public Button getScoreboardButton() {
+        return scoreboardButton;
+    }
+
+    public Button getSettingsButton() {
+        return settingsButton;
+    }
+
     public Button getExitButton() {
         return exitButton;
+    }
+
+    public Label getTitleLabel() {
+        return titleLabel;
     }
 
     public void exit() {
@@ -190,26 +190,10 @@ public class communesView extends Application {
         return menuButtons;
     }
 
-    private MediaView rickView = null;
-
-    private MediaView rickRoll() {
-        this.titleLabel.setText("EasterEgg : Rick Rolled!");
-        MediaPlayer mediaPlayer = null;
-        try {
-            mediaPlayer = new MediaPlayer(new Media(new File("../src/assets/rick.mp4").toURI().toURL().toString()));
-            rickView = new MediaView(mediaPlayer);
-        } catch (Exception e) {} finally {
-            rickView.setFitHeight(imgSize*9);
-            rickView.setFitWidth(imgSize*7);
-            mediaPlayer.play();
-            root.centerProperty().addListener((obs, oldVal, newVal) -> {
-                if (oldVal != this.rickView) {
-                    ((MediaView) oldVal).getMediaPlayer().stop();
-                }
-            });
-        }
-        return rickView;
+    public ImageView getLogo() {
+        return logo;
     }
+
 
     private GridPane authPane() {
         GridPane authPane = new GridPane();
@@ -313,7 +297,7 @@ public class communesView extends Application {
     private GridPane homeView() {
         GridPane homePane = new GridPane();
 
-        this.titleLabel = new Label(TITLE);
+        this.titleLabel.setText(TITLE);
 
         return homePane;
     }
@@ -321,7 +305,7 @@ public class communesView extends Application {
     private GridPane searchView() {
         GridPane searchPane = new GridPane();
 
-        this.titleLabel = new Label("Search");
+        this.titleLabel.setText("Search");
 
         return searchPane;
     }
@@ -329,7 +313,7 @@ public class communesView extends Application {
     private GridPane scoreboardView() {
         GridPane scoreboardPane = new GridPane();
 
-        this.titleLabel = new Label("Scoreboard");
+        this.titleLabel.setText("Scoreboard");
 
                 // Define the X-axis
         final NumberAxis xAxis = new NumberAxis();
