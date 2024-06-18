@@ -40,15 +40,15 @@ public class communesController {
         this.mainView = view;
         this.authView = new AuthView(this);
         this.userView = new UserView(this);
-        this.searchView = new SearchView();
-        this.homeView = new HomeView();
-        this.scoreboardView = new ScoreboardView();
-        this.settingsView = new SettingsView();
+        this.searchView = new SearchView(this);
+        this.homeView = new HomeView(this);
+        this.scoreboardView = new ScoreboardView(this);
+        this.settingsView = new SettingsView(this);
         this.utils = new UIMakingUtils(this);
     }
 
     public void onReady() {
-        this.mainView.getRoot().setCenter(this.homeView.getPane(this));
+        this.mainView.getRoot().setCenter(this.homeView.getPane());
         this.mainView.getTitleLabel().setText(uivars.getTITLE());
 
         mainView.getUserButton().setOnAction(e -> {
@@ -57,22 +57,22 @@ public class communesController {
         });
 
         mainView.getSearchButton().setOnAction(e -> {
-            mainView.getRoot().setCenter(this.searchView.getPane(this));
+            mainView.getRoot().setCenter(this.searchView.getPane());
             mainView.getTitleLabel().setText(uivars.getSEARCH());
         });
 
         mainView.getHomeButton().setOnAction(e -> {
-            mainView.getRoot().setCenter(this.homeView.getPane(this));
+            mainView.getRoot().setCenter(this.homeView.getPane());
             mainView.getTitleLabel().setText(uivars.getHOME());
         });
 
         mainView.getScoreboardButton().setOnAction(e -> {
-            mainView.getRoot().setCenter(this.scoreboardView.getPane(this));
+            mainView.getRoot().setCenter(this.scoreboardView.getPane());
             mainView.getTitleLabel().setText(uivars.getSCOREBOARD());
         });
 
         mainView.getSettingsButton().setOnAction(e -> {
-            mainView.getRoot().setCenter(this.settingsView.getPane(this));
+            mainView.getRoot().setCenter(this.settingsView.getPane());
             mainView.getTitleLabel().setText(uivars.getSETTINGS());
         });
 
@@ -95,8 +95,10 @@ public class communesController {
         });
 
         mainView.getRoot().centerProperty().addListener((obs, oldVal, newVal) -> {
-            if (newVal != utils.getRickView()) {
-                ((MediaView) oldVal).getMediaPlayer().stop();
+            if (oldVal instanceof MediaView) {
+                if (newVal != utils.getRickView()) {
+                    ((MediaView) oldVal).getMediaPlayer().stop();
+                }
             }
         });
 

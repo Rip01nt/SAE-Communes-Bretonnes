@@ -5,9 +5,13 @@ import javafx.scene.layout.GridPane;
 
 public class SearchView {
 
-    public GridPane getPane(communesController controller) {
-        GridPane searchPane = new GridPane();
+    private GridPane searchPane;
 
+    public SearchView(communesController controller) {
+        this.searchPane = new GridPane();
+    }
+
+    public GridPane getPane() {
         return searchPane;
     }
 

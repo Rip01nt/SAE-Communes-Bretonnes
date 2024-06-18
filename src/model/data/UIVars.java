@@ -28,8 +28,8 @@ public class UIVars {
             logo_light.setFitWidth(imgSize*1.75);
 
             logo_dark = new ImageView(new Image(new FileInputStream("../src/assets/logo_dark.png")));
-            logo_dark.setFitHeight(imgSize*1.75);
-            logo_dark.setFitWidth(imgSize*1.75);
+            logo_dark.setFitHeight(imgSize);
+            logo_dark.setFitWidth(imgSize);
         } catch (Exception e) {}
         this.logo_light = logo_light;
         this.logo_dark = logo_dark;

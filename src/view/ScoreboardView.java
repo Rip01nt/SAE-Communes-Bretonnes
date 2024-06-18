@@ -8,10 +8,12 @@ import javafx.scene.layout.GridPane;
 
 public class ScoreboardView {
 
-    public GridPane getPane(communesController controller) {
-                GridPane scoreboardPane = new GridPane();
+    GridPane scoreboardPane;
 
-                // Define the X-axis
+    public ScoreboardView(communesController controller) {
+        scoreboardPane = new GridPane();
+
+        // Define the X-axis
         final NumberAxis xAxis = new NumberAxis();
         xAxis.setLabel("Month");
 
@@ -49,7 +51,9 @@ public class ScoreboardView {
         lineChart.setAnimated(true);
 
         scoreboardPane.add(lineChart, 0, 0);
+    }
 
+    public GridPane getPane() {
         return scoreboardPane;
     }
 

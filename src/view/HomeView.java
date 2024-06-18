@@ -5,9 +5,13 @@ import javafx.scene.layout.GridPane;
 
 public class HomeView {
 
-    public GridPane getPane(communesController controller) {
-        GridPane homePane = new GridPane();
+    private GridPane homePane;
 
+    public HomeView(communesController controller) {
+        this.homePane = new GridPane();
+    }
+
+    public GridPane getPane() {
         return homePane;
     }
 }

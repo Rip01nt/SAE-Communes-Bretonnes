@@ -9,8 +9,10 @@ import javafx.scene.layout.GridPane;
 
 public class SettingsView {
 
-    public GridPane getPane(communesController controller) {
-        GridPane dataPane = new GridPane();
+    private GridPane settingsPane;
+
+    public SettingsView(communesController controller) {
+        this.settingsPane = new GridPane();
 
 
         Label labelCommunesVoisines = new Label("Nombre de communes voisines");
@@ -103,36 +105,37 @@ public class SettingsView {
             GridPane.setHalignment(labels[i], HPos.CENTER);
         }
 
-        dataPane.add(labelCommunesVoisines, 0, 0);
-        dataPane.add(sliderCommunesVoisines, 0, 1);
+        this.settingsPane.add(labelCommunesVoisines, 0, 0);
+        this.settingsPane.add(sliderCommunesVoisines, 0, 1);
 
-        dataPane.add(labelVenteApart, 1, 0);
-        dataPane.add(sliderVenteApart, 1, 1);
+        this.settingsPane.add(labelVenteApart, 1, 0);
+        this.settingsPane.add(sliderVenteApart, 1, 1);
 
-        dataPane.add(labelTailleMoyHabit, 0, 2);
-        dataPane.add(sliderTailleMoyHabit, 0, 3);
+        this.settingsPane.add(labelTailleMoyHabit, 0, 2);
+        this.settingsPane.add(sliderTailleMoyHabit, 0, 3);
 
-        dataPane.add(labelInflation, 1, 2);
-        dataPane.add(sliderInflation, 1, 3);
+        this.settingsPane.add(labelInflation, 1, 2);
+        this.settingsPane.add(sliderInflation, 1, 3);
 
-        dataPane.add(labelInvCulture, 0, 4);
-        dataPane.add(sliderInvCulture, 0, 5);
+        this.settingsPane.add(labelInvCulture, 0, 4);
+        this.settingsPane.add(sliderInvCulture, 0, 5);
 
-        dataPane.add(labelPrixMoyM2Ans, 1, 4);
-        dataPane.add(sliderPrixMoyM2Ans, 1, 5);
+        this.settingsPane.add(labelPrixMoyM2Ans, 1, 4);
+        this.settingsPane.add(sliderPrixMoyM2Ans, 1, 5);
 
-        dataPane.add(labelNbGare, 0, 6);
-        dataPane.add(sliderNbGare, 0, 7);
+        this.settingsPane.add(labelNbGare, 0, 6);
+        this.settingsPane.add(sliderNbGare, 0, 7);
 
-        dataPane.add(labelNbHabitant, 1, 6);
-        dataPane.add(sliderNbHabitant, 1, 7);
+        this.settingsPane.add(labelNbHabitant, 1, 6);
+        this.settingsPane.add(sliderNbHabitant, 1, 7);
 
-        dataPane.add(labelNbMaisonVenduAns, 0, 8);
-        dataPane.add(sliderNbMaisonVenduAns, 0, 9);
+        this.settingsPane.add(labelNbMaisonVenduAns, 0, 8);
+        this.settingsPane.add(sliderNbMaisonVenduAns, 0, 9);
 
-        dataPane.add(labelNbAeroport, 1, 8);
-        dataPane.add(sliderNbAeroport, 1, 9);
-
-        return dataPane;
+        this.settingsPane.add(labelNbAeroport, 1, 8);
+        this.settingsPane.add(sliderNbAeroport, 1, 9);
+    }
+    public GridPane getPane() {
+        return this.settingsPane;
     }
 }
