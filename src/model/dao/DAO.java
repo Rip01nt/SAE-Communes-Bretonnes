@@ -5,37 +5,26 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
 
-public abstract class DAO <T> {
+public abstract class DAO <T,P> {
     private static String driverClassName = "com.mysql.cj.jdbc.Driver ";
     private static String url = "dbc:mysql://localhost:3306/bdSAE";
     private static String username = "thel9";
     private static String password = "motdepasse";
-    private Connection conn = null;
-    protected void openConnection () throws SQLException {
-        if(this.conn == null){
-            // Charger la classe du pilote
-            try {
-                Class.forName(driverClassName);
-            } catch (ClassNotFoundException ex) {
-                ex.printStackTrace ();
-                this.conn = null;
-            }
-            // Obtenir la connection
-            this.conn = DriverManager.getConnection(url , username , password);
+
+    protected Connection getConnection() throws SQLException {
+        // Charger la classe du pilote
+        try {
+            Class.forName(driverClassName);
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace ();
+            return null;
         }
+        // Obtenir la connection
+        return DriverManager.getConnection(url , username , password);
     }
-    protected void closeConnection(){
-        if (this.conn != null){
-            try {
-                this.conn.close();
-                this.conn = null;
-            } catch (Exception e) {
-                e.getMessage();
-            }
-        }
-    }
+
     public abstract List <T> findAll ();
-    public abstract T findByID(Long id);
+    public abstract T findByID(P id);
     public abstract int update(T element);
     public abstract int delete(T element);
     public abstract int create(T element);
