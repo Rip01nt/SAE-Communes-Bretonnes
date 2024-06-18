@@ -5,7 +5,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
-import model.data.*;
+
+import exception.CommuneNotFoundException;
+import exception.InvalidAttributException;
+import model.data.Aeroport;
+import model.data.Departement;
 
 public class AeroportDAO extends DAO<Aeroport, String, String>{
 
@@ -48,7 +52,13 @@ public class AeroportDAO extends DAO<Aeroport, String, String>{
                 String adresse = rs.getString("adresse");
                 DepartementDAO depDAO = new DepartementDAO();
                 Departement leDepartement = depDAO.findByID(rs.getInt("leDepartement"), null);
-                ret.add(new Aeroport(leDepartement, nom, adresse));
+                try {
+                    ret.add(new Aeroport(leDepartement, nom, adresse));
+                } catch (InvalidAttributException e) {
+                    System.out.println(e.getMessage());
+                } catch (CommuneNotFoundException e) {
+                    System.out.println(e.getMessage());
+                }
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -57,19 +67,26 @@ public class AeroportDAO extends DAO<Aeroport, String, String>{
     }
 
     public Aeroport findByID(String nom, String a){
+        Aeroport aeroport = null;
         try (Connection con = this.getConnection(); PreparedStatement st = con.prepareStatement("SELECT * FROM Aeroport WHERE nom = '?'")) {
             st.setString(1, nom);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 String n = rs.getString("nom");
-                String a = rs.getString("adresse");
+                String adresse = rs.getString("adresse");
                 DepartementDAO depDAO = new DepartementDAO();
                 Departement d = depDAO.findByID(rs.getInt("leDepartement"), null);
-                return new Aeroport(d, n, a);
+                try {
+                    aeroport = new Aeroport(d, n, adresse);
+                } catch (InvalidAttributException e) {
+                    System.out.println(e.getMessage());
+                } catch (CommuneNotFoundException e) {
+                    System.out.println(e.getMessage());
+                }
             }
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
-            return null;
         }
+        return aeroport;
     }
 }

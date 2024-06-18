@@ -55,6 +55,7 @@ public class UserDAO extends DAO<User, String, String>{
     }
 
     public User findByID(String login, String password){
+        User user = null;
         try (Connection con = this.getConnection(); PreparedStatement st = con.prepareStatement("SELECT * FROM User WHERE login = '?' AND password = '?'")) {
             st.setString(1, login);
             st.setString(2, password);
@@ -62,11 +63,12 @@ public class UserDAO extends DAO<User, String, String>{
             while (rs.next()) {
                 String l = rs.getString("login");
                 String p = rs.getString("password");
-                return new User(l, p);
+                user = new User(l, p);
             }
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
-            return null;
         }
+
+        return user;
     }
 }

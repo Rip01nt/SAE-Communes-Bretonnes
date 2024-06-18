@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
+
+import exception.InvalidAttributException;
 import model.data.*;
 
 public class DonneesAnnuellesDAO extends DAO<DonneesAnnuelles, Integer, Integer>{
@@ -56,7 +58,11 @@ public class DonneesAnnuellesDAO extends DAO<DonneesAnnuelles, Integer, Integer>
                 int depensesCulturellesTotales = rs.getInt("depensesCulturellesTotales");
                 int budgetTotal = rs.getInt("budgetTotal");
                 int population = rs.getInt("population");
-                ret.add(new DonneesAnnuelles(lAnnee, laCommune, nbMaison, nbAppart, prixMoyen, prixM2Moyen, surfaceMoy, depensesCulturellesTotales, budgetTotal, population));
+                try {
+                    ret.add(new DonneesAnnuelles(lAnnee, laCommune, nbMaison, nbAppart, prixMoyen, prixM2Moyen, surfaceMoy, depensesCulturellesTotales, budgetTotal, population));
+                } catch (InvalidAttributException e) {
+                    System.out.println(e.getMessage());
+                }
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -65,6 +71,7 @@ public class DonneesAnnuellesDAO extends DAO<DonneesAnnuelles, Integer, Integer>
     }
 
     public DonneesAnnuelles findByID(Integer lAnnee, Integer laCommune){
+        DonneesAnnuelles ret = null;
         try (Connection con = this.getConnection(); PreparedStatement st = con.prepareStatement("SELECT * FROM DonneesAnnuelles WHERE lAnnee = ? AND WHERE laCommune = ?")) {
             st.setInt(1, lAnnee.intValue());
             st.setInt(2, laCommune.intValue());
@@ -82,15 +89,19 @@ public class DonneesAnnuellesDAO extends DAO<DonneesAnnuelles, Integer, Integer>
                 int depensesCulturellesTotales = rs.getInt("depensesCulturellesTotales");
                 int budgetTotal = rs.getInt("budgetTotal");
                 int population = rs.getInt("population");
-                return new DonneesAnnuelles(a, c, nbMaison, nbAppart, prixMoyen, prixM2Moyen, surfaceMoy, depensesCulturellesTotales, budgetTotal, population);
+                try {
+                    ret = new DonneesAnnuelles(a, c, nbMaison, nbAppart, prixMoyen, prixM2Moyen, surfaceMoy, depensesCulturellesTotales, budgetTotal, population);
+                } catch (InvalidAttributException e) {
+                    System.out.println(e.getMessage());
+                }
             }
         }catch (SQLException e) {
             System.out.println(e.getMessage());
-            return null;
         }
+        return ret;
     }
 
     public DonneesAnnuelles findByID(int lAnnee, int laCommune){
-        return this.findByID(new Integer(lAnnee), new Integer(laCommune));
+        return this.findByID(lAnnee,laCommune);
     }
 }

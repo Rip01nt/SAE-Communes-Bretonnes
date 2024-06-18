@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
-import model.data.*;
+import model.data.Annee;
 
 public class AnneeDAO extends DAO<Annee, Integer, String>{
     public int create(Annee annee){
@@ -53,22 +53,23 @@ public class AnneeDAO extends DAO<Annee, Integer, String>{
         return ret;
     }
 
-    public Annee findByID(Integer annee, String a){
+    public Annee findByID(Integer annee, String nom){
+        Annee year = null;
         try (Connection con = this.getConnection(); PreparedStatement st = con.prepareStatement("SELECT * FROM Annee WHERE nom = ?")) {
             st.setInt(1, annee);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 int a = rs.getInt("annee");
                 double tauxInflation = rs.getFloat("tauxInflation");
-                return new Annee(a, tauxInflation);
+                year = new Annee(a, tauxInflation);
             }
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
-            return null;
         }
+        return year;
     }
 
-    public Annee findByID(int annee, String a){
-        return this.findByID(new Integer(annee), a);
+    public Annee findByID(String a){
+        return this.findByID(Integer.valueOf(a), a);
     }
 }

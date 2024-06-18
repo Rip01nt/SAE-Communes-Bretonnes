@@ -5,7 +5,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
-import model.data.*;
+
+import exception.InvalidAttributException;
+import model.data.Departement;
+import model.data.Aeroport;
+import model.data.Commune;
 
 public class DepartementDAO extends DAO<Departement, Integer, String>{
 
@@ -55,7 +59,7 @@ public class DepartementDAO extends DAO<Departement, Integer, String>{
                 rsA = st.executeQuery("SELECT nom FROM Aeroport WHERE leDepartement = " + idDep);
                 lesAeroport = new ArrayList<Aeroport>();
                 AeroportDAO aeroDAO = new AeroportDAO();
-                while (rs.next()){
+                while (rsA.next()){
                     lesAeroport.add(aeroDAO.findByID(rs.getString("nom"), null));
                 }
 
@@ -65,8 +69,11 @@ public class DepartementDAO extends DAO<Departement, Integer, String>{
                 while (rsC.next()){
                     lesCommunes.add(communeDAO.findByID(rs.getInt("idCommune"), null));
                 }
-
-                ret.add(new Departement(lesAeroport, lesCommunes, idDep, nomDepartement, investissementCulturel2019));
+                try {
+                    ret.add(new Departement(lesAeroport, lesCommunes, idDep, nomDepartement, investissementCulturel2019));
+                } catch (InvalidAttributException e) {
+                    System.out.println(e.getMessage());
+                }
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -75,7 +82,10 @@ public class DepartementDAO extends DAO<Departement, Integer, String>{
     }
 
     public Departement findByID(Integer idDep, String a){
-        try (Connection con = this.getConnection(); PreparedStatement st = con.prepareStatement("SELECT * FROM Departement WHERE idDep = '?")) {
+        Departement departement = null;
+        try {
+            Connection con = this.getConnection();
+            PreparedStatement st = con.prepareStatement("SELECT * FROM Departement WHERE idDep = '?");
             st.setInt(1, idDep.intValue());
             ResultSet rs = st.executeQuery();
             ResultSet rsA;
@@ -90,7 +100,7 @@ public class DepartementDAO extends DAO<Departement, Integer, String>{
                 rsA = st.executeQuery("SELECT nom FROM Aeroport WHERE leDepartement = " + id);
                 lesAeroport = new ArrayList<Aeroport>();
                 AeroportDAO aeroDAO = new AeroportDAO();
-                while (rs.next()){
+                while (rsA.next()){
                     lesAeroport.add(aeroDAO.findByID(rs.getString("nom"), null));
                 }
 
@@ -100,17 +110,20 @@ public class DepartementDAO extends DAO<Departement, Integer, String>{
                 while (rsC.next()){
                     lesCommunes.add(communeDAO.findByID(rs.getInt("idCommune"), null));
                 }
-
-                return new Departement(lesAeroport, lesCommunes, id, nomDepartement, investissementCulturel2019);
+                try {
+                departement = new Departement(lesAeroport, lesCommunes, id, nomDepartement, investissementCulturel2019);
+                } catch (InvalidAttributException e) {
+                    System.out.println(e.getMessage());
+                }
             }
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
-            return null;
         }
+        return departement;
     }
 
     public Departement findByID(int idDep, String a){
-        return this.findByID(new Integer(idDep), a);
+        return this.findByID(Integer.valueOf(idDep), a);
     }
 
 }

@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
+
+import exception.InvalidAttributException;
 import model.data.*;
 
 public class GareDAO extends DAO<Gare, Integer, String>{
@@ -50,7 +52,11 @@ public class GareDAO extends DAO<Gare, Integer, String>{
                 String nomGare = rs.getString("nomGare");
                 boolean estFret = rs.getBoolean("estFret");
                 boolean estVoyageur = rs.getBoolean("estVoyageur");
-                ret.add(new Gare(laCommune, codeGare, nomGare, estFret, estVoyageur));
+                try {
+                    ret.add(new Gare(laCommune, codeGare, nomGare, estFret, estVoyageur));
+                } catch (InvalidAttributException e) {
+                    System.out.println(e.getMessage());
+                }
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -59,6 +65,7 @@ public class GareDAO extends DAO<Gare, Integer, String>{
     }
 
     public Gare findByID(Integer codeGare, String a){
+        Gare gare = null;
         try (Connection con = this.getConnection(); PreparedStatement st = con.prepareStatement("SELECT * FROM Gare WHERE codeGare = ?")) {
             st.setInt(1, codeGare.intValue());
             ResultSet rs = st.executeQuery();
@@ -69,16 +76,20 @@ public class GareDAO extends DAO<Gare, Integer, String>{
                 String nomGare = rs.getString("nomGare");
                 boolean estFret = rs.getBoolean("estFret");
                 boolean estVoyageur = rs.getBoolean("estVoyageur");
-                return new Gare(laCommune, c, nomGare, estFret, estVoyageur);
+                try {
+                    gare = new Gare(laCommune, c, nomGare, estFret, estVoyageur);
+                } catch (InvalidAttributException e) {
+                    System.out.println(e.getMessage());
+                }
             }
         }catch (SQLException e) {
             System.out.println(e.getMessage());
-            return null;
         }
+        return gare;
     }
 
     public Gare findByID(int codeGare, String a){
-        return this.findByID(new Integer(codeGare), a);
+        return this.findByID(Integer.valueOf(codeGare), a);
     }
 
 }
