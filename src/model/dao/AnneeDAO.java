@@ -72,7 +72,7 @@ public class AnneeDAO extends DAO<Annee, Integer, String>{
         return year;
     }
 
-    public Annee findByID(String a){
-        return this.findByID(Integer.valueOf(a), a);
+    public Annee findByID(int annee, String a){
+        return this.findByID(Integer.valueOf(annee), a);
     }
 }

@@ -104,6 +104,6 @@ public class DonneesAnnuellesDAO extends DAO<DonneesAnnuelles, Integer, Integer>
     }
 
     public DonneesAnnuelles findByID(int lAnnee, int laCommune){
-        return this.findByID(lAnnee,laCommune);
+        return this.findByID(Integer.valueOf(lAnnee),Integer.valueOf(laCommune));
     }
 }

@@ -9,6 +9,7 @@ public class SearchView {
 
     public SearchView(communesController controller) {
         this.searchPane = new GridPane();
+        
     }
 
     public GridPane getPane() {

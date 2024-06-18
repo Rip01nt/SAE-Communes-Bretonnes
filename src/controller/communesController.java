@@ -8,6 +8,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.MediaView;
 import javafx.scene.text.Font;
+
 import view.CommunesView;
 import view.AuthView;
 import view.UserView;
@@ -16,6 +17,14 @@ import view.HomeView;
 import view.ScoreboardView;
 import view.SettingsView;
 import view.UIMakingUtils;
+
+import model.dao.AeroportDAO;
+import model.dao.AnneeDAO;
+import model.dao.CommuneDAO;
+import model.dao.DepartementDAO;
+import model.dao.DonneesAnnuellesDAO;
+import model.dao.GareDAO;
+import model.dao.UserDAO;
 
 import model.data.UIVars;
 
@@ -31,12 +40,21 @@ public class communesController {
     private SettingsView settingsView;
     private UIMakingUtils utils;
 
+    private AeroportDAO aeroportDAO;
+    private AnneeDAO anneeDAO;
+    private CommuneDAO communeDAO;
+    private DepartementDAO departementDAO;
+    private DonneesAnnuellesDAO donneesAnnuellesDAO;
+    private GareDAO gareDAO;
+    private UserDAO userDAO;
+
     private UIVars uivars = new UIVars();
 
     
 
     public communesController(CommunesView view) {
         this.mainView = view;
+
         this.authView = new AuthView(this);
         this.userView = new UserView(this);
         this.searchView = new SearchView(this);
@@ -44,6 +62,14 @@ public class communesController {
         this.scoreboardView = new ScoreboardView(this);
         this.settingsView = new SettingsView(this);
         this.utils = new UIMakingUtils(this);
+
+        this.aeroportDAO = new AeroportDAO();
+        this.anneeDAO = new AnneeDAO();
+        this.communeDAO = new CommuneDAO();
+        this.departementDAO = new DepartementDAO();
+        this.donneesAnnuellesDAO = new DonneesAnnuellesDAO();
+        this.gareDAO = new GareDAO();
+        this.userDAO = new UserDAO();
     }
 
     public void onReady() {
@@ -128,7 +154,6 @@ public class communesController {
         });
         
     }
-
 
     public int getImgSize() {
         return uivars.getImgSize();
