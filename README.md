@@ -9,4 +9,7 @@ Application pour mesurer l'attractivitée des communes bretonnes
 * [X] POJO
 * [X] GRAPH
 * [ ] DAO
+  * [ ] Fix mariadb syntax
 * [ ] IHM
+  * [ ] Search
+  * [ ] Info Communes
