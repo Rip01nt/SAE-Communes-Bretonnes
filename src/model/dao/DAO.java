@@ -8,8 +8,8 @@ import java.util.List;
 public abstract class DAO <T,P> {
     private static String driverClassName = "com.mysql.cj.jdbc.Driver ";
     private static String url = "dbc:mysql://localhost:3306/bdSAE";
-    private static String username = "thel9";
-    private static String password = "motdepasse";
+    private static String username = "root";
+    private static String password = "root";
 
     protected Connection getConnection() throws SQLException {
         // Charger la classe du pilote
