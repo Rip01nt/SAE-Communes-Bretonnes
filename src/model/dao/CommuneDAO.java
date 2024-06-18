@@ -76,7 +76,7 @@ public class CommuneDAO extends DAO<Commune, Integer, String>{
                     communesVoisines.add(communeDAO.findByID(rs.getInt("communeVoisine"), null));
                 }
 
-                ret.add(new Commune(leDepartement, lesGares, communesVoisines, idCommune, nomCommune);
+                ret.add(new Commune(leDepartement, lesGares, communesVoisines, idCommune, nomCommune));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
