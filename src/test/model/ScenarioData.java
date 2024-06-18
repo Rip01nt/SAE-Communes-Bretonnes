@@ -12,8 +12,15 @@ import java.util.ArrayList;
 import exception.CommuneNotFoundException;
 import exception.InvalidAttributException;
 
+/**
+ * Classe de test manipulant les class du package model.data 
+ */
 public class ScenarioData {
 
+    /**
+     * Méthode principale représentant le scénario d'utilisation.
+     * @param args les arguments de la ligne de commande (non utilisés dans ce scénario)
+     */
     public static void main(String[] args){
         
         try {
@@ -148,14 +155,5 @@ public class ScenarioData {
         }catch (CommuneNotFoundException e){
             System.out.println(e.getMessage());
         }
-
-        
-
-
-
-
-
-
-        
     }
 }
