@@ -27,7 +27,7 @@ public class communesController {
     private HomeView homeView;
     private ScoreboardView scoreboardView;
     private SettingsView settingsView;
-    private UIMakingUtils easterEggView;
+    private UIMakingUtils utils;
 
     
 
@@ -56,7 +56,7 @@ public class communesController {
             mainView.getRoot().setCenter(this.settingsView.getPane());
         });
         mainView.getLogo().setOnMouseClicked(e -> {
-            mainView.getRoot().setCenter(easterEggView.rickRoll());
+            mainView.getRoot().setCenter(utils.rickRoll());
         });
         mainView.getMenuButton().setOnAction(e -> {
             mainView.getMenu().setVisible(!mainView.getMenu().isVisible());
@@ -70,7 +70,7 @@ public class communesController {
             mainView.exit();
         });
         mainView.getRoot().centerProperty().addListener((obs, oldVal, newVal) -> {
-            if (newVal != easterEggView.getRickView()) {
+            if (newVal != utils.getRickView()) {
                 ((MediaView) oldVal).getMediaPlayer().stop();
             }
         });
