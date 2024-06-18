@@ -9,14 +9,14 @@ import javafx.scene.layout.GridPane;
 
 public class UserView {
 
+    private GridPane userPane;
     private Label labelUsername;
     private Label labelPassword;
     private Label labelUISize;
     private Slider sliderUISize;
 
-    public GridPane getPane(communesController controller) {
-        
-        GridPane userPane = new GridPane();
+    public UserView(communesController controller) {
+        userPane = new GridPane();
 
         labelUsername = new Label("Username");
         labelUsername.setFont(controller.getFONT());
@@ -44,9 +44,9 @@ public class UserView {
         userPane.add(labelPassword, 0, 1);
         userPane.add(labelUISize, 0, 2);
         userPane.add(sliderUISize, 1, 2);
+    }
 
-
-
+    public GridPane getPane() {
         return userPane;
     }
 

@@ -5,15 +5,12 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-
-import java.io.FileInputStream;
 
 import controller.communesController;
 
@@ -45,22 +42,16 @@ public class CommunesView extends Application {
         titleLabel.setFont(new Font(controller.getFONT_NAME(), controller.getImgSize()/2));
         userButton = new Button("\uE853");
         userButton.setStyle("-fx-font-family: 'Material Symbols Outlined';-fx-font-size: 3em;-fx-alignment: center;");
-        //userButton.setFont(TITLE_FONT);
         searchButton = new Button("\uE8B6");
         searchButton.setStyle("-fx-font-family: 'Material Symbols Outlined';-fx-font-size: 3em;-fx-alignment: center;");
-        //searchButton.setFont(FONT);
         homeButton = new Button("\uE88A");
         homeButton.setStyle("-fx-font-family: 'Material Symbols Outlined';-fx-font-size: 3em;-fx-alignment: center;");
-        //homeButton.setFont(FONT);
         scoreboardButton = new Button("\uF6A0");
         scoreboardButton.setStyle("-fx-font-family: 'Material Symbols Outlined';-fx-font-size: 3em;-fx-alignment: center;");
-        //scoreboardButton.setFont(FONT);
         settingsButton = new Button("\uE026");
         settingsButton.setStyle("-fx-font-family: 'Material Symbols Outlined';-fx-font-size: 3em;-fx-alignment: center;");
-        //settingsButton.setFont(FONT);
         exitButton = new Button("\uE8AC");
         exitButton.setStyle("-fx-font-family: 'Material Symbols Outlined';-fx-font-size: 3em;-fx-alignment: center;");
-        //exitButton.setFont(FONT);
         exitButton.textFillProperty().set(javafx.scene.paint.Color.RED);
         menu = new VBox(userButton, searchButton, homeButton, scoreboardButton, settingsButton, exitButton);
         menuButton = new Button("≡");
@@ -71,9 +62,7 @@ public class CommunesView extends Application {
         titleBar.setCenter(titleLabel);
         titleBar.setLeft(menuButton);
         BorderPane.setMargin(menuButton, controller.getINSETS());
-        logo = new ImageView(new Image(new FileInputStream("../src/assets/logo_dark.png")));
-        logo.setFitHeight(controller.getImgSize()*1.2);
-        logo.setFitWidth(controller.getImgSize()*1.2);
+        logo = controller.getLogo_dark();
         BorderPane.setMargin(logo, controller.getINSETS());
         titleBar.setRight(logo);
 
@@ -83,7 +72,6 @@ public class CommunesView extends Application {
         titleBar.setStyle("-fx-background-color: #FFFFFF;");
         menu.setVisible(false);
         root.getChildren().remove(menu);
-        controller.onReady();
         menuButtons = new Button[]{userButton, searchButton, homeButton, scoreboardButton, settingsButton, exitButton};
         for (Button button : menuButtons) {
             button.setPrefWidth(controller.getImgSize()*1.2);
@@ -93,6 +81,7 @@ public class CommunesView extends Application {
         VBox.setMargin(userButton, new Insets(controller.getImgSize()/10, controller.getImgSize()/10, 0, controller.getImgSize()/20));
         VBox.setMargin(exitButton, new Insets(controller.getImgSize()/10, controller.getImgSize()/10, controller.getImgSize()/10, controller.getImgSize()/20));
         BorderPane.setAlignment(menuButton, javafx.geometry.Pos.CENTER_LEFT);
+        controller.onReady();
 
         this.center = new StackPane(root, controller.getAuthPane());
         this.scene = new Scene(center, controller.getImgSize()*9, controller.getImgSize()*9.25);

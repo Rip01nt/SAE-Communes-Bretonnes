@@ -24,7 +24,7 @@ public class AuthView {
     private Button loginButton;
 
 
-    public GridPane getPane(communesController controller) {
+    public AuthView(communesController controller) {
         authPane = new GridPane();
         logo = null;
         try {
@@ -57,8 +57,6 @@ public class AuthView {
 
         authPane.setStyle("-fx-background-color: rgba(0, 0, 0, 0.5);");
         authPane.setAlignment(Pos.CENTER);
-
-        return authPane;
     }
 
     public Button getLoginButton() {
@@ -77,7 +75,7 @@ public class AuthView {
         return errLabel;
     }
 
-    public GridPane getAuthPane() {
+    public GridPane getPane() {
         return authPane;
     }
 

@@ -38,39 +38,21 @@ public class communesController {
 
     public communesController(CommunesView view) {
         this.mainView = view;
-
-        // Initialize all views
-
-        // Initialize the main view
-        this.mainView.getRoot().setCenter(this.homeView.getPane(this));
-
-
-
-
-
-
-
-
-
+        this.authView = new AuthView(this);
+        this.userView = new UserView(this);
+        this.searchView = new SearchView();
+        this.homeView = new HomeView();
+        this.scoreboardView = new ScoreboardView();
+        this.settingsView = new SettingsView();
+        this.utils = new UIMakingUtils(this);
     }
 
     public void onReady() {
-
-        authView.getLoginButton().setOnAction(e -> {
-            // Hardcoded login credentials
-            // TODO : Implement a database for user authentication
-            if (authView.getUsernameField().getText().equals("admin") && authView.getPasswordField().getText().equals("admin")) {
-                authView.getAuthPane().setVisible(false);
-                mainView.getRoot().setVisible(true);
-                mainView.getMenuButton().setFocusTraversable(true);
-            } else {
-                authView.getAuthPane().add(authView.getErrLabel(), 0, 1);
-                GridPane.setMargin(authView.getErrLabel(), uivars.getINSETS());
-            }
-        });
+        this.mainView.getRoot().setCenter(this.homeView.getPane(this));
+        this.mainView.getTitleLabel().setText(uivars.getTITLE());
 
         mainView.getUserButton().setOnAction(e -> {
-            mainView.getRoot().setCenter(this.userView.getPane(this));
+            mainView.getRoot().setCenter(this.userView.getPane());
             mainView.getTitleLabel().setText(uivars.getUSER());
         });
 
@@ -118,6 +100,7 @@ public class communesController {
             }
         });
 
+        
         userView.getSliderUISize().setOnMouseReleased(e -> {
             uivars.setImgSize((int) userView.getSliderUISize().getValue());
             for (Button button : mainView.getMenuButtons()) {
@@ -129,6 +112,20 @@ public class communesController {
             VBox.setMargin(mainView.getExitButton(), new Insets(uivars.getImgSize()/10, uivars.getImgSize()/10, uivars.getImgSize()/10, uivars.getImgSize()/20));
             BorderPane.setAlignment(mainView.getMenuButton(), javafx.geometry.Pos.CENTER_LEFT);
         });
+
+        authView.getLoginButton().setOnAction(e -> {
+            // Hardcoded login credentials
+            // TODO : Implement a database for user authentication
+            if (authView.getUsernameField().getText().equals("admin") && authView.getPasswordField().getText().equals("admin")) {
+                authView.getPane().setVisible(false);
+                mainView.getRoot().setVisible(true);
+                mainView.getMenuButton().setFocusTraversable(true);
+            } else {
+                authView.getPane().add(authView.getErrLabel(), 0, 1);
+                GridPane.setMargin(authView.getErrLabel(), uivars.getINSETS());
+            }
+        });
+        
     }
 
 
@@ -157,7 +154,7 @@ public class communesController {
     }
 
     public GridPane getAuthPane() {
-        return authView.getPane(this);
+        return authView.getPane();
     }
 
     public ImageView getLogo_light() {
