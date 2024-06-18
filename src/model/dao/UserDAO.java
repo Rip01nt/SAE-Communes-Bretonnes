@@ -10,33 +10,36 @@ import model.data.*;
 public class UserDAO extends DAO<User, String, String>{
 
     public int create(User user){
+        int ret = -1;
         String query = "INSERT INTO User VALUES ('" + user.getLogin() + "','" + user.getPassword() + "')";
         try (Connection con = this.getConnection(); Statement st = con.createStatement()) {
-            return st.executeUpdate(query);
+            ret = st.executeUpdate(query);
         } catch (SQLException e){
             System.out.println(e.getMessage());
-            return -1;
         }
+        return ret;
     }
 
     public int update(User user) {
+        int ret = -1;
         String query = "UPDATE User SET login = '" + user.getLogin() + "', password = '" + user.getPassword() + "' WHERE login = '" + user.getLogin() + "'";
         try (Connection con = this.getConnection(); Statement st = con.createStatement()) {
-            return st.executeUpdate(query);
-        }catch (SQLException e){
+            ret = st.executeUpdate(query);
+        } catch (SQLException e){
             System.out.println(e.getMessage());
-            return -1;
         }
+        return ret;
     }
 
     public int delete(User user) {
+        int ret = -1;
         String query = "DELETE FROM User WHERE login = '" + user.getLogin() + "'";
         try (Connection con = this.getConnection(); Statement st = con.createStatement()) {
-            return st.executeUpdate(query);
-        }catch (SQLException e){
+            ret = st.executeUpdate(query);
+        } catch (SQLException e){
             System.out.println(e.getMessage());
-            return -1;
         }
+        return ret;
     }
 
     public List<User> findAll(){

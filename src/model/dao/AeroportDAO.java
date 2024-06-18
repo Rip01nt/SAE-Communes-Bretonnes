@@ -13,34 +13,37 @@ import model.data.Departement;
 
 public class AeroportDAO extends DAO<Aeroport, String, String>{
 
-    public int create(Aeroport aeroport){
+    public int create(Aeroport aeroport) {
+        int ret = -1;
         String query = "INSERT INTO Aeroport VALUES ('" + aeroport.getNom() + "','" + aeroport.getAdresse() + "'," + aeroport.getLeDepartement().getIdDepartement() + ")";
         try (Connection con = this.getConnection(); Statement st = con.createStatement()) {
             return st.executeUpdate(query);
         } catch (SQLException e){
             System.out.println(e.getMessage());
-            return -1;
         }
+        return ret;
     }
 
     public int update(Aeroport aeroport) {
+        int ret = -1;
         String query = "UPDATE Aeroport SET nom = '" + aeroport.getNom() + "', adresse = '" + aeroport.getAdresse() + "', leDepartement = " + aeroport.getLeDepartement().getIdDepartement() + " WHERE nom = '" + aeroport.getNom() + "'";
         try (Connection con = this.getConnection(); Statement st = con.createStatement()) {
-            return st.executeUpdate(query);
-        }catch (SQLException e){
+            ret = st.executeUpdate(query);
+        } catch (SQLException e){
             System.out.println(e.getMessage());
-            return -1;
         }
+        return ret;
     }
 
     public int delete(Aeroport aeroport) {
+        int ret = -1;
         String query = "DELETE FROM Aeroport WHERE nom = '" + aeroport.getNom() + "'";
         try (Connection con = this.getConnection(); Statement st = con.createStatement()) {
-            return st.executeUpdate(query);
-        }catch (SQLException e){
+            ret = st.executeUpdate(query);
+        } catch (SQLException e){
             System.out.println(e.getMessage());
-            return -1;
         }
+        return ret;
     }
 
     public List<Aeroport> findAll(){

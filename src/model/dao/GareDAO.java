@@ -12,33 +12,36 @@ import model.data.*;
 public class GareDAO extends DAO<Gare, Integer, String>{
 
     public int create(Gare gare){
+        int ret = -1;
         String query = "INSERT INTO Gare VALUES (" + gare.getCodeGare() + ",'" + gare.getNomGare() + "'," + gare.getEstFret() + "," + gare.getEstVoyageur() + "," + gare.getLaCommune().getIdCommune() + ")";
         try (Connection con = this.getConnection(); Statement st = con.createStatement()) {
-            return st.executeUpdate(query);
+            ret = st.executeUpdate(query);
         } catch (SQLException e){
             System.out.println(e.getMessage());
-            return -1;
         }
+        return ret;
     }
 
     public int update(Gare gare) {
+        int ret = -1;
         String query = "UPDATE Gare SET codeGare = " + gare.getCodeGare() + ", nomGare = '" + gare.getNomGare() + "', estFret = " + gare.getEstFret() + ", estVoyageur = " + gare.getEstVoyageur() + ", laCommune = " + gare.getLaCommune().getIdCommune() + " WHERE codeGare = " + gare.getCodeGare();
         try (Connection con = this.getConnection(); Statement st = con.createStatement()) {
-            return st.executeUpdate(query);
-        }catch (SQLException e){
+            ret = st.executeUpdate(query);
+        } catch (SQLException e){
             System.out.println(e.getMessage());
-            return -1;
         }
+        return ret;
     }
 
     public int delete(Gare gare) {
+        int ret = -1;
         String query = "DELETE FROM Gare WHERE codeGare = " + gare.getClass();
         try (Connection con = this.getConnection(); Statement st = con.createStatement()) {
-            return st.executeUpdate(query);
-        }catch (SQLException e){
+            ret = st.executeUpdate(query);
+        } catch (SQLException e){
             System.out.println(e.getMessage());
-            return -1;
         }
+        return ret;
     }
 
     public List<Gare> findAll(){

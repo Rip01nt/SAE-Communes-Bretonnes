@@ -14,33 +14,36 @@ import model.data.Commune;
 public class DepartementDAO extends DAO<Departement, Integer, String>{
 
     public int create(Departement departement){
+        int ret = -1;
         String query = "INSERT INTO Departement VALUES (" + departement.getIdDepartement() + ",'" + departement.getNomDepartement() + "'," + departement.getInvestissementCulturel2019() + ")";
         try (Connection con = this.getConnection(); Statement st = con.createStatement()) {
-            return st.executeUpdate(query);
+            ret = st.executeUpdate(query);
         } catch (SQLException e){
             System.out.println(e.getMessage());
-            return -1;
         }
+        return ret;
     }
 
     public int update(Departement departement) {
+        int ret = -1;
         String query = "UPDATE Departement SET idDep = " + departement.getIdDepartement() + ", nomDep = '" + departement.getNomDepartement() + "', investissementCulturel2019 = " + departement.getInvestissementCulturel2019() + " WHERE idDep = " + departement.getIdDepartement();
         try (Connection con = this.getConnection(); Statement st = con.createStatement()) {
-            return st.executeUpdate(query);
-        }catch (SQLException e){
+            ret = st.executeUpdate(query);
+        } catch (SQLException e){
             System.out.println(e.getMessage());
-            return -1;
         }
+        return ret;
     }
 
     public int delete(Departement departement) {
+        int ret = -1;
         String query = "DELETE FROM Departement WHERE idDep = " + departement.getIdDepartement();
         try (Connection con = this.getConnection(); Statement st = con.createStatement()) {
-            return st.executeUpdate(query);
-        }catch (SQLException e){
+            ret = st.executeUpdate(query);
+        } catch (SQLException e){
             System.out.println(e.getMessage());
-            return -1;
         }
+        return ret;
     }
 
     public List<Departement> findAll(){

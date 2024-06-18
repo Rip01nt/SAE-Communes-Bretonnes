@@ -13,7 +13,8 @@ import model.data.Gare;
 
 public class CommuneDAO extends DAO<Commune, Integer, String>{
 
-    public int create(Commune commune){
+    public int create(Commune commune) {
+        int ret = -1;
         String query = "INSERT INTO Commune VALUES (" + commune.getIdCommune() + ",'" + commune.getNomCommune() + "'," + commune.getLeDepartement().getIdDepartement() + ")";
         for (Commune c : commune.getCommunesVoisines()){
             query += "; INSERT INTO Voisinage VALUES (" + commune.getIdCommune() + "," + c.getIdCommune() + ")";
@@ -22,34 +23,36 @@ public class CommuneDAO extends DAO<Commune, Integer, String>{
             query += ";";
         }
         try (Connection con = this.getConnection(); Statement st = con.createStatement()) {
-            return st.executeUpdate(query);
+            ret = st.executeUpdate(query);
         } catch (SQLException e){
             System.out.println(e.getMessage());
-            return -1;
         }
+        return ret;
     }
 
     public int update(Commune commune) {
+        int ret = -1;
         String query = "UPDATE Commune SET idCommune = " + commune.getIdCommune() + ", nomCommune = '" + commune.getNomCommune() + "', leDepartement = " + commune.getLeDepartement().getIdDepartement() + " WHERE idCommune = " + commune.getIdCommune() + "; DELETE FROM Voisinage WHERE commune = " + commune.getIdCommune() + ";";
         for (Commune c : commune.getCommunesVoisines()){
             query += " INSERT INTO Voisinage VALUES (" + commune.getIdCommune() + "," + c.getIdCommune() + ");";
         }
         try (Connection con = this.getConnection(); Statement st = con.createStatement()) {
-            return st.executeUpdate(query);
-        }catch (SQLException e){
+            ret= st.executeUpdate(query);
+        } catch (SQLException e){
             System.out.println(e.getMessage());
-            return -1;
         }
+        return ret;
     }
 
     public int delete(Commune commune) {
+        int ret = -1;
         String query = "DELETE FROM Commune WHERE idCommune = " + commune.getIdCommune();
         try (Connection con = this.getConnection(); Statement st = con.createStatement()) {
-            return st.executeUpdate(query);
-        }catch (SQLException e){
+            ret = st.executeUpdate(query);
+        } catch (SQLException e){
             System.out.println(e.getMessage());
-            return -1;
         }
+        return ret;
     }
 
     public List<Commune> findAll(){

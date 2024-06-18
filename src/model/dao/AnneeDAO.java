@@ -9,33 +9,36 @@ import model.data.Annee;
 
 public class AnneeDAO extends DAO<Annee, Integer, String>{
     public int create(Annee annee){
+        int ret = -1;
         String query = "INSERT INTO Annee VALUES (" + annee.getANNEE() + "," + annee.getTauxInflation() + ")";
         try (Connection con = this.getConnection(); Statement st = con.createStatement()) {
-            return st.executeUpdate(query);
+            ret = st.executeUpdate(query);
         } catch (SQLException e){
             System.out.println(e.getMessage());
-            return -1;
         }
+        return ret;
     }
 
     public int update(Annee annee) {
+        int ret = -1;
         String query = "UPDATE Annee SET annee = " + annee.getANNEE() + ", tauxInflation = " + annee.getTauxInflation() + " WHERE annee = " + annee.getANNEE();
         try (Connection con = this.getConnection(); Statement st = con.createStatement()) {
-            return st.executeUpdate(query);
-        }catch (SQLException e){
+            ret = st.executeUpdate(query);
+        } catch (SQLException e){
             System.out.println(e.getMessage());
-            return -1;
         }
+        return ret;
     }
 
     public int delete(Annee annee) {
+        int ret = -1;
         String query = "DELETE FROM Annee WHERE annee = " + annee.getANNEE();
         try (Connection con = this.getConnection(); Statement st = con.createStatement()) {
-            return st.executeUpdate(query);
-        }catch (SQLException e){
+            ret = st.executeUpdate(query);
+        } catch (SQLException e){
             System.out.println(e.getMessage());
-            return -1;
         }
+        return ret;
     }
 
     public List<Annee> findAll(){

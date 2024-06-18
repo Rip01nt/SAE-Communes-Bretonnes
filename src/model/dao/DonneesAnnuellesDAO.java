@@ -12,30 +12,32 @@ import model.data.*;
 public class DonneesAnnuellesDAO extends DAO<DonneesAnnuelles, Integer, Integer>{
 
     public int create(DonneesAnnuelles donneesAnnuelles){
+        int ret = -1;
         String query = "INSERT INTO DonneesAnnuelles VALUES (" + donneesAnnuelles.getLAnnee().getANNEE() + "," + donneesAnnuelles.getLaCommune().getIdCommune() + "," + donneesAnnuelles.getNbMaison() + "," + donneesAnnuelles.getNbAppart() + "," + donneesAnnuelles.getPrixMoyen() + "," + donneesAnnuelles.getPrixM2Moyen() + "," + donneesAnnuelles.getSurfaceMoy() + "," + donneesAnnuelles.getDepensesCultutrellesTotales() + "," + donneesAnnuelles.getBudgetTotal() + "," + donneesAnnuelles.getPopulation() + ")";
         try (Connection con = this.getConnection(); Statement st = con.createStatement()) {
-            return st.executeUpdate(query);
+            ret = st.executeUpdate(query);
         } catch (SQLException e){
             System.out.println(e.getMessage());
-            return -1;
         }
+        return ret;
     }
 
     public int update(DonneesAnnuelles donneesAnnuelles) {
+        int ret = -1;
         String query = "UPDATE DonneesAnnuelles SET lAnnee = " + donneesAnnuelles.getLAnnee().getANNEE() + ", laCommune = " + donneesAnnuelles.getLaCommune().getIdCommune() + ", nbMaison = " + donneesAnnuelles.getNbMaison() + ", nbAppart = " + donneesAnnuelles.getNbAppart() + ", prixMoyen = " + donneesAnnuelles.getPrixMoyen() + ", prixM2Moyen = " + donneesAnnuelles.getPrixM2Moyen() + ", surfaceMoy = " + donneesAnnuelles.getSurfaceMoy() + ", depensesCulturellesTotales = " + donneesAnnuelles.getDepensesCultutrellesTotales() + ", budgetTotal = " + donneesAnnuelles.getBudgetTotal() + ", population = " + donneesAnnuelles.getPopulation() +  " WHERE lAnnee = " + donneesAnnuelles.getLAnnee().getANNEE() + " AND WHERE laCommune = " + donneesAnnuelles.getLaCommune().getIdCommune();
         try (Connection con = this.getConnection(); Statement st = con.createStatement()) {
-            return st.executeUpdate(query);
-        }catch (SQLException e){
+            ret = st.executeUpdate(query);
+        } catch (SQLException e){
             System.out.println(e.getMessage());
-            return -1;
         }
+        return ret;
     }
 
     public int delete(DonneesAnnuelles donneesAnnuelles) {
         String query = "DELETE FROM DonneesAnnuelles WHERE lAnnee = " + donneesAnnuelles.getLAnnee().getANNEE() + ", AND WHERE laCommune = " + donneesAnnuelles.getLaCommune().getIdCommune();
         try (Connection con = this.getConnection(); Statement st = con.createStatement()) {
             return st.executeUpdate(query);
-        }catch (SQLException e){
+        } catch (SQLException e){
             System.out.println(e.getMessage());
             return -1;
         }
