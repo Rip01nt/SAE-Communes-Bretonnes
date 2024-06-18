@@ -1,13 +1,12 @@
 package view;
 
+import controller.communesController;
 import javafx.scene.layout.GridPane;
 
 public class SearchView {
 
-    public GridPane searchView() {
+    public GridPane getPane(communesController controller) {
         GridPane searchPane = new GridPane();
-
-        this.titleLabel.setText("Search");
 
         return searchPane;
     }

@@ -1,13 +1,12 @@
 package view;
 
+import controller.communesController;
 import javafx.scene.layout.GridPane;
 
 public class HomeView {
 
-    public GridPane getPane() {
+    public GridPane getPane(communesController controller) {
         GridPane homePane = new GridPane();
-
-        this.titleLabel.setText(TITLE);
 
         return homePane;
     }

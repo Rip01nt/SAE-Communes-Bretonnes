@@ -1,17 +1,17 @@
 package view;
 
+import controller.communesController;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Font;
 
 public class SettingsView {
 
-    public GridPane getPane() {        GridPane dataPane = new GridPane();
+    public GridPane getPane(communesController controller) {
+        GridPane dataPane = new GridPane();
 
-        this.titleLabel.setText("Settings");
 
         Label labelCommunesVoisines = new Label("Nombre de communes voisines");
 
@@ -98,7 +98,7 @@ public class SettingsView {
         Label[] labels = new Label[]{labelCommunesVoisines, labelVenteApart, labelTailleMoyHabit, labelInflation, labelInvCulture, labelPrixMoyM2Ans, labelNbGare, labelNbHabitant, labelNbMaisonVenduAns, labelNbAeroport};
 
         for (int i = 0; i < labels.length; i++) {
-            labels[i].setFont(new Font(FONT_NAME, imgSize/4));
+            labels[i].setFont(controller.getFONT());
             GridPane.setMargin(labels[i], new Insets(10));
             GridPane.setHalignment(labels[i], HPos.CENTER);
         }

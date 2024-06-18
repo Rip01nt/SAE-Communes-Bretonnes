@@ -1,22 +1,13 @@
 package view;
 
 import javafx.application.Application;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.chart.LineChart;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -28,13 +19,7 @@ import controller.communesController;
 
 public class CommunesView extends Application {
 
-    private final String TITLE = "Communes Bretonnes";
-    private final String FONT_NAME="Arial";
-    private int imgSize = 80;
-    private final Font TITLE_FONT = new Font(FONT_NAME, imgSize/2);
-    private final Font FONT = new Font(FONT_NAME, imgSize/4);
-    private final Insets INSETS = new Insets(imgSize/10, imgSize/10, imgSize/10, imgSize/10);
-    private Label titleLabel = new Label(TITLE);
+    private Label titleLabel;
     private Stage primaryStage;
     private Scene scene;
     private BorderPane root;
@@ -49,9 +34,6 @@ public class CommunesView extends Application {
     private Button settingsButton;
     private Button exitButton;
     private Button[] menuButtons;
-    private TextField usernameField;
-    private PasswordField passwordField;
-    private Button loginButton;
     private ImageView logo;
 
     public void start(Stage primaryStage) throws Exception {
@@ -59,38 +41,40 @@ public class CommunesView extends Application {
         this.primaryStage = primaryStage;
 
         root = new BorderPane();
+        titleLabel = new Label();
+        titleLabel.setFont(new Font(controller.getFONT_NAME(), controller.getImgSize()/2));
         userButton = new Button("\uE853");
         userButton.setStyle("-fx-font-family: 'Material Symbols Outlined';-fx-font-size: 3em;-fx-alignment: center;");
-        userButton.setFont(TITLE_FONT);
+        //userButton.setFont(TITLE_FONT);
         searchButton = new Button("\uE8B6");
         searchButton.setStyle("-fx-font-family: 'Material Symbols Outlined';-fx-font-size: 3em;-fx-alignment: center;");
-        searchButton.setFont(FONT);
+        //searchButton.setFont(FONT);
         homeButton = new Button("\uE88A");
         homeButton.setStyle("-fx-font-family: 'Material Symbols Outlined';-fx-font-size: 3em;-fx-alignment: center;");
-        homeButton.setFont(FONT);
+        //homeButton.setFont(FONT);
         scoreboardButton = new Button("\uF6A0");
         scoreboardButton.setStyle("-fx-font-family: 'Material Symbols Outlined';-fx-font-size: 3em;-fx-alignment: center;");
-        scoreboardButton.setFont(FONT);
+        //scoreboardButton.setFont(FONT);
         settingsButton = new Button("\uE026");
         settingsButton.setStyle("-fx-font-family: 'Material Symbols Outlined';-fx-font-size: 3em;-fx-alignment: center;");
-        settingsButton.setFont(FONT);
+        //settingsButton.setFont(FONT);
         exitButton = new Button("\uE8AC");
         exitButton.setStyle("-fx-font-family: 'Material Symbols Outlined';-fx-font-size: 3em;-fx-alignment: center;");
-        exitButton.setFont(FONT);
+        //exitButton.setFont(FONT);
         exitButton.textFillProperty().set(javafx.scene.paint.Color.RED);
         menu = new VBox(userButton, searchButton, homeButton, scoreboardButton, settingsButton, exitButton);
         menuButton = new Button("≡");
         menuButton.setFocusTraversable(false);
-        menuButton.setFont(TITLE_FONT);
+        menuButton.setFont(controller.getTITLE_FONT());
         titleBar = new BorderPane();
-        this.titleLabel.setFont(TITLE_FONT);
+        this.titleLabel.setFont(controller.getTITLE_FONT());
         titleBar.setCenter(titleLabel);
         titleBar.setLeft(menuButton);
-        BorderPane.setMargin(menuButton, INSETS);
+        BorderPane.setMargin(menuButton, controller.getINSETS());
         logo = new ImageView(new Image(new FileInputStream("../src/assets/logo_dark.png")));
-        logo.setFitHeight(imgSize*1.2);
-        logo.setFitWidth(imgSize*1.2);
-        BorderPane.setMargin(logo, INSETS);
+        logo.setFitHeight(controller.getImgSize()*1.2);
+        logo.setFitWidth(controller.getImgSize()*1.2);
+        BorderPane.setMargin(logo, controller.getINSETS());
         titleBar.setRight(logo);
 
         root.setLeft(menu);
@@ -102,32 +86,28 @@ public class CommunesView extends Application {
         controller.onReady();
         menuButtons = new Button[]{userButton, searchButton, homeButton, scoreboardButton, settingsButton, exitButton};
         for (Button button : menuButtons) {
-            button.setPrefWidth(imgSize*1.2);
+            button.setPrefWidth(controller.getImgSize()*1.2);
             button.setPrefHeight(Integer.MAX_VALUE);
-            VBox.setMargin(button, new Insets(imgSize/10, imgSize/10, 0, imgSize/20));
+            VBox.setMargin(button, new Insets(controller.getImgSize()/10, controller.getImgSize()/10, 0, controller.getImgSize()/20));
         }
-        VBox.setMargin(userButton, new Insets(imgSize/10, imgSize/10, 0, imgSize/20));
-        VBox.setMargin(exitButton, new Insets(imgSize/10, imgSize/10, imgSize/10, imgSize/20));
+        VBox.setMargin(userButton, new Insets(controller.getImgSize()/10, controller.getImgSize()/10, 0, controller.getImgSize()/20));
+        VBox.setMargin(exitButton, new Insets(controller.getImgSize()/10, controller.getImgSize()/10, controller.getImgSize()/10, controller.getImgSize()/20));
         BorderPane.setAlignment(menuButton, javafx.geometry.Pos.CENTER_LEFT);
 
-        root.setCenter(this.homeView());
-
-
-
-
-        this.center = new StackPane(root, this.authPane());
-        this.scene = new Scene(center, imgSize*9, imgSize*9.25);
-        this.primaryStage.setMinHeight(imgSize*9);
-        this.primaryStage.setMinWidth(imgSize*7);
+        this.center = new StackPane(root, controller.getAuthPane());
+        this.scene = new Scene(center, controller.getImgSize()*9, controller.getImgSize()*9.25);
+        this.primaryStage.setMinHeight(controller.getImgSize()*9);
+        this.primaryStage.setMinWidth(controller.getImgSize()*7);
         this.primaryStage.setScene(scene);
-        this.primaryStage.setTitle(TITLE);
+        this.primaryStage.setTitle(controller.getTITLE());
         this.primaryStage.show();
     }
     
     public static void main(String[] args) {
         launch(args);
     }
-
+    
+    /*
     public void showMenu() {
         menu.setVisible(true);
         root.setLeft(menu);
@@ -137,6 +117,7 @@ public class CommunesView extends Application {
         menu.setVisible(false);
         root.getChildren().remove(menu);
     }
+    */
 
     public Button getMenuButton() {
         return menuButton;
@@ -194,14 +175,14 @@ public class CommunesView extends Application {
         return logo;
     }
 
-
+    /*
     private GridPane authPane() {
         GridPane authPane = new GridPane();
         ImageView logo = null;
         try {
             logo = new ImageView(new Image(new FileInputStream("../src/assets/logo_light.png")));
-            logo.setFitHeight(imgSize*1.75);
-            logo.setFitWidth(imgSize*1.75);
+            logo.setFitHeight(controller.getImgSize()*1.75);
+            logo.setFitWidth(controller.getImgSize()*1.75);
         } catch (Exception e) {}
         Label errLabel = new Label("Wrong credentials");
         this.usernameField = new TextField();
@@ -218,7 +199,7 @@ public class CommunesView extends Application {
         loginButton.setFont(FONT);
         errLabel.setTextFill(javafx.scene.paint.Color.RED);
         authPane.add(logo, 0, 0);
-        GridPane.setMargin(logo, new Insets(imgSize/5));
+        GridPane.setMargin(logo, new Insets(controller.getImgSize()/5));
         authPane.add(usernameField, 0, 2);
         GridPane.setMargin(usernameField, INSETS);
         authPane.add(passwordField, 0, 3);
@@ -250,17 +231,17 @@ public class CommunesView extends Application {
         this.titleLabel = new Label("User");
 
         Label labelUsername = new Label("Username");
-        labelUsername.setFont(new Font(FONT_NAME, imgSize/4));
+        labelUsername.setFont(new Font(FONT_NAME, controller.getImgSize()/4));
         GridPane.setMargin(labelUsername, new Insets(10));
         GridPane.setHalignment(labelUsername, HPos.CENTER);
 
         Label labelPassword = new Label("Password");
-        labelPassword.setFont(new Font(FONT_NAME, imgSize/4));
+        labelPassword.setFont(new Font(FONT_NAME, controller.getImgSize()/4));
         GridPane.setMargin(labelPassword, new Insets(10));
         GridPane.setHalignment(labelPassword, HPos.CENTER);
 
         Label labelUISize = new Label("UI Size");
-        labelUISize.setFont(new Font(FONT_NAME, imgSize/4));
+        labelUISize.setFont(new Font(FONT_NAME, controller.getImgSize()/4));
         GridPane.setMargin(labelUISize, new Insets(10));
         GridPane.setHalignment(labelUISize, HPos.CENTER);
         Slider sliderUISize = new Slider();
@@ -271,15 +252,15 @@ public class CommunesView extends Application {
         sliderUISize.setMin(60);
         sliderUISize.setMax(100);
         sliderUISize.setOnMouseReleased(e -> {
-            imgSize = (int) sliderUISize.getValue();
-            titleLabel.setFont(new Font(FONT_NAME, imgSize/2));
+            controller.getImgSize() = (int) sliderUISize.getValue();
+            titleLabel.setFont(new Font(FONT_NAME, controller.getImgSize()/2));
             for (Button button : menuButtons) {
-                button.setPrefWidth(imgSize*1.2);
+                button.setPrefWidth(controller.getImgSize()*1.2);
                 button.setPrefHeight(Integer.MAX_VALUE);
-                VBox.setMargin(button, new Insets(imgSize/10, imgSize/10, 0, imgSize/20));
+                VBox.setMargin(button, new Insets(controller.getImgSize()/10, controller.getImgSize()/10, 0, controller.getImgSize()/20));
             }
-            VBox.setMargin(userButton, new Insets(imgSize/10, imgSize/10, 0, imgSize/20));
-            VBox.setMargin(exitButton, new Insets(imgSize/10, imgSize/10, imgSize/10, imgSize/20));
+            VBox.setMargin(userButton, new Insets(controller.getImgSize()/10, controller.getImgSize()/10, 0, controller.getImgSize()/20));
+            VBox.setMargin(exitButton, new Insets(controller.getImgSize()/10, controller.getImgSize()/10, controller.getImgSize()/10, controller.getImgSize()/20));
             BorderPane.setAlignment(menuButton, javafx.geometry.Pos.CENTER_LEFT);
         });
 
@@ -347,7 +328,7 @@ public class CommunesView extends Application {
 
         // Add the series to the chart
         lineChart.getData().add(series);
-        lineChart.setPrefSize(imgSize*7, imgSize*7);
+        lineChart.setPrefSize(controller.getImgSize()*7, controller.getImgSize()*7);
         lineChart.setCreateSymbols(true);
         lineChart.setLegendVisible(true);
         lineChart.setAnimated(true);
@@ -484,4 +465,5 @@ public class CommunesView extends Application {
 
         return dataPane;
     }
+    */
 }

@@ -1,5 +1,6 @@
 package view;
 
+import controller.communesController;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
@@ -7,10 +8,8 @@ import javafx.scene.layout.GridPane;
 
 public class ScoreboardView {
 
-    public GridPane getPane() {
+    public GridPane getPane(communesController controller) {
                 GridPane scoreboardPane = new GridPane();
-
-        this.titleLabel.setText("Scoreboard");
 
                 // Define the X-axis
         final NumberAxis xAxis = new NumberAxis();
@@ -44,7 +43,7 @@ public class ScoreboardView {
 
         // Add the series to the chart
         lineChart.getData().add(series);
-        lineChart.setPrefSize(imgSize*7, imgSize*7);
+        lineChart.setPrefSize(controller.getImgSize()*7, controller.getImgSize()*7);
         lineChart.setCreateSymbols(true);
         lineChart.setLegendVisible(true);
         lineChart.setAnimated(true);
