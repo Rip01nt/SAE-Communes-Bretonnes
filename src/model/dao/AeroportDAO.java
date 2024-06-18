@@ -62,10 +62,10 @@ public class AeroportDAO extends DAO<Aeroport, String, String>{
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 String n = rs.getString("nom");
-                String a = rs.getString("adresse");
+                String adresse = rs.getString("adresse");
                 DepartementDAO depDAO = new DepartementDAO();
                 Departement d = depDAO.findByID(rs.getInt("leDepartement"), null);
-                return new Aeroport(d, n, a);
+                return new Aeroport(d, n, adresse);
             }
         }catch (SQLException e) {
             System.out.println(e.getMessage());
