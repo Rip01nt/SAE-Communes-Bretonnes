@@ -66,6 +66,25 @@ public class Commune implements Comparable<Commune> {
         this.nomCommune = nomCommune;
     }
 
+        /**
+     * Constructeur avec paramètres de la classe Commune.
+     * @param leDepartement le département de la commune
+     * @param lesGares les gares de la commune
+     * @param communesVoisines les communes voisines
+     * @param idCommune le code INSEE de la commune
+     * @param nomCommune le nom de la commune
+     * @throws InvalidAttributException si un attribut est invalide (null)
+     */
+    public Commune(Departement leDepartement, ArrayList<Gare> lesGares, int idCommune, String nomCommune) throws InvalidAttributException {
+        if (leDepartement == null || lesGares == null || communesVoisines == null || nomCommune == null || idCommune <= 0) 
+            throw new InvalidAttributException("Les attributs sont invalides");
+        this.leDepartement = leDepartement;
+        this.lesGares = lesGares;
+        this.communesVoisines = new ArrayList<Commune>();
+        this.idCommune = idCommune;
+        this.nomCommune = nomCommune;
+    }
+
     /**
      * Obtient le département de la commune.
      * @return le département de la commune
@@ -121,6 +140,17 @@ public class Commune implements Comparable<Commune> {
         if (communesVoisines == null) 
             throw new InvalidAttributException("L'attribut ne peut pas être nul");
         this.communesVoisines = communesVoisines;
+    }
+
+    /**
+     * Définit les communes voisines.
+     * @param communesVoisines la nouvelle liste des communes voisines
+     * @throws InvalidAttributException si les communes voisines sont nulles
+     */
+    public void addCommunesVoisines(Commune communeVoisine) throws InvalidAttributException {
+        if (communeVoisine == null) 
+            throw new InvalidAttributException("L'attribut ne peut pas être nul");
+        this.communesVoisines.add(communeVoisine);
     }
 
     /**
