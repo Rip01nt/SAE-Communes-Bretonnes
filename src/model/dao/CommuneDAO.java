@@ -15,6 +15,7 @@ public class CommuneDAO extends DAO<Commune, Integer, String> {
     private List<Commune> listCommunes;
 
     public CommuneDAO(){
+        super();
         this.updateList();
     }
 
