@@ -112,6 +112,8 @@ public class SettingsView {
         this.setFit(sliderNbAeroport, labelNbAeroport);
 
         Button buttonExport = new Button("Exporter les données des communes");
+        buttonExport.setFont(controller.getFONT());
+        GridPane.setMargin(buttonExport, new Insets(30));
 
         Label[] labels = new Label[]{labelCommunesVoisines, labelVenteApart, labelTailleMoyHabit, labelInflation, labelInvCulture, labelPrixMoyM2Ans, labelNbGare, labelNbHabitant, labelNbMaisonVenduAns, labelNbAeroport};
 
@@ -151,7 +153,7 @@ public class SettingsView {
         this.settingsPane.add(labelNbAeroport, 1, 8);
         this.settingsPane.add(sliderNbAeroport, 1, 9);
 
-
+        this.settingsPane.add(buttonExport, 0, 10);
 
     }
 
@@ -168,8 +170,11 @@ public class SettingsView {
 
     }
 
-
     public GridPane getPane() {
         return this.settingsPane;
+    }
+
+    public Button getButtonExport() {
+        return this.buttonExport;
     }
 }
