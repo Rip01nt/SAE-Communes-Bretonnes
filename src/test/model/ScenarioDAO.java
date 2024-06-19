@@ -6,5 +6,8 @@ public class ScenarioDAO {
     public static void main(String[] args){
         CommuneDAO communeDAO = new CommuneDAO();
         System.out.println(communeDAO.findByName("Vannes"));
+        UserDAO userDAO = new UserDAO();
+        System.out.println(userDAO.findByID("admin", "admin"));
     }
 }
+
