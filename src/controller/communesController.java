@@ -129,7 +129,7 @@ public class communesController {
         });
 
         searchView.getSearchButton().setOnAction(e -> {
-            communeDAO.findByName(searchView.getSearchField().getText());
+            communeDAO.findByName(searchView.getSearchField().getText().trim());
         });
 
         authView.getLoginButton().setOnAction(e -> {
