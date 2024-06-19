@@ -69,7 +69,6 @@ public class UserDAO extends DAO<User, String, String>{
             while (rs.next()) {
                 String l = rs.getString("login");
                 String p = rs.getString("password");
-                System.out.println(l + " " + p);
                 user = new User(l, p);
             }
         } catch (SQLException e) {

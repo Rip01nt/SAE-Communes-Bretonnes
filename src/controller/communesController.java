@@ -148,8 +148,6 @@ public class communesController {
         authView.getLoginButton().setOnAction(e -> {
             User currentUser = uivars.getUser();
             currentUser = userDAO.findByID((String) authView.getUsernameField().getText(), (String) authView.getPasswordField().getText());
-            System.out.println("Attempting to authenticate user: " + authView.getUsernameField().getText() + ", " + authView.getPasswordField().getText());
-            System.out.println("Found user: " + currentUser);
             if (currentUser != null) {
                 if (this.homeView.getImageView() != null) {
                     this.homeView.getImageView().setPreserveRatio(true);
