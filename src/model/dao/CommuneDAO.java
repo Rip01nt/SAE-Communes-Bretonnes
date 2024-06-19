@@ -78,7 +78,7 @@ public class CommuneDAO extends DAO<Commune, Integer, String> {
                     commune.setLeDepartement(depDAO.findByID(rs.getInt("C1.leDepartement"), null));
                     commune.setLesGares(gareDAO.findByCommune(commune.getIdCommune()));
                     this.mapCommune.put(Integer.valueOf(commune.getIdCommune()), commune);      
-                }else commune = this.mapCommune.get(Integer.valueOf(rs.getInt("C1.idCommune")));
+                } else commune = this.mapCommune.get(Integer.valueOf(rs.getInt("C1.idCommune")));
 
                 if (!this.mapCommune.containsKey(Integer.valueOf(rs.getInt("C2.idCommune")))){
                     communeVoisine = new Commune();
@@ -87,7 +87,7 @@ public class CommuneDAO extends DAO<Commune, Integer, String> {
                     communeVoisine.setLeDepartement(depDAO.findByID(rs.getInt("C2.leDepartement"), null));
                     communeVoisine.setLesGares(gareDAO.findByCommune(communeVoisine.getIdCommune()));
                     this.mapCommune.put(Integer.valueOf(communeVoisine.getIdCommune()), communeVoisine); 
-                }else communeVoisine = this.mapCommune.get(Integer.valueOf(rs.getInt("C2.idCommune")));
+                } else communeVoisine = this.mapCommune.get(Integer.valueOf(rs.getInt("C2.idCommune")));
 
                 commune.getCommunesVoisines().add(communeVoisine);
             }
