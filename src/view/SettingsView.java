@@ -3,6 +3,7 @@ package view;
 import controller.communesController;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.GridPane;
@@ -11,11 +12,11 @@ import javafx.scene.text.Font;
 public class SettingsView {
 
     private GridPane settingsPane;
-    private communesController controller;
+
+    private Button buttonExport;
 
     public SettingsView(communesController controller) {
         this.settingsPane = new GridPane();
-        this.controller = controller;
 
 
         Label labelCommunesVoisines = new Label("Nombre de communes voisines");
@@ -110,6 +111,8 @@ public class SettingsView {
         sliderNbAeroport.setBlockIncrement(1);
         this.setFit(sliderNbAeroport, labelNbAeroport);
 
+        Button buttonExport = new Button("Exporter les données des communes");
+
         Label[] labels = new Label[]{labelCommunesVoisines, labelVenteApart, labelTailleMoyHabit, labelInflation, labelInvCulture, labelPrixMoyM2Ans, labelNbGare, labelNbHabitant, labelNbMaisonVenduAns, labelNbAeroport};
 
         for (int i = 0; i < labels.length; i++) {
@@ -147,6 +150,8 @@ public class SettingsView {
 
         this.settingsPane.add(labelNbAeroport, 1, 8);
         this.settingsPane.add(sliderNbAeroport, 1, 9);
+
+
 
     }
 

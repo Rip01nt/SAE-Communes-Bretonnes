@@ -1,11 +1,8 @@
 package controller;
 
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.media.MediaView;
 import javafx.scene.text.Font;
 
@@ -27,8 +24,6 @@ import model.dao.GareDAO;
 import model.dao.UserDAO;
 
 import model.data.UIVars;
-import javafx.collections.ObservableList;
-import javafx.scene.control.ListView;
 
 
 public class communesController {
