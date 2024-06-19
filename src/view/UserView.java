@@ -1,104 +1,94 @@
 package view;
 
-import controller.communesController;
-import javafx.geometry.HPos;
+import controller.UserController;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 
 public class UserView {
 
     private GridPane userPane;
-    private Label labelUsername;
-    private Label labelPassword;
-    private Label InfoCHG;
-    private TextField textUsername;
-    private TextField textOldPassword;
-    private TextField textNewPassword;
-    private Button buttonChange;
+    private TextField tfLoginCreate;
+    private TextField tfPasswordCreate;
+    private TextField tfLoginUpdate;
+    private TextField tfPasswordUpdate;
+    private TextField tfLoginDelete;
+    private UserController userController;
 
-    public UserView(communesController controller) {
-        userPane = new GridPane();
-        GridPane innerPane = new GridPane();
+    public UserView(UserController userController) {
+        this.userController = userController;
+        this.userPane = new GridPane();
+        this.userPane.setHgap(10);
+        this.userPane.setVgap(10);
+        this.userPane.setPadding(new Insets(10, 10, 10, 10));
 
-        labelUsername = new Label("Username");
-        labelUsername.setFont(controller.getFONT());
-        GridPane.setMargin(labelUsername, controller.getINSETS());
-        GridPane.setHalignment(labelUsername, HPos.CENTER);
+        // Create user section
+        Label lblCreate = new Label("Create User");
+        Label lblLoginCreate = new Label("Login:");
+        tfLoginCreate = new TextField();
+        Label lblPasswordCreate = new Label("Password:");
+        tfPasswordCreate = new TextField();
+        Button btnCreate = new Button("Create");
+        btnCreate.setOnAction(e -> createUser());
 
-        labelPassword = new Label("Password");
-        labelPassword.setFont(controller.getFONT());
-        GridPane.setMargin(labelPassword, controller.getINSETS());
-        GridPane.setHalignment(labelPassword, HPos.CENTER);
+        // Update user section
+        Label lblUpdate = new Label("Update User");
+        Label lblLoginUpdate = new Label("Login:");
+        tfLoginUpdate = new TextField();
+        Label lblPasswordUpdate = new Label("New Password:");
+        tfPasswordUpdate = new TextField();
+        Button btnUpdate = new Button("Update");
+        btnUpdate.setOnAction(e -> updateUser());
 
-        InfoCHG = new Label("Change your username or password");
-        InfoCHG.setFont(controller.getFONT());
-        GridPane.setMargin(InfoCHG, controller.getINSETS());
-        GridPane.setHalignment(InfoCHG, HPos.CENTER);
+        // Delete user section
+        Label lblDelete = new Label("Delete User");
+        Label lblLoginDelete = new Label("Login:");
+        tfLoginDelete = new TextField();
+        Button btnDelete = new Button("Delete");
+        btnDelete.setOnAction(e -> deleteUser());
 
-        textUsername = new TextField();
-        textUsername.setFont(controller.getFONT());
-        GridPane.setMargin(textUsername, controller.getINSETS());
-        GridPane.setHalignment(textUsername, HPos.CENTER);
-        textUsername.setPromptText("New Username");
+        // Add nodes to the grid
+        userPane.add(lblCreate, 0, 0);
+        userPane.add(lblLoginCreate, 0, 1);
+        userPane.add(tfLoginCreate, 1, 1);
+        userPane.add(lblPasswordCreate, 0, 2);
+        userPane.add(tfPasswordCreate, 1, 2);
+        userPane.add(btnCreate, 1, 3);
 
-        textNewPassword = new TextField();
-        textNewPassword.setFont(controller.getFONT());
-        GridPane.setMargin(textNewPassword, controller.getINSETS());
-        GridPane.setHalignment(textNewPassword, HPos.CENTER);
-        textNewPassword.setPromptText("New Password");
+        userPane.add(lblUpdate, 0, 4);
+        userPane.add(lblLoginUpdate, 0, 5);
+        userPane.add(tfLoginUpdate, 1, 5);
+        userPane.add(lblPasswordUpdate, 0, 6);
+        userPane.add(tfPasswordUpdate, 1, 6);
+        userPane.add(btnUpdate, 1, 7);
 
-        textOldPassword = new TextField();
-        textOldPassword.setFont(controller.getFONT());
-        GridPane.setMargin(textOldPassword, controller.getINSETS());
-        GridPane.setHalignment(textOldPassword, HPos.CENTER);
-        textOldPassword.setPromptText("Old Password");
-        
-        buttonChange = new Button("Change");
-        buttonChange.setFont(controller.getFONT());
-        GridPane.setMargin(buttonChange, controller.getINSETS());
-        GridPane.setHalignment(buttonChange, HPos.CENTER);
+        userPane.add(lblDelete, 0, 8);
+        userPane.add(lblLoginDelete, 0, 9);
+        userPane.add(tfLoginDelete, 1, 9);
+        userPane.add(btnDelete, 1, 10);
+    }
 
-        userPane.add(InfoCHG, 0, 0);
-        userPane.add(innerPane, 0, 1);
-        innerPane.add(labelUsername, 0, 1);
-        innerPane.add(labelPassword, 0, 2);
-        innerPane.add(textUsername, 1, 1);
-        innerPane.add(textNewPassword, 1, 2);
-        innerPane.add(textOldPassword, 1, 3);
-        innerPane.add(buttonChange, 1, 4);
+    private void createUser() {
+        String login = tfLoginCreate.getText();
+        String password = tfPasswordCreate.getText();
+        userController.createUser(login, password);
+    }
 
+    private void updateUser() {
+        String login = tfLoginUpdate.getText();
+        String password = tfPasswordUpdate.getText();
+        userController.updateUser(login, password);
+    }
 
+    private void deleteUser() {
+        String login = tfLoginDelete.getText();
+        userController.deleteUser(login);
     }
 
     public GridPane getPane() {
         return userPane;
     }
-
-    public Label getLabelUsername() {
-        return labelUsername;
-    }
-
-    public Label getLabelPassword() {
-        return labelPassword;
-    }
-
-    public TextField getTextUsername() {
-        return textUsername;
-    }
-
-    public TextField getTextNewPassword() {
-        return textNewPassword;
-    }
-
-    public TextField getTextOldPassword() {
-        return textOldPassword;
-    }
-
-
-    public Button getButtonChange() {
-        return buttonChange;
-    }
-
 }
