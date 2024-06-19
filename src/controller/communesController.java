@@ -128,19 +128,6 @@ public class communesController {
             }
         });
 
-        
-        userView.getSliderUISize().setOnMouseReleased(e -> {
-            uivars.setImgSize((int) userView.getSliderUISize().getValue());
-            for (Button button : mainView.getMenuButtons()) {
-                button.setPrefWidth(uivars.getImgSize()*1.2);
-                button.setPrefHeight(Integer.MAX_VALUE);
-                VBox.setMargin(button, new Insets(uivars.getImgSize()/10, uivars.getImgSize()/10, 0, uivars.getImgSize()/20));
-            }
-            VBox.setMargin(mainView.getUserButton(), new Insets(uivars.getImgSize()/10, uivars.getImgSize()/10, 0, uivars.getImgSize()/20));
-            VBox.setMargin(mainView.getExitButton(), new Insets(uivars.getImgSize()/10, uivars.getImgSize()/10, uivars.getImgSize()/10, uivars.getImgSize()/20));
-            BorderPane.setAlignment(mainView.getMenuButton(), javafx.geometry.Pos.CENTER_LEFT);
-        });
-
         searchView.getSearchButton().setOnAction(e -> {
             communeDAO.findByName(searchView.getSearchField().getText());
         });
