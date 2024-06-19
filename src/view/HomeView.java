@@ -23,14 +23,14 @@ public class HomeView {
         titleLabel.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;");
 
         // Ajouter une image
-        String imagePath = "file:/home/bernard-griffiths/Documents/GitHub/SAE-Communes-Bretonnes/ws/ImageAcceuil.jpg";
+        String imagePath = getClass().getResource("/assets/ImageAcceuil.jpg").toExternalForm();
         Image image = new Image(imagePath);
         ImageView imageView = new ImageView(image);
-        imageView.setFitHeight(300);
-        imageView.setFitWidth(300);
+        imageView.setFitHeight(150);
+        imageView.setFitWidth(150);
 
         // Ajouter du texte descriptif
-        Label descriptionLabel = new Label("Cliquez sur les 3 barres en haut à gauche pour naviguer dans l'application.");
+        Label descriptionLabel = new Label("Cette application vous permet de rechercher des informations sur les communes. Utilisez le menu à gauche pour naviguer.");
         descriptionLabel.setWrapText(true);
         descriptionLabel.setPadding(new Insets(10, 0, 0, 0));
 
