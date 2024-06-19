@@ -29,7 +29,6 @@ import model.dao.UserDAO;
 import model.data.UIVars;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListView;
-import model.SearchModel;
 
 
 public class communesController {
@@ -52,7 +51,6 @@ public class communesController {
     private UserDAO userDAO;
 
     private UIVars uivars = new UIVars();
-    private SearchModel model;
     
 
     public communesController(CommunesView view) {
@@ -73,12 +71,11 @@ public class communesController {
         this.donneesAnnuellesDAO = new DonneesAnnuellesDAO();
         this.gareDAO = new GareDAO();
         this.userDAO = new UserDAO();
-        model = new SearchModel();
     }
 
     public void onReady() {
         this.mainView.getRoot().setCenter(this.homeView.getPane());
-        this.mainView.getTitleLabel().setText(uivars.getTITLE());
+        this.mainView.getTitleLabel().setText("Bienvenue !");
 
         mainView.getUserButton().setOnAction(e -> {
             mainView.getRoot().setCenter(this.userView.getPane());

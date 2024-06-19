@@ -3,14 +3,11 @@ package view;
 import java.io.FileInputStream;
 
 import controller.communesController;
-import javafx.geometry.Insets;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 public class HomeView {
 
@@ -18,13 +15,6 @@ public class HomeView {
 
     public HomeView(communesController controller) {
         this.homePane = new GridPane();
-        initialize(controller);
-    }
-
-    private void initialize(communesController controller) {
-        // Créer un label pour le titre de la page d'accueil
-        Label titleLabel = new Label("Bienvenue !");
-        titleLabel.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;");
 
         // Ajouter une image
         ImageView imageView = null;
@@ -39,23 +29,25 @@ public class HomeView {
         if (imageView != null) {
             imageView.setPreserveRatio(true);
             // Lier la taille de l'ImageView à la taille du conteneur parent
-            imageView.fitWidthProperty().bind(homePane.widthProperty().multiply(0.6));
-            imageView.fitHeightProperty().bind(homePane.heightProperty().multiply(0.6));
+            imageView.fitWidthProperty().bind(homePane.widthProperty().multiply(0.8));
+            imageView.fitHeightProperty().bind(homePane.heightProperty().multiply(0.8));
         }
 
         // Ajouter du texte descriptif
         Label descriptionLabel = new Label("Cette application vous permet de rechercher des informations sur les communes. Utilisez le menu à gauche pour naviguer.");
+        descriptionLabel.setFont(controller.getFONT());
         descriptionLabel.setWrapText(true);
-        descriptionLabel.setPadding(new Insets(10, 0, 0, 0));
+        descriptionLabel.setPadding(controller.getINSETS());
 
         // Organiser les éléments dans un VBox
-        VBox contentBox = new VBox(10, titleLabel, imageView, descriptionLabel);
-        contentBox.setPadding(new Insets(20));
+        VBox contentBox = new VBox(10, imageView, descriptionLabel);
+        contentBox.setPadding(controller.getINSETS());
         contentBox.setStyle("-fx-alignment: center;");
 
         // Ajouter le VBox au GridPane
         homePane.add(contentBox, 0, 0);
-        homePane.setStyle("-fx-alignment: center; -fx-padding: 20;");
+        homePane.setPadding(controller.getINSETS());
+        homePane.setStyle("-fx-alignment: center;");
     }
 
     public GridPane getPane() {
