@@ -75,6 +75,7 @@ public class CommuneDAO extends DAO<Commune, Integer, String> {
                 String nomCommune = rs.getString("nomCommune");
                 DepartementDAO depDAO = new DepartementDAO();
                 System.out.println("ledocument: "+rs.getInt("leDepartement"));
+                System.out.println("Dep "+rs.getInt("leDepartement"));
                 Departement leDepartement = depDAO.findByID(rs.getInt("leDepartement"), null);
 
                 rsG = st.executeQuery("SELECT codeGare FROM Gare WHERE laCommune = " + idCommune);
@@ -127,6 +128,7 @@ public class CommuneDAO extends DAO<Commune, Integer, String> {
                 commune = c;
             }
         }
+        
         return commune;
     }
 
