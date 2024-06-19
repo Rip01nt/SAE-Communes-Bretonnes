@@ -1,5 +1,7 @@
 package view;
 
+import java.io.FileInputStream;
+
 import controller.communesController;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
@@ -23,11 +25,12 @@ public class HomeView {
         titleLabel.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;");
 
         // Ajouter une image
-        String imagePath = "file:/home/bernard-griffiths/Documents/GitHub/SAE-Communes-Bretonnes/ws/ImageAcceuil.jpg";
-        Image image = new Image(imagePath);
-        ImageView imageView = new ImageView(image);
-        imageView.setFitHeight(300);
-        imageView.setFitWidth(300);
+        ImageView imageView = null;
+        try {
+            imageView = new ImageView(new Image(new FileInputStream("../src/assets/ImageAcceuil.jpg")));
+            imageView.setFitHeight(500);
+            imageView.setFitWidth(500);
+        } catch (Exception e) {}
 
         // Ajouter du texte descriptif
         Label descriptionLabel = new Label("Cliquez sur les 3 barres en haut à gauche pour naviguer dans l'application.");
