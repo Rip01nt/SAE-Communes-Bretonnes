@@ -31,7 +31,6 @@ import model.data.Commune;
 import model.data.UIVars;
 import model.data.User;
 
-
 public class communesController {
 
     private CommunesView mainView;
@@ -131,7 +130,7 @@ public class communesController {
 
         searchView.getSearchButton().setOnAction(e -> {
             // Fetch the Commune object by name
-            Commune commune = communeDAO.findByName(searchView.getSearchField().getText());
+            Commune commune = communeDAO.findByName(searchView.getSearchField().getText().trim());
 
             // Check if a Commune was found
             if (commune!= null) {
