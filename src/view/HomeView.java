@@ -1,5 +1,7 @@
 package view;
 
+import java.io.FileInputStream;
+
 import controller.communesController;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
@@ -23,11 +25,12 @@ public class HomeView {
         titleLabel.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;");
 
         // Ajouter une image
-        String imagePath = getClass().getResource("/assets/ImageAcceuil.jpg").toExternalForm();
-        Image image = new Image(imagePath);
-        ImageView imageView = new ImageView(image);
-        imageView.setFitHeight(150);
-        imageView.setFitWidth(150);
+        ImageView imageView = null;
+        try {
+            imageView = new ImageView(new Image(new FileInputStream("../src/assets/ImageAcceuil.jpg")));
+            imageView.setFitHeight(500);
+            imageView.setFitWidth(500);
+        } catch (Exception e) {}
 
         // Ajouter du texte descriptif
         Label descriptionLabel = new Label("Cette application vous permet de rechercher des informations sur les communes. Utilisez le menu à gauche pour naviguer.");
