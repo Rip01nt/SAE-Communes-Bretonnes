@@ -76,11 +76,6 @@ public class communesController {
         model = new SearchModel();
     }
 
-    public void handleSearch(String query, ListView<String> listView) {
-        ObservableList<String> results = model.search(query);
-        listView.setItems(results);
-    }
-
     public void onReady() {
         this.mainView.getRoot().setCenter(this.homeView.getPane());
         this.mainView.getTitleLabel().setText(uivars.getTITLE());
@@ -147,6 +142,10 @@ public class communesController {
             VBox.setMargin(mainView.getUserButton(), new Insets(uivars.getImgSize()/10, uivars.getImgSize()/10, 0, uivars.getImgSize()/20));
             VBox.setMargin(mainView.getExitButton(), new Insets(uivars.getImgSize()/10, uivars.getImgSize()/10, uivars.getImgSize()/10, uivars.getImgSize()/20));
             BorderPane.setAlignment(mainView.getMenuButton(), javafx.geometry.Pos.CENTER_LEFT);
+        });
+
+        searchView.getSearchButton().setOnAction(e -> {
+            communeDAO.findByName(searchView.getSearchField().getText());
         });
 
         authView.getLoginButton().setOnAction(e -> {

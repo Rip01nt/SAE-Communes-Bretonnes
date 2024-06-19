@@ -29,9 +29,6 @@ public class SearchView {
         layout.getChildren().addAll(searchField, searchButton, listView);
 
         searchPane.add(layout, 0, 0);
-
-        // Connexion des actions du contrôleur
-        searchButton.setOnAction(e -> controller.handleSearch(searchField.getText(), listView));
     }
 
     public GridPane getPane() {
