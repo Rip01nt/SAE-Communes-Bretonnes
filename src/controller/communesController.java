@@ -59,7 +59,7 @@ public class communesController {
         this.mainView = view;
 
         this.authView = new AuthView(this);
-        this.userView = new UserView(this);
+        this.userView = new UserView(new UserController());
         this.searchView = new SearchView(this);
         this.homeView = new HomeView(this);
         this.scoreboardView = new ScoreboardView(this);
