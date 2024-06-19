@@ -35,7 +35,10 @@ public class UserDAO extends DAO<User, String, String>{
         int ret = -1;
         String query = "DELETE FROM User WHERE login = '" + user.getLogin() + "'";
         try (Connection con = this.getConnection(); Statement st = con.createStatement()) {
-            ret = st.executeUpdate(query);
+            ResultSet rs = st.executeQuery("SELECT COUNT(login) FROM User");
+            if (rs.getInt("COUNT(*)")>1){
+                ret = st.executeUpdate(query);
+            }
         } catch (SQLException e){
             System.out.println(e.getMessage());
         }

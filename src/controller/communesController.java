@@ -29,6 +29,7 @@ import model.dao.GareDAO;
 import model.dao.UserDAO;
 
 import model.data.UIVars;
+import model.data.Commune;
 
 
 public class communesController {
@@ -129,7 +130,8 @@ public class communesController {
         });
 
         searchView.getSearchButton().setOnAction(e -> {
-            communeDAO.findByName(searchView.getSearchField().getText().trim());
+
+            Commune commune = communeDAO.findByName(searchView.getSearchField().getText().trim());
         });
 
         authView.getLoginButton().setOnAction(e -> {
