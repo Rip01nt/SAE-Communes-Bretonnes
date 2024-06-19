@@ -10,7 +10,6 @@ public class CsvExportUtil {
             FileWriter writer = new FileWriter(filename);
             writer.write(content);
             writer.close();
-            System.out.println("Exported to " + filename);
         } catch (IOException e) {
             e.printStackTrace();
         }
