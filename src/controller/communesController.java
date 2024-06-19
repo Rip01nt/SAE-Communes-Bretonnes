@@ -30,7 +30,6 @@ import model.dao.UserDAO;
 import model.data.Commune;
 import model.data.UIVars;
 import model.data.User;
-import utils.ExportCommData;
 
 public class communesController {
 
@@ -50,8 +49,6 @@ public class communesController {
     private DonneesAnnuellesDAO donneesAnnuellesDAO;
     private GareDAO gareDAO;
     private UserDAO userDAO;
-
-    private ExportCommData exportCommData;
 
     private UIVars uivars = new UIVars();
     
@@ -74,8 +71,6 @@ public class communesController {
         this.donneesAnnuellesDAO = new DonneesAnnuellesDAO();
         this.gareDAO = new GareDAO();
         this.userDAO = new UserDAO();
-
-        this.exportCommData = new ExportCommData();
     }
 
     public void onReady() {
@@ -141,7 +136,7 @@ public class communesController {
             if (commune!= null) {
                 // Convert the Commune object to a String. Adjust this line based on what you want to display.
                 String communeDisplayString = commune.toString();
-                uivars.getCommunes().add(commune);
+
                 // Update the ListView with the new item
                 searchView.getListView().getItems().add(communeDisplayString);
             } else {
@@ -167,12 +162,6 @@ public class communesController {
                     authView.getPane().add(authView.getErrLabel(), 0, 1);
                     GridPane.setMargin(authView.getErrLabel(), uivars.getINSETS());
                 }
-            }
-        });
-
-        settingsView.getButtonExport().setOnAction(ea -> {
-            if (!uivars.getCommunes().isEmpty()) {
-                exportCommData.export(uivars.getCommunes());
             }
         });
 

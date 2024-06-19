@@ -19,11 +19,6 @@ public class SettingsView {
         this.settingsPane = new GridPane();
         GridPane innerPane = new GridPane();
 
-        Button buttonExport = new Button("Exporter les données des communes");
-        buttonExport.setFont(controller.getFONT());
-        GridPane.setMargin(buttonExport, new Insets(40));
-        GridPane.setHalignment(buttonExport, HPos.CENTER);
-
         Label labelCommunesVoisines = new Label("Communes voisines");
 
         Slider sliderCommunesVoisines = new Slider();
@@ -104,6 +99,11 @@ public class SettingsView {
         sliderNbAeroport.setShowTickLabels(true);
         sliderNbAeroport.setMajorTickUnit(10);
         sliderNbAeroport.setBlockIncrement(1);
+
+        Button buttonExport = new Button("Exporter les données des communes");
+        buttonExport.setFont(controller.getFONT());
+        GridPane.setMargin(buttonExport, new Insets(40));
+        GridPane.setHalignment(buttonExport, HPos.CENTER);
 
         innerPane.add(labelCommunesVoisines, 0, 0);
         innerPane.add(sliderCommunesVoisines, 0, 1);
