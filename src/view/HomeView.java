@@ -41,16 +41,14 @@ public class HomeView {
         if (imageView != null) {
             imageView.setPreserveRatio(true);
             // Lier la taille de l'ImageView à la taille du conteneur parent
-            imageView.fitWidthProperty().bind(homePane.widthProperty().multiply(0.6));
-            imageView.fitHeightProperty().bind(homePane.heightProperty().multiply(0.6));
+            imageView.fitWidthProperty().bind(homePane.widthProperty().multiply(0.7));
+            imageView.fitHeightProperty().bind(homePane.heightProperty().multiply(0.7));
         }
 
         // Ajouter du texte descriptif
         Label descriptionLabel = new Label("Cette application vous permet de rechercher des informations sur les communes. Utilisez le menu à gauche pour naviguer.");
         descriptionLabel.setWrapText(true);
         descriptionLabel.setPadding(new Insets(10, 0, 0, 0));
-        StackPane.setAlignment(descriptionLabel, Pos.CENTER);
-
         // Organiser les éléments dans un VBox
         VBox contentBox = new VBox(10, titleLabel, imageView, descriptionLabel);
         contentBox.setPadding(new Insets(20));
