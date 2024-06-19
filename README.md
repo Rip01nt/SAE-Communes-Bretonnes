@@ -6,6 +6,9 @@ Application pour mesurer l'attractivitée des communes bretonnes
 
 Une police d'ecriture est a installer pour faire fonctionner les icones du programme.
 
+## Compilation et lancement
+Les fichiers s'appellent compile.sh pour compiler et launch.sh pour lancer.
+
 ## TODO
 
 * [X] POJO
