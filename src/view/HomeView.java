@@ -12,26 +12,21 @@ import javafx.scene.layout.VBox;
 public class HomeView {
 
     private GridPane homePane;
+    private ImageView imageView;
 
     public HomeView(communesController controller) {
         this.homePane = new GridPane();
 
         // Ajouter une image
-        ImageView imageView = null;
+        imageView = null;
         try {
             imageView = new ImageView(new Image(new FileInputStream("../src/assets/ImageAcceuil.jpg")));
-            imageView.setFitWidth(500);
-            imageView.setFitHeight(500);
+            imageView.setPreserveRatio(true);
+            imageView.setFitHeight(300);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        if (imageView != null) {
-            imageView.setPreserveRatio(true);
-            // Lier la taille de l'ImageView à la taille du conteneur parent
-            imageView.fitWidthProperty().bind(homePane.widthProperty().multiply(0.7));
-            imageView.fitHeightProperty().bind(homePane.heightProperty().multiply(0.7));
-        }
 
         // Ajouter du texte descriptif
         Label descriptionLabel = new Label("Cette application vous permet de rechercher des informations sur les communes. Utilisez le menu à gauche pour naviguer.");
@@ -53,4 +48,9 @@ public class HomeView {
     public GridPane getPane() {
         return homePane;
     }
+
+    public ImageView getImageView() {
+        return imageView;
+    }
+
 }
