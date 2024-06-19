@@ -101,14 +101,14 @@ public class DepartementDAO extends DAO<Departement, Integer, String>{
                 String nomDepartement = rs.getString("nomDep");
                 int investissementCulturel2019 = rs.getInt("investissementCulturel2019");
 
-                rsA = st.executeQuery("SELECT nom FROM Aeroport WHERE leDepartement = " + id);
+                rsA = stm.executeQuery("SELECT nom FROM Aeroport WHERE leDepartement = " + id);
                 lesAeroport = new ArrayList<Aeroport>();
                 AeroportDAO aeroDAO = new AeroportDAO();
                 while (rsA.next()){
                     lesAeroport.add(aeroDAO.findByID(rs.getString("nom"), null));
                 }
 
-                rsC = st.executeQuery("SELECT idCommune FROM Commune WHERE leDepartement = " + id);
+                rsC = stm.executeQuery("SELECT idCommune FROM Commune WHERE leDepartement = " + id);
                 lesCommunes = new ArrayList<Commune>();
                 CommuneDAO communeDAO = new CommuneDAO();
                 while (rsC.next()){
