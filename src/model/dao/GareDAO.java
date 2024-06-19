@@ -95,4 +95,26 @@ public class GareDAO extends DAO<Gare, Integer, String>{
         return this.findByID(Integer.valueOf(codeGare), a);
     }
 
+    public ArrayList<Gare> findByCommune(int idCommune){
+        ArrayList<Gare> ret = new ArrayList<Gare>();
+        Gare gare;
+        try (Connection con = this.getConnection(); Statement st = con.createStatement()){
+            ResultSet rs = st.executeQuery("SELECT * FROM Gare WHERE laCommune = " + idCommune);
+            while (rs.next()){
+                gare = new Gare();
+                gare.setCodeGare(rs.getInt("codeGare"));
+                gare.setNomGare(rs.getString("nomGare"));
+                gare.setEstFret(rs.getBoolean("estFret"));
+                gare.setEstVoyageur(rs.getBoolean("estVoyageur"));
+                ret.add(gare);
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (InvalidAttributException e){
+            e.printStackTrace();
+        }
+        return ret;
+    }
+
 }
