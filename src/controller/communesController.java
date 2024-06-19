@@ -27,6 +27,9 @@ import model.dao.GareDAO;
 import model.dao.UserDAO;
 
 import model.data.UIVars;
+import javafx.collections.ObservableList;
+import javafx.scene.control.ListView;
+import model.SearchModel;
 
 
 public class communesController {
@@ -49,7 +52,7 @@ public class communesController {
     private UserDAO userDAO;
 
     private UIVars uivars = new UIVars();
-
+    private SearchModel model;
     
 
     public communesController(CommunesView view) {
@@ -70,6 +73,12 @@ public class communesController {
         this.donneesAnnuellesDAO = new DonneesAnnuellesDAO();
         this.gareDAO = new GareDAO();
         this.userDAO = new UserDAO();
+        model = new SearchModel();
+    }
+
+    public void handleSearch(String query, ListView<String> listView) {
+        ObservableList<String> results = model.search(query);
+        listView.setItems(results);
     }
 
     public void onReady() {
