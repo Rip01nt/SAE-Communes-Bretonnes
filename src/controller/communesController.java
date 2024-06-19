@@ -29,6 +29,7 @@ import model.dao.GareDAO;
 import model.dao.UserDAO;
 import model.data.Commune;
 import model.data.UIVars;
+import model.data.User;
 
 
 public class communesController {
@@ -146,9 +147,11 @@ public class communesController {
         });
 
         authView.getLoginButton().setOnAction(e -> {
-            // Hardcoded login credentials
-            // TODO : Implement a database for user authentication
-            if (authView.getUsernameField().getText().equals("admin") && authView.getPasswordField().getText().equals("admin")) {
+            User currentUser = uivars.getUser();
+            currentUser = userDAO.findByID((String) authView.getUsernameField().getText(), (String) authView.getPasswordField().getText());
+            System.out.println("Attempting to authenticate user: " + authView.getUsernameField().getText() + ", " + authView.getPasswordField().getText());
+            System.out.println("Found user: " + currentUser);
+            if (currentUser != null) {
                 if (this.homeView.getImageView() != null) {
                     this.homeView.getImageView().setPreserveRatio(true);
                     this.homeView.getImageView().fitWidthProperty().bind(this.homeView.getPane().widthProperty().multiply(0.9));
@@ -158,8 +161,10 @@ public class communesController {
                 mainView.getRoot().setVisible(true);
                 mainView.getMenuButton().setFocusTraversable(true);
             } else {
-                authView.getPane().add(authView.getErrLabel(), 0, 1);
-                GridPane.setMargin(authView.getErrLabel(), uivars.getINSETS());
+                if (!authView.getPane().getChildren().contains(authView.getErrLabel())) {
+                    authView.getPane().add(authView.getErrLabel(), 0, 1);
+                    GridPane.setMargin(authView.getErrLabel(), uivars.getINSETS());
+                }
             }
         });
 
