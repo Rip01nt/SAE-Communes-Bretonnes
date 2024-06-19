@@ -16,10 +16,10 @@ public class HomeView {
 
     public HomeView(communesController controller) {
         this.homePane = new GridPane();
-        initialize();
+        initialize(controller);
     }
 
-    private void initialize() {
+    private void initialize(communesController controller) {
         // Créer un label pour le titre de la page d'accueil
         Label titleLabel = new Label("Bienvenue !");
         titleLabel.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;");
@@ -28,8 +28,8 @@ public class HomeView {
         ImageView imageView = null;
         try {
             imageView = new ImageView(new Image(new FileInputStream("../src/assets/ImageAcceuil.jpg")));
-            imageView.setFitHeight(500);
-            imageView.setFitWidth(500);
+            imageView.setFitHeight(controller.getImgSize()*6);
+            imageView.setFitWidth(controller.getImgSize()*6);
         } catch (Exception e) {}
 
         // Ajouter du texte descriptif
