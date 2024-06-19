@@ -1,6 +1,11 @@
 package controller;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.media.MediaView;
@@ -144,7 +149,36 @@ public class communesController {
                 GridPane.setMargin(authView.getErrLabel(), uivars.getINSETS());
             }
         });
+
+        this.setSettingsFit(settingsView.getSliders(), settingsView.getLabels());
+
+        searchView.getListView().prefWidthProperty().bind(searchView.getPane().widthProperty());
+        searchView.getListView().prefHeightProperty().bind(searchView.getPane().heightProperty());
         
+    }
+
+    private void setSettingsFit(Slider[] sliderList, Label[] labelList) {
+        for (Slider slider : sliderList) {
+            // Bind the slider's width to 40% of the settingsPane's width
+            slider.prefWidthProperty().bind(settingsView.getPane().widthProperty().multiply(0.4));
+            slider.prefHeightProperty().bind(settingsView.getPane().heightProperty().multiply(0.2));
+        }
+
+        for (Label label : labelList) {
+            settingsView.getPane().widthProperty().addListener((ChangeListener<? super Number>) new ChangeListener<Number>() {
+                @Override
+                public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                    double newFontSize = newValue.doubleValue() * 0.03;
+                    label.setFont(Font.font(label.getFont().getFamily(), newFontSize));
+                }
+            });
+            
+            // Bind the label's width to 80% of the settingsPane's width
+            label.prefHeightProperty().bind(settingsView.getPane().heightProperty().multiply(0.8));
+            label.setWrapText(true);
+            GridPane.setHalignment(label, HPos.CENTER);
+            GridPane.setMargin(label, uivars.getINSETS());
+        }
     }
 
     public int getImgSize() {

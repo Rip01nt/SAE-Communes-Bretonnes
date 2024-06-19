@@ -1,27 +1,23 @@
 package view;
 
 import controller.communesController;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Font;
 
 public class SettingsView {
 
     private GridPane settingsPane;
-    private communesController controller;
     private Button buttonExport;
+    private Label[] labels;
+    private Slider[] sliders;
 
     public SettingsView(communesController controller) {
         this.settingsPane = new GridPane();
         GridPane innerPane = new GridPane();
-
-        this.controller = controller;
 
         Label labelCommunesVoisines = new Label("Communes voisines");
 
@@ -31,7 +27,6 @@ public class SettingsView {
         sliderCommunesVoisines.setScaleShape(false);
         sliderCommunesVoisines.setMajorTickUnit(10);
         sliderCommunesVoisines.setBlockIncrement(1);
-        this.setFit(sliderCommunesVoisines, labelCommunesVoisines);
 
         Label labelVenteApart = new Label("Appartements vendu par ans");
 
@@ -41,7 +36,6 @@ public class SettingsView {
         sliderCommunesVoisines.setScaleShape(true);
         sliderVenteApart.setMajorTickUnit(10);
         sliderVenteApart.setBlockIncrement(1);
-        this.setFit(sliderVenteApart, labelVenteApart);
 
         Label labelTailleMoyHabit = new Label("Taille moyenne des habitations");
 
@@ -50,7 +44,6 @@ public class SettingsView {
         sliderTailleMoyHabit.setShowTickLabels(true);
         sliderTailleMoyHabit.setMajorTickUnit(10);
         sliderTailleMoyHabit.setBlockIncrement(1);
-        this.setFit(sliderTailleMoyHabit, labelTailleMoyHabit);
 
         Label labelInflation = new Label("Taux inflation");
 
@@ -59,7 +52,6 @@ public class SettingsView {
         sliderInflation.setShowTickLabels(true);
         sliderInflation.setMajorTickUnit(10);
         sliderInflation.setBlockIncrement(1);
-        this.setFit(sliderInflation, labelInflation);
 
         Label labelInvCulture = new Label("Investissement culturel");
 
@@ -68,7 +60,6 @@ public class SettingsView {
         sliderInvCulture.setShowTickLabels(true);
         sliderInvCulture.setMajorTickUnit(10);
         sliderInvCulture.setBlockIncrement(1);
-        this.setFit(sliderInvCulture, labelInvCulture);
 
         Label labelPrixMoyM2Ans = new Label("Prix moyen du m² par ans");
 
@@ -77,7 +68,6 @@ public class SettingsView {
         sliderPrixMoyM2Ans.setShowTickLabels(true);
         sliderPrixMoyM2Ans.setMajorTickUnit(10);
         sliderPrixMoyM2Ans.setBlockIncrement(1);
-        this.setFit(sliderPrixMoyM2Ans, labelPrixMoyM2Ans);
 
         Label labelNbGare = new Label("Nombre de Gare");
 
@@ -86,7 +76,6 @@ public class SettingsView {
         sliderNbGare.setShowTickLabels(true);
         sliderNbGare.setMajorTickUnit(10);
         sliderNbGare.setBlockIncrement(1);
-        this.setFit(sliderNbGare, labelNbGare);
 
         Label labelNbHabitant = new Label("Nombre d'habitant");
 
@@ -95,8 +84,6 @@ public class SettingsView {
         sliderNbHabitant.setShowTickLabels(true);
         sliderNbHabitant.setMajorTickUnit(10);
         sliderNbHabitant.setBlockIncrement(1);
-        this.setFit(sliderNbHabitant, labelNbHabitant);
-
         Label labelNbMaisonVenduAns = new Label("Maison vendues par ans");
 
         Slider sliderNbMaisonVenduAns = new Slider();
@@ -104,7 +91,6 @@ public class SettingsView {
         sliderNbMaisonVenduAns.setShowTickLabels(true);
         sliderNbMaisonVenduAns.setMajorTickUnit(10);
         sliderNbMaisonVenduAns.setBlockIncrement(1);
-        this.setFit(sliderNbMaisonVenduAns, labelNbMaisonVenduAns);
 
         Label labelNbAeroport = new Label("Nombre d\'aéroport");
 
@@ -113,7 +99,6 @@ public class SettingsView {
         sliderNbAeroport.setShowTickLabels(true);
         sliderNbAeroport.setMajorTickUnit(10);
         sliderNbAeroport.setBlockIncrement(1);
-        this.setFit(sliderNbAeroport, labelNbAeroport);
 
         Button buttonExport = new Button("Exporter les données des communes");
         buttonExport.setFont(controller.getFONT());
@@ -153,26 +138,9 @@ public class SettingsView {
         this.settingsPane.add(innerPane, 0, 0);
         this.settingsPane.add(buttonExport, 0, 1);
 
-    }
+        this.labels = new Label[] {labelCommunesVoisines, labelVenteApart, labelTailleMoyHabit, labelInflation, labelInvCulture, labelPrixMoyM2Ans, labelNbGare, labelNbHabitant, labelNbMaisonVenduAns, labelNbAeroport};
+        this.sliders = new Slider[] {sliderCommunesVoisines, sliderVenteApart, sliderTailleMoyHabit, sliderInflation, sliderInvCulture, sliderPrixMoyM2Ans, sliderNbGare, sliderNbHabitant, sliderNbMaisonVenduAns, sliderNbAeroport};
 
-    private void setFit(Slider slider, Label label) {
-        // Bind the slider's width to 40% of the settingsPane's width
-        slider.prefWidthProperty().bind(settingsPane.widthProperty().multiply(0.4));
-        slider.prefHeightProperty().bind(settingsPane.heightProperty().multiply(0.8));
-
-        settingsPane.widthProperty().addListener((ChangeListener<? super Number>) new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                double newFontSize = newValue.doubleValue() * 0.03;
-                label.setFont(Font.font(label.getFont().getFamily(), newFontSize));
-            }
-        });
-
-        // Bind the label's width to 80% of the settingsPane's width
-        label.prefHeightProperty().bind(settingsPane.heightProperty().multiply(0.8));
-        label.setWrapText(true);
-        GridPane.setHalignment(label, HPos.CENTER);
-        GridPane.setMargin(label, controller.getINSETS());
     }
 
     public GridPane getPane() {
@@ -181,5 +149,13 @@ public class SettingsView {
 
     public Button getButtonExport() {
         return this.buttonExport;
+    }
+
+    public Label[] getLabels() {
+        return this.labels;
+    }
+
+    public Slider[] getSliders() {
+        return this.sliders;
     }
 }
