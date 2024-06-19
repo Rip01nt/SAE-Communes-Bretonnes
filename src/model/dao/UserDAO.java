@@ -62,7 +62,7 @@ public class UserDAO extends DAO<User, String, String>{
 
     public User findByID(String login, String password){
         User user = null;
-        try (Connection con = this.getConnection(); PreparedStatement st = con.prepareStatement("SELECT * FROM User WHERE login = '?' AND password = '?'")) {
+        try (Connection con = this.getConnection(); PreparedStatement st = con.prepareStatement("SELECT * FROM User WHERE login = ? AND password = ?")) {
             st.setString(1, login);
             st.setString(2, password);
             ResultSet rs = st.executeQuery();
