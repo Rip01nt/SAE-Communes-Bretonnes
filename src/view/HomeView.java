@@ -29,8 +29,8 @@ public class HomeView {
         if (imageView != null) {
             imageView.setPreserveRatio(true);
             // Lier la taille de l'ImageView à la taille du conteneur parent
-            imageView.fitWidthProperty().bind(homePane.widthProperty().multiply(0.8));
-            imageView.fitHeightProperty().bind(homePane.heightProperty().multiply(0.8));
+            imageView.fitWidthProperty().bind(homePane.widthProperty().multiply(0.7));
+            imageView.fitHeightProperty().bind(homePane.heightProperty().multiply(0.7));
         }
 
         // Ajouter du texte descriptif
