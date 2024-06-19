@@ -133,8 +133,8 @@ public class communesController {
             if (authView.getUsernameField().getText().equals("admin") && authView.getPasswordField().getText().equals("admin")) {
                 if (this.homeView.getImageView() != null) {
                     this.homeView.getImageView().setPreserveRatio(true);
-                    this.homeView.getImageView().fitWidthProperty().bind(this.homeView.getPane().widthProperty().multiply(0.7));
-                    this.homeView.getImageView().fitHeightProperty().bind(this.homeView.getPane().heightProperty().multiply(0.7));
+                    this.homeView.getImageView().fitWidthProperty().bind(this.homeView.getPane().widthProperty().multiply(0.9));
+                    this.homeView.getImageView().fitHeightProperty().bind(this.homeView.getPane().heightProperty().multiply(0.9));
                 }
                 authView.getPane().setVisible(false);
                 mainView.getRoot().setVisible(true);
