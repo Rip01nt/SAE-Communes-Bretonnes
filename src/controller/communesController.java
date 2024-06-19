@@ -141,6 +141,8 @@ public class communesController {
                 // Convert the Commune object to a String. Adjust this line based on what you want to display.
                 String communeDisplayString = commune.toString();
 
+                uivars.getCommunes().add(commune);
+
                 // Update the ListView with the new item
                 searchView.getListView().getItems().add(communeDisplayString);
             } else {
@@ -172,6 +174,8 @@ public class communesController {
         settingsView.getButtonExport().setOnAction(e -> {
             if (uivars.getCommunes()!= null &&!uivars.getCommunes().isEmpty()) {
                 exportCommData.export(uivars.getCommunes());
+            } else {
+                System.out.println("No communes to export.");
             }
         });
 
