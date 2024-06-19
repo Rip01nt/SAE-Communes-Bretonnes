@@ -87,7 +87,7 @@ public class DepartementDAO extends DAO<Departement, Integer, String>{
     public Departement findByID(Integer idDep, String a){
         Departement departement = null;
         System.out.println("Debut "+ idDep);
-        try (Connection con = this.getConnection(); PreparedStatement st = con.prepareStatement("SELECT * FROM Departement WHERE idDep = ?")) {
+        try (Connection con = this.getConnection(); PreparedStatement st = con.prepareStatement("SELECT * FROM Departement WHERE idDep = ?"); Statement stm = con.createStatement()) {
             st.setInt(1, idDep.intValue());
             ResultSet rs = st.executeQuery();
             ResultSet rsA;
