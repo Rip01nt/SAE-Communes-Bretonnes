@@ -74,19 +74,23 @@ public class CommuneDAO extends DAO<Commune, Integer, String> {
                 int idCommune = rs.getInt("idCommune");
                 String nomCommune = rs.getString("nomCommune");
                 DepartementDAO depDAO = new DepartementDAO();
+                System.out.println("ledocument: "+rs.getInt("leDepartement"));
                 Departement leDepartement = depDAO.findByID(rs.getInt("leDepartement"), null);
 
                 rsG = st.executeQuery("SELECT codeGare FROM Gare WHERE laCommune = " + idCommune);
                 lesGares = new ArrayList<Gare>();
                 GareDAO gareDAO = new GareDAO();
                 while (rsG.next()){
-                    lesGares.add(gareDAO.findByID(rs.getInt("codeGare"), null));
+                    lesGares.add(gareDAO.findByID(rsG.getInt("codeGare"), null));
                 }
-
+                 System.out.println(lesGares.toString());
                 try {
+                    System.out.println(leDepartement+" "+ lesGares+" "+  idCommune+" "+  nomCommune);
                     listCommunes.add(new Commune(leDepartement, lesGares, idCommune, nomCommune));
                 } catch (InvalidAttributException e) {
-                    System.out.println(e.getMessage());
+                    System.out.println("Commune: "+e.getMessage());
+                    e.printStackTrace();
+                    break;
                 }
             }
             for (Commune c : this.listCommunes){
@@ -102,7 +106,8 @@ public class CommuneDAO extends DAO<Commune, Integer, String> {
                 try {
                     c.setCommunesVoisines(communesVoisines);
                 } catch (InvalidAttributException e) {
-                    System.out.println(e.getMessage());
+                    System.out.println("Commune: "+e.getMessage());
+                    e.printStackTrace();
                 }
             }
         } catch (SQLException e) {
