@@ -173,6 +173,7 @@ public class communesController {
 
         settingsView.getButtonExport().setOnAction(e -> {
             if (uivars.getCommunes()!= null &&!uivars.getCommunes().isEmpty()) {
+                System.out.println("Exporting communes data...");
                 exportCommData.export(uivars.getCommunes());
             } else {
                 System.out.println("No communes to export.");
