@@ -4,11 +4,13 @@ import java.io.FileInputStream;
 
 import controller.communesController;
 import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class HomeView {
 
@@ -28,9 +30,18 @@ public class HomeView {
         ImageView imageView = null;
         try {
             imageView = new ImageView(new Image(new FileInputStream("../src/assets/ImageAcceuil.jpg")));
-            imageView.setFitHeight(controller.getImgSize()*6);
-            imageView.setFitWidth(controller.getImgSize()*6);
-        } catch (Exception e) {}
+            imageView.setFitWidth(500);
+            imageView.setFitHeight(500);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (imageView != null) {
+            imageView.setPreserveRatio(true);
+            // Lier la taille de l'ImageView à la taille du conteneur parent
+            imageView.fitWidthProperty().bind(homePane.widthProperty().multiply(0.6));
+            imageView.fitHeightProperty().bind(homePane.heightProperty().multiply(0.6));
+        }
 
         // Ajouter du texte descriptif
         Label descriptionLabel = new Label("Cette application vous permet de rechercher des informations sur les communes. Utilisez le menu à gauche pour naviguer.");
