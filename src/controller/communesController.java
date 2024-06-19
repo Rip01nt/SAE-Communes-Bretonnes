@@ -27,7 +27,7 @@ import model.dao.DepartementDAO;
 import model.dao.DonneesAnnuellesDAO;
 import model.dao.GareDAO;
 import model.dao.UserDAO;
-
+import model.data.Commune;
 import model.data.UIVars;
 
 
@@ -129,7 +129,20 @@ public class communesController {
         });
 
         searchView.getSearchButton().setOnAction(e -> {
-            communeDAO.findByName(searchView.getSearchField().getText());
+            // Fetch the Commune object by name
+            Commune commune = communeDAO.findByName(searchView.getSearchField().getText());
+
+            // Check if a Commune was found
+            if (commune!= null) {
+                // Convert the Commune object to a String. Adjust this line based on what you want to display.
+                String communeDisplayString = commune.toString();
+
+                // Update the ListView with the new item
+                searchView.getListView().getItems().add(communeDisplayString);
+            } else {
+                // Handle the case where no Commune was found
+                System.out.println("No commune found with the specified name.");
+            }
         });
 
         authView.getLoginButton().setOnAction(e -> {
