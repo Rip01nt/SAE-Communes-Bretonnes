@@ -1,6 +1,7 @@
 package model.data;
 
 import java.io.FileInputStream;
+import java.util.ArrayList;
 
 import javafx.geometry.Insets;
 import javafx.scene.image.Image;
@@ -19,6 +20,7 @@ public class UIVars {
     private final ImageView logo_light;
     private final ImageView logo_dark;
     private User user = null;
+    private ArrayList<Commune> communes = new ArrayList<Commune>();
 
     public UIVars() {
         ImageView logo_light = null;
@@ -100,6 +102,10 @@ public class UIVars {
 
     public User getUser() {
         return user;
+    }
+
+    public ArrayList<Commune> getCommunes() {
+        return communes;
     }
 
 }
