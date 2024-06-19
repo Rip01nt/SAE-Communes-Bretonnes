@@ -54,7 +54,6 @@ public class communesController {
     private ExportCommData exportCommData;
 
     private UIVars uivars = new UIVars();
-    
 
     public communesController(CommunesView view) {
         this.mainView = view;
@@ -170,8 +169,8 @@ public class communesController {
             }
         });
 
-        settingsView.getButtonExport().setOnAction(ea -> {
-            if (!uivars.getCommunes().isEmpty()) {
+        settingsView.getButtonExport().setOnAction(e -> {
+            if (uivars.getCommunes()!= null &&!uivars.getCommunes().isEmpty()) {
                 exportCommData.export(uivars.getCommunes());
             }
         });
@@ -180,7 +179,6 @@ public class communesController {
 
         searchView.getListView().prefWidthProperty().bind(searchView.getPane().widthProperty());
         searchView.getListView().prefHeightProperty().bind(searchView.getPane().heightProperty());
-        
     }
 
     private void setSettingsFit(Slider[] sliderList, Label[] labelList) {
