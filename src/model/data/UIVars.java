@@ -18,6 +18,7 @@ public class UIVars {
     private final String HOME = "Home",SEARCH = "Search",USER = "User",SCOREBOARD = "Scoreboard",SETTINGS = "Settings",UTILS = "Utils";
     private final ImageView logo_light;
     private final ImageView logo_dark;
+    private User user = null;
 
     public UIVars() {
         ImageView logo_light = null;
@@ -96,4 +97,9 @@ public class UIVars {
     public ImageView getLogo_dark() {
         return logo_dark;
     }
+
+    public User getUser() {
+        return user;
+    }
+
 }

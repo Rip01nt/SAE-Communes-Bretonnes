@@ -27,10 +27,9 @@ import model.dao.DepartementDAO;
 import model.dao.DonneesAnnuellesDAO;
 import model.dao.GareDAO;
 import model.dao.UserDAO;
-
-import model.data.UIVars;
 import model.data.Commune;
-
+import model.data.UIVars;
+import model.data.User;
 
 public class communesController {
 
@@ -130,14 +129,26 @@ public class communesController {
         });
 
         searchView.getSearchButton().setOnAction(e -> {
-
+            // Fetch the Commune object by name
             Commune commune = communeDAO.findByName(searchView.getSearchField().getText().trim());
+
+            // Check if a Commune was found
+            if (commune!= null) {
+                // Convert the Commune object to a String. Adjust this line based on what you want to display.
+                String communeDisplayString = commune.toString();
+
+                // Update the ListView with the new item
+                searchView.getListView().getItems().add(communeDisplayString);
+            } else {
+                // Handle the case where no Commune was found
+                System.out.println("No commune found with the specified name.");
+            }
         });
 
         authView.getLoginButton().setOnAction(e -> {
-            // Hardcoded login credentials
-            // TODO : Implement a database for user authentication
-            if (authView.getUsernameField().getText().equals("admin") && authView.getPasswordField().getText().equals("admin")) {
+            User currentUser = uivars.getUser();
+            currentUser = userDAO.findByID((String) authView.getUsernameField().getText(), (String) authView.getPasswordField().getText());
+            if (currentUser != null) {
                 if (this.homeView.getImageView() != null) {
                     this.homeView.getImageView().setPreserveRatio(true);
                     this.homeView.getImageView().fitWidthProperty().bind(this.homeView.getPane().widthProperty().multiply(0.9));
@@ -147,8 +158,10 @@ public class communesController {
                 mainView.getRoot().setVisible(true);
                 mainView.getMenuButton().setFocusTraversable(true);
             } else {
-                authView.getPane().add(authView.getErrLabel(), 0, 1);
-                GridPane.setMargin(authView.getErrLabel(), uivars.getINSETS());
+                if (!authView.getPane().getChildren().contains(authView.getErrLabel())) {
+                    authView.getPane().add(authView.getErrLabel(), 0, 1);
+                    GridPane.setMargin(authView.getErrLabel(), uivars.getINSETS());
+                }
             }
         });
 

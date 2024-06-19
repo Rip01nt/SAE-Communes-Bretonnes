@@ -33,7 +33,7 @@ public class ScoreboardView {
         series.getData().add(new XYChart.Data<>("Finistère", 29));
         series.getData().add(new XYChart.Data<>("Coted D'Armor", 22));
         series.getData().add(new XYChart.Data<>("Morbihan", 56));
-        series.getData().add(new XYChart.Data<>("Commune 4", 35));
+        series.getData().add(new XYChart.Data<>("Ille et Vilaine", 35));
 
         // Add the series to the chart
         barChart.getData().add(series);
