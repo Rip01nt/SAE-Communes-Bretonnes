@@ -1,11 +1,8 @@
 package controller;
 
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.media.MediaView;
 import javafx.scene.text.Font;
 
@@ -27,9 +24,6 @@ import model.dao.GareDAO;
 import model.dao.UserDAO;
 
 import model.data.UIVars;
-import javafx.collections.ObservableList;
-import javafx.scene.control.ListView;
-import model.SearchModel;
 
 
 public class communesController {
@@ -52,7 +46,6 @@ public class communesController {
     private UserDAO userDAO;
 
     private UIVars uivars = new UIVars();
-    private SearchModel model;
     
 
     public communesController(CommunesView view) {
@@ -73,12 +66,11 @@ public class communesController {
         this.donneesAnnuellesDAO = new DonneesAnnuellesDAO();
         this.gareDAO = new GareDAO();
         this.userDAO = new UserDAO();
-        model = new SearchModel();
     }
 
     public void onReady() {
         this.mainView.getRoot().setCenter(this.homeView.getPane());
-        this.mainView.getTitleLabel().setText(uivars.getTITLE());
+        this.mainView.getTitleLabel().setText("Bienvenue !");
 
         mainView.getUserButton().setOnAction(e -> {
             mainView.getRoot().setCenter(this.userView.getPane());
@@ -131,19 +123,6 @@ public class communesController {
             }
         });
 
-        
-        userView.getSliderUISize().setOnMouseReleased(e -> {
-            uivars.setImgSize((int) userView.getSliderUISize().getValue());
-            for (Button button : mainView.getMenuButtons()) {
-                button.setPrefWidth(uivars.getImgSize()*1.2);
-                button.setPrefHeight(Integer.MAX_VALUE);
-                VBox.setMargin(button, new Insets(uivars.getImgSize()/10, uivars.getImgSize()/10, 0, uivars.getImgSize()/20));
-            }
-            VBox.setMargin(mainView.getUserButton(), new Insets(uivars.getImgSize()/10, uivars.getImgSize()/10, 0, uivars.getImgSize()/20));
-            VBox.setMargin(mainView.getExitButton(), new Insets(uivars.getImgSize()/10, uivars.getImgSize()/10, uivars.getImgSize()/10, uivars.getImgSize()/20));
-            BorderPane.setAlignment(mainView.getMenuButton(), javafx.geometry.Pos.CENTER_LEFT);
-        });
-
         searchView.getSearchButton().setOnAction(e -> {
             communeDAO.findByName(searchView.getSearchField().getText());
         });
@@ -152,6 +131,11 @@ public class communesController {
             // Hardcoded login credentials
             // TODO : Implement a database for user authentication
             if (authView.getUsernameField().getText().equals("admin") && authView.getPasswordField().getText().equals("admin")) {
+                if (this.homeView.getImageView() != null) {
+                    this.homeView.getImageView().setPreserveRatio(true);
+                    this.homeView.getImageView().fitWidthProperty().bind(this.homeView.getPane().widthProperty().multiply(0.7));
+                    this.homeView.getImageView().fitHeightProperty().bind(this.homeView.getPane().heightProperty().multiply(0.7));
+                }
                 authView.getPane().setVisible(false);
                 mainView.getRoot().setVisible(true);
                 mainView.getMenuButton().setFocusTraversable(true);

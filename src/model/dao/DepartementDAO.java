@@ -113,11 +113,13 @@ public class DepartementDAO extends DAO<Departement, Integer, String>{
                 lesCommunes = new ArrayList<Commune>();
                 CommuneDAO communeDAO = new CommuneDAO();
                 while (rsC.next()){
+                    System.out.println("Commune--: "+ rsC.getInt("idCommune"));
                     lesCommunes.add(communeDAO.findByID(rsC.getInt("idCommune"), null));
-                    System.out.println("Commune: "+ rsC.getInt("idCommune"));
                 }
                 try {
+                System.out.println("Fin");
                 departement = new Departement(lesAeroport, lesCommunes, id, nomDepartement, investissementCulturel2019);
+                System.out.println("F--");
                 } catch (InvalidAttributException e) {
                     System.out.println(e.getMessage());
                 }

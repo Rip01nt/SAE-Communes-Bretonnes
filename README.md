@@ -2,14 +2,15 @@
 
 Application pour mesurer l'attractivitée des communes bretonnes
 
-*Ceci est un projet de SAE qui n'a pas été approuvé par le département Bretagne
+## Requirements
+
+Une police d'ecriture est a installer pour faire fonctionner les icones du programme.
 
 ## TODO
 
 * [X] POJO
 * [X] GRAPH
 * [ ] DAO
-  * [ ] Fix mariadb syntax
 * [ ] IHM
-  * [ ] Search
-  * [ ] Info Communes
+
+*Ceci est un projet de SAE qui n'a pas été approuvé par le département Bretagne

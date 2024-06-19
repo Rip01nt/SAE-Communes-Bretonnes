@@ -3,13 +3,17 @@ package view;
 import controller.communesController;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
 
 public class SettingsView {
 
     private GridPane settingsPane;
+
+    private Button buttonExport;
 
     public SettingsView(communesController controller) {
         this.settingsPane = new GridPane();
@@ -23,6 +27,7 @@ public class SettingsView {
         sliderCommunesVoisines.setScaleShape(false);
         sliderCommunesVoisines.setMajorTickUnit(10);
         sliderCommunesVoisines.setBlockIncrement(1);
+        this.setFit(sliderCommunesVoisines, labelCommunesVoisines);
 
         Label labelVenteApart = new Label("Nombre d'appartements vendu par ans");
 
@@ -32,6 +37,7 @@ public class SettingsView {
         sliderCommunesVoisines.setScaleShape(true);
         sliderVenteApart.setMajorTickUnit(10);
         sliderVenteApart.setBlockIncrement(1);
+        this.setFit(sliderVenteApart, labelVenteApart);
 
         Label labelTailleMoyHabit = new Label("Taille moyenne des habitations");
 
@@ -40,6 +46,7 @@ public class SettingsView {
         sliderTailleMoyHabit.setShowTickLabels(true);
         sliderTailleMoyHabit.setMajorTickUnit(10);
         sliderTailleMoyHabit.setBlockIncrement(1);
+        this.setFit(sliderTailleMoyHabit, labelTailleMoyHabit);
 
         Label labelInflation = new Label("Taux inflation");
 
@@ -48,6 +55,7 @@ public class SettingsView {
         sliderInflation.setShowTickLabels(true);
         sliderInflation.setMajorTickUnit(10);
         sliderInflation.setBlockIncrement(1);
+        this.setFit(sliderInflation, labelInflation);
 
         Label labelInvCulture = new Label("Investissement culturel");
 
@@ -56,6 +64,7 @@ public class SettingsView {
         sliderInvCulture.setShowTickLabels(true);
         sliderInvCulture.setMajorTickUnit(10);
         sliderInvCulture.setBlockIncrement(1);
+        this.setFit(sliderInvCulture, labelInvCulture);
 
         Label labelPrixMoyM2Ans = new Label("Prix moyen du m² par ans");
 
@@ -64,6 +73,7 @@ public class SettingsView {
         sliderPrixMoyM2Ans.setShowTickLabels(true);
         sliderPrixMoyM2Ans.setMajorTickUnit(10);
         sliderPrixMoyM2Ans.setBlockIncrement(1);
+        this.setFit(sliderPrixMoyM2Ans, labelPrixMoyM2Ans);
 
         Label labelNbGare = new Label("Nombre de Gare");
 
@@ -72,6 +82,7 @@ public class SettingsView {
         sliderNbGare.setShowTickLabels(true);
         sliderNbGare.setMajorTickUnit(10);
         sliderNbGare.setBlockIncrement(1);
+        this.setFit(sliderNbGare, labelNbGare);
 
         Label labelNbHabitant = new Label("Nombre d'habitant");
 
@@ -80,6 +91,7 @@ public class SettingsView {
         sliderNbHabitant.setShowTickLabels(true);
         sliderNbHabitant.setMajorTickUnit(10);
         sliderNbHabitant.setBlockIncrement(1);
+        this.setFit(sliderNbHabitant, labelNbHabitant);
 
         Label labelNbMaisonVenduAns = new Label("Nombre de maison vendu par ans");
 
@@ -88,6 +100,7 @@ public class SettingsView {
         sliderNbMaisonVenduAns.setShowTickLabels(true);
         sliderNbMaisonVenduAns.setMajorTickUnit(10);
         sliderNbMaisonVenduAns.setBlockIncrement(1);
+        this.setFit(sliderNbMaisonVenduAns, labelNbMaisonVenduAns);
 
         Label labelNbAeroport = new Label("Nombre d\'aéroport");
 
@@ -96,6 +109,9 @@ public class SettingsView {
         sliderNbAeroport.setShowTickLabels(true);
         sliderNbAeroport.setMajorTickUnit(10);
         sliderNbAeroport.setBlockIncrement(1);
+        this.setFit(sliderNbAeroport, labelNbAeroport);
+
+        Button buttonExport = new Button("Exporter les données des communes");
 
         Label[] labels = new Label[]{labelCommunesVoisines, labelVenteApart, labelTailleMoyHabit, labelInflation, labelInvCulture, labelPrixMoyM2Ans, labelNbGare, labelNbHabitant, labelNbMaisonVenduAns, labelNbAeroport};
 
@@ -134,7 +150,25 @@ public class SettingsView {
 
         this.settingsPane.add(labelNbAeroport, 1, 8);
         this.settingsPane.add(sliderNbAeroport, 1, 9);
+
+
+
     }
+
+    private void setFit(Slider slider, Label label) {
+        Font font = new Font("Arial", 40);
+        // Bind the slider's width to 40% of the settingsPane's width
+        slider.prefWidthProperty().bind(settingsPane.widthProperty().multiply(0.4));
+
+        // Bind the label's width to 80% of the settingsPane's width
+        label.prefWidthProperty().bind(settingsPane.widthProperty().multiply(0.8));
+        label.setWrapText(true);
+        label.setFont(font);
+        
+
+    }
+
+
     public GridPane getPane() {
         return this.settingsPane;
     }
