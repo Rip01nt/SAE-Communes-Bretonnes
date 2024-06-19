@@ -86,47 +86,25 @@ public class DepartementDAO extends DAO<Departement, Integer, String>{
 
     public Departement findByID(Integer idDep, String a){
         Departement departement = null;
-        System.out.println("Debut "+ idDep);
         try (Connection con = this.getConnection(); PreparedStatement st = con.prepareStatement("SELECT * FROM Departement WHERE idDep = ?"); Statement stm = con.createStatement()) {
             st.setInt(1, idDep.intValue());
             ResultSet rs = st.executeQuery();
-            ResultSet rsA;
-            ResultSet rsC;
-            ArrayList<Aeroport> lesAeroport;
-            ArrayList<Commune> lesCommunes;
+            AeroportDAO aeroDAO = new AeroportDAO();
             while (rs.next()) {
-                int id = rs.getInt("idDep");
-
-                System.out.println("Dept: "+ id);
-                String nomDepartement = rs.getString("nomDep");
-                int investissementCulturel2019 = rs.getInt("investissementCulturel2019");
-
-                rsA = stm.executeQuery("SELECT nom FROM Aeroport WHERE leDepartement = " + id);
-                lesAeroport = new ArrayList<Aeroport>();
-                AeroportDAO aeroDAO = new AeroportDAO();
-                while (rsA.next()){
-                    lesAeroport.add(aeroDAO.findByID(rsA.getString("nom"), null));
-                    System.out.println("Aeroport: "+ rsA.getString("nom"));
-                }
-
-                rsC = stm.executeQuery("SELECT idCommune FROM Commune WHERE leDepartement = " + id);
-                lesCommunes = new ArrayList<Commune>();
-                CommuneDAO communeDAO = new CommuneDAO();
-                while (rsC.next()){
-                    System.out.println("Commune--: "+ rsC.getInt("idCommune"));
-                    lesCommunes.add(communeDAO.findByID(rsC.getInt("idCommune"), null));
-                }
-                try {
-                System.out.println("Fin");
-                departement = new Departement(lesAeroport, lesCommunes, id, nomDepartement, investissementCulturel2019);
-                System.out.println("F--");
-                } catch (InvalidAttributException e) {
-                    System.out.println(e.getMessage());
+                departement = new Departement();
+                departement.setIdDepartement(rs.getInt("idDep"));
+                departement.setInvestissementCulturel2019(rs.getInt("investissementCulturel2019"));
+                departement.setNomDepartement(rs.getString("nomDep"));
+                departement.setLesAeroports(aeroDAO.findByDep(departement.getIdDepartement()));
+                for(Aeroport aero : departement.getLesAeroports()){
+                    aero.setLeDepartement(departement);
                 }
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
 
+        } catch (InvalidAttributException e){
+            e.printStackTrace();
         }
         return departement;
     }

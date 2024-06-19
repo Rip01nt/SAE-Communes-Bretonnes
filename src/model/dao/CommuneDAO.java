@@ -6,6 +6,7 @@ import java.sql.Statement;
 import java.util.*;
 
 import exception.InvalidAttributException;
+import model.data.Aeroport;
 import model.data.Commune;
 import model.data.Gare;
 
@@ -93,6 +94,9 @@ public class CommuneDAO extends DAO<Commune, Integer, String> {
             for (Commune c : this.mapCommune.values()){
                 for (Gare g : c.getLesGares()){
                     g.setLaCommune(c);
+                }
+                for (Aeroport aero : c.getLeDepartement().getLesAeroports()){
+                    aero.setlaCommune(c);
                 }
             }
         } catch (SQLException e) {

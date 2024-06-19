@@ -92,4 +92,24 @@ public class AeroportDAO extends DAO<Aeroport, String, String>{
         }
         return aeroport;
     }
+
+    public ArrayList<Aeroport> findByDep(int idDep){
+        ArrayList<Aeroport> ret = new ArrayList<Aeroport>();
+        Aeroport aero;
+        try (Connection con = this.getConnection(); Statement st = con.createStatement()){
+            ResultSet rs = st.executeQuery("SELECT * FROM Aeroport WHERE leDepartement = " + idDep);
+            while (rs.next()){
+                aero = new Aeroport();
+                aero.setNom(rs.getString("nom"));
+                aero.setAdresse(rs.getString("adresse"));
+                ret.add(aero);
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (InvalidAttributException e){
+            e.printStackTrace();
+        }
+        return ret;
+    }
 }

@@ -104,10 +104,9 @@ public class Aeroport {
      * @throws InvalidAttributException si l'adresse est nulle
      * @throws CommuneNotFoundException si la commune n'est pas trouvée
      */
-    public void setAdresse(String adresse) throws InvalidAttributException, CommuneNotFoundException {
+    public void setAdresse(String adresse) throws InvalidAttributException {
         if (adresse == null) throw new InvalidAttributException("The attribut cannot be null");
         this.adresse = adresse;
-        this.updateCommune();
     }
 
     /**
